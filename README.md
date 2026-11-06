@@ -3,7 +3,7 @@
 **A match research workspace for football and competitive VALORANT.**
 
 [Run locally](#run-locally) ·
-[Présentation en français](docs/presentation.fr.md) ·
+[Project case study](docs/case-study.md) ·
 [Snapshot contract](CONTRACT.md) ·
 [Data sources and licenses](DATA_SOURCES.md) ·
 [Technical evidence](docs/evidence/README.md)
