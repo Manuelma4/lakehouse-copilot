@@ -1,0 +1,103 @@
+{
+  "generated_at": "2026-10-06T15:38:34.941341+00:00",
+  "wheel": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\wheels\\arena_copilot-0.6.0-py3-none-any.whl",
+  "sha256": "2ccfaa4dd610ff11b54744e2235afeb4e6ed0e7cfbb06e6ed4d11bfa184a6b13",
+  "bytes": 1237914,
+  "wheel_entry_count": 75,
+  "record_verified_entries": 74,
+  "source_files_verified": 69,
+  "source_drift": {},
+  "installed_source_drift": [],
+  "entry_points": [
+    "[console_scripts]",
+    "arena-copilot = arena_copilot.cli:main"
+  ],
+  "build_dependency": "setuptools 84.0.0 (isolated pip build environment)",
+  "shared_environment_setuptools": "65.5.0",
+  "runtime_probe_status": "passed",
+  "runtime_probe_elapsed_seconds": 5.401,
+  "live_prompt_version": "arena-live-0.6.4",
+  "live_source_sha256": "c49beff66bce32544d2587ec8879a3612c8567aed97cfde58a15a8143f92a859",
+  "live_agent_source_sha256": "89558bfd1f46e2cd6666c36d6293935e96735347154a812c9261deaecd11c31a",
+  "publisher_source_sha256": "e564bb22b3e2078c9de4720dc1b6e82697352daf3e8a8d0a8573baae8b091c53",
+  "provider_requests": 0,
+  "model_requests": 0,
+  "spark_runs": 0,
+  "shared_install": false,
+  "previous_package_retained": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-7c84851359",
+  "notes": [
+    "Windows Python 3.11.9 isolated extraction uses existing dependency environment; this is not a clean dependency installation or Linux execution claim.",
+    "No producer artifacts or source files modified.",
+    "README and all copied runtime sources matched at the final probe."
+  ],
+  "scope": "Final isolated wheel extraction/runtime probes, no shared install/provider/model/Spark calls",
+  "probe": {
+    "scope": "isolated wheel extraction; existing dependency environment, no shared installation",
+    "python": "3.11.9",
+    "target": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target",
+    "provider_requests": 0,
+    "model_requests": 0,
+    "module_files": {
+      "live": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\live.py",
+      "live_agent": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\live_agent.py",
+      "live_publication": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\live_publication.py",
+      "openfootball": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\openfootball.py",
+      "research_agent": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\research_agent.py",
+      "sports": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\sports.py",
+      "snapshot": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\snapshot.py",
+      "api": "C:\\Works\\.arena-worktrees\\research-groups\\data\\packaging-v0.6-final-975d979722\\isolated-target\\arena_copilot\\api.py"
+    },
+    "version": "0.6.0",
+    "distribution_version": "0.6.0",
+    "live_prompt_version": "arena-live-0.6.4",
+    "canonical_fixtures": {
+      "showcase": {
+        "dataset_version": "ed9242317b501386",
+        "matches": 600
+      },
+      "fixture": {
+        "dataset_version": "a21b3d2589a0558f",
+        "matches": 600
+      }
+    },
+    "research_fixture": {
+      "dataset_version": "20d06e8e5af0886e",
+      "matches": 2831,
+      "sources": 10,
+      "team_profiles": 261,
+      "contract": "openfootball-research-2.0"
+    },
+    "offline_display": {
+      "contract": "arena-live-display-1.0",
+      "display_version": "1a70be1205989ecb",
+      "states": {
+        "football-data": "not_connected",
+        "pandascore": "not_connected"
+      },
+      "cards": {
+        "football-data": 0,
+        "pandascore": 0
+      }
+    },
+    "api_route_count": 62,
+    "verified_api_paths": [
+      "/api/live/chat",
+      "/api/live/health",
+      "/competitions",
+      "/live/chat",
+      "/live/feedback",
+      "/live/health",
+      "/live/matches",
+      "/matches",
+      "/open-football/health",
+      "/open-football/matches"
+    ],
+    "live_health_http": {
+      "status": 200,
+      "provider_count": 2
+    },
+    "source_drift": {},
+    "status": "passed",
+    "elapsed_seconds": 5.401
+  }
+}

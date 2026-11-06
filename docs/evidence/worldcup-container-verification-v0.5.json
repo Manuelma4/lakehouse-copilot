@@ -1,0 +1,49 @@
+{
+  "recorded_at": "2026-10-06T12:39:00.995453+00:00",
+  "status": "passed",
+  "scope": "Actual Linux Docker production web/API container, evidence mode; Ollama inference and MLflow not tested in this container",
+  "checks": {
+    "/favicon.svg": 200,
+    "/assets/index-7hTiPWjn.js": 200,
+    "/assets/index-DalpUKRn.css": 200,
+    "/snapshot.json": 200,
+    "/api/overview?sport=valorant": 200
+  },
+  "health": {
+    "status": "ready",
+    "snapshot_verified": true,
+    "dataset_version": "ed9242317b501386",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "snapshot_fingerprint": "16e6942356eeaeaae0a6d68a4d4a262901fb5c8e9eff66bd30ab8dd32486b5f8",
+    "model": "qwen3:4b",
+    "ollama_status": "not_checked"
+  },
+  "fixture_matches": 600,
+  "competitions": 6,
+  "revision_rows": 1192,
+  "event_maps_verified": true,
+  "historical_context_verified": true,
+  "cited_chat": true,
+  "stored_feedback": true,
+  "research": {
+    "dataset_version": "20d06e8e5af0886e",
+    "fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+    "records": 2831,
+    "editions": 10,
+    "national_teams": 48,
+    "worldcup_records": 104,
+    "source_clock_rollover": true,
+    "source_stages_separate": true,
+    "mexico_coverage": true,
+    "separate_chat_feedback": true,
+    "forecast_abstention_before_model": true,
+    "static_api_parity": true
+  },
+  "openapi_version": "0.5.0",
+  "application_version": "0.5.0",
+  "actual_image_tag": "arena-copilot:0.5.0-verification",
+  "image_id": "sha256:8f28a3d768494e8939e13e23a1e63d23657406344d3493e85219668f02aebb78",
+  "container_id": "2ce94cddcafe6e1680b3e34bf30db03cada0ac0655f24d3e82f494314457d669",
+  "lifecycle": "Built once from frozen runtime, started fresh, smoke passed, then stopped"
+}

@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-06T15:26:20.386544+00:00",
+  "scope": "Complete local Chromium API/static/public-current regression, original test-only fixtures; actual provider display is separate",
+  "stats": {
+    "startTime": "2026-10-06T15:20:29.531Z",
+    "duration": 206219.144,
+    "expected": 57,
+    "skipped": 17,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "retries": 0,
+  "initial_failed_bootstrap": "Missing explicit shared Python path in worktree, preserved without a runtime change",
+  "source_inputs": "Original synthetic and CC0 inputs unchanged",
+  "case_boundaries": "17 intentional profile-specific skips; one execution per applicable case, remote repetition is separate"
+}

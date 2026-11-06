@@ -1,0 +1,74 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T10:41:15.046020+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Predict synthetic:valorant:000599. State the stored percentages for each team.",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "Zero Latitude: 33.71%; Echo Division: 66.29%; Forecast is synthetic and uncalibrated",
+    "citations": [
+      {
+        "id": "predictions.json",
+        "uri": "snapshot://ed9242317b501386/predictions.json"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_prediction",
+        "source": "predictions.json",
+        "rows": [
+          {
+            "match_id": "synthetic:valorant:000599",
+            "sport": "valorant",
+            "team_a": "Zero Latitude",
+            "team_b": "Echo Division",
+            "start_time": "2025-04-10T20:00:00.000000Z",
+            "probabilities": {
+              "a": 0.33706754345856194,
+              "b": 0.6629324565414381
+            },
+            "model": "scaled_logistic_v1",
+            "data_kind": "synthetic",
+            "as_of": "2025-04-09T15:10:00.000000Z",
+            "evidence": {
+              "elo_a": 1368.67,
+              "elo_b": 1473.12,
+              "recent_form_a": 0.6,
+              "recent_form_b": 0.6,
+              "historical_matches_a": 69,
+              "historical_matches_b": 74,
+              "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+              "latest_result_used": "2025-04-09T15:10:00.000000Z"
+            },
+            "limitations": "Uncalibrated synthetic demonstration"
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "345c88ce930e4fffb37ae126bb638bd0",
+    "dataset_version": "ed9242317b501386",
+    "snapshot_fingerprint": "16e6942356eeaeaae0a6d68a4d4a262901fb5c8e9eff66bd30ab8dd32486b5f8",
+    "prompt_version": "arena-analyst-0.3.2",
+    "retrieval": "lexical",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "metrics": {
+      "latency_seconds": 43.10667310000099,
+      "generated_tokens": 55,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

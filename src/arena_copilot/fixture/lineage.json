@@ -1,0 +1,22 @@
+[
+  {
+    "source": "provider_api_or_replay",
+    "target": "bronze_events",
+    "transformation": "validated observations"
+  },
+  {
+    "source": "bronze_events",
+    "target": "matches",
+    "transformation": "highest accepted source revision"
+  },
+  {
+    "source": "matches",
+    "target": "team_stats",
+    "transformation": "finished matches grouped by sport and team"
+  },
+  {
+    "source": "bronze_events",
+    "target": "predictions",
+    "transformation": "point-in-time features and baseline model"
+  }
+]

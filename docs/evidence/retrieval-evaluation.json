@@ -1,0 +1,2114 @@
+{
+  "status": "measured_locally",
+  "recorded_at": "2026-10-06T09:15:35.119881+00:00",
+  "scope": "Document retrieval only: eight source documents, 60 original labelled questions, no generative inference",
+  "dataset_version": "a21b3d2589a0558f",
+  "snapshot_fingerprint": "9712196aa2763ac6adf2345fefe934ca093ec7748ff5e44dafa2c931a2e8619c",
+  "corpus_fingerprint": "46b4d68f900405c6a0a30fbf0fb287c30452626aaa4d83c8ac5811cc72154ba5",
+  "embedding_model": "nomic-embed-text:137m-v1.5-fp16",
+  "categories": {
+    "document": 60,
+    "tool": 20,
+    "unanswerable": 20,
+    "ambiguous": 10,
+    "adversarial": 10
+  },
+  "human_semantic_review": "pending; automated retrieval scores are not human answer-quality ratings",
+  "metrics": {
+    "development": {
+      "lexical": 1.0,
+      "dense": 1.0,
+      "hybrid": 1.0
+    },
+    "holdout": {
+      "lexical": 1.0,
+      "dense": 1.0,
+      "hybrid": 1.0
+    }
+  },
+  "cases": [
+    {
+      "id": "arena-001",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/metrics.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/overview.md",
+          "docs/metrics.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-002",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/overview.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/overview.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-003",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-004",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/metrics.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/streaming.md",
+          "docs/overview.md",
+          "docs/metrics.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-005",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-006",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-007",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-008",
+      "split": "development",
+      "expected_sources": [
+        "docs/overview.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-009",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-010",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-011",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/providers.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/providers.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-012",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-013",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/limitations.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-014",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/providers.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-015",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-016",
+      "split": "development",
+      "expected_sources": [
+        "docs/metrics.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-017",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/limitations.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-018",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-019",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-020",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/providers.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/overview.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-021",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/overview.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-022",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-023",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/metrics.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/streaming.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-024",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/metrics.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-025",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-026",
+      "split": "development",
+      "expected_sources": [
+        "docs/predictions.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/metrics.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-027",
+      "split": "development",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/providers.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-028",
+      "split": "development",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/metrics.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/overview.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-029",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-030",
+      "split": "development",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/metrics.md",
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-031",
+      "split": "development",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-032",
+      "split": "development",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/providers.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-033",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/streaming.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/streaming.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/predictions.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/predictions.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-034",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/predictions.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-035",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-036",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/streaming.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-037",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/limitations.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-038",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/overview.md",
+          "docs/metrics.md",
+          "docs/streaming.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-039",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "dense": [
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/streaming.md",
+          "docs/predictions.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-040",
+      "split": "development",
+      "expected_sources": [
+        "docs/quality.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/quality.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/predictions.md"
+        ],
+        "hybrid": [
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-041",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-042",
+      "split": "development",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-043",
+      "split": "development",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/metrics.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/metrics.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-044",
+      "split": "development",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/predictions.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-045",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-046",
+      "split": "development",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/overview.md",
+          "docs/streaming.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-047",
+      "split": "development",
+      "expected_sources": [
+        "docs/providers.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-048",
+      "split": "development",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-049",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/providers.md",
+          "docs/overview.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/limitations.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/streaming.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-050",
+      "split": "development",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/metrics.md",
+          "docs/overview.md",
+          "docs/predictions.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/limitations.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/streaming.md",
+          "docs/quality.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-051",
+      "split": "development",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/providers.md",
+          "docs/limitations.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/limitations.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-052",
+      "split": "development",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/providers.md",
+          "docs/streaming.md",
+          "docs/metrics.md"
+        ],
+        "dense": [
+          "docs/providers.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/overview.md",
+          "docs/predictions.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-053",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/privacy.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/privacy.md",
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/predictions.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/privacy.md",
+          "docs/providers.md",
+          "docs/streaming.md",
+          "docs/overview.md",
+          "docs/quality.md"
+        ],
+        "hybrid": [
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-054",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/quality.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/metrics.md",
+          "docs/overview.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/quality.md",
+          "docs/privacy.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-055",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/privacy.md",
+          "docs/overview.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/privacy.md",
+          "docs/quality.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-056",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/streaming.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/streaming.md",
+          "docs/overview.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-057",
+      "split": "holdout",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/streaming.md",
+          "docs/privacy.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/quality.md",
+          "docs/providers.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/metrics.md",
+          "docs/predictions.md",
+          "docs/streaming.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-058",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/metrics.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/providers.md",
+          "docs/quality.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-059",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/predictions.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/quality.md",
+          "docs/predictions.md",
+          "docs/privacy.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/privacy.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/streaming.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    },
+    {
+      "id": "arena-060",
+      "split": "development",
+      "expected_sources": [
+        "docs/limitations.md"
+      ],
+      "top5": {
+        "lexical": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/metrics.md",
+          "docs/overview.md",
+          "docs/providers.md"
+        ],
+        "dense": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/quality.md",
+          "docs/privacy.md",
+          "docs/streaming.md"
+        ],
+        "hybrid": [
+          "docs/limitations.md",
+          "docs/predictions.md",
+          "docs/overview.md",
+          "docs/privacy.md",
+          "docs/metrics.md"
+        ]
+      },
+      "recall_at_5": {
+        "lexical": 1.0,
+        "dense": 1.0,
+        "hybrid": 1.0
+      }
+    }
+  ]
+}

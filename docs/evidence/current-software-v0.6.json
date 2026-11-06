@@ -1,0 +1,54 @@
+{
+  "recorded_at": "2026-10-06T15:42:45.356014+00:00",
+  "status": "passed",
+  "version": "0.6.0",
+  "scope": "Final complete offline consumer suite including current form kickoff ordering, conservative completion precision, captured-source agents, import/publication/recovery and bounded refresh; acquisition/model/browser separate",
+  "environment": {
+    "os": "Windows",
+    "python": "3.11.9",
+    "pytest": "9.1.1",
+    "pyarrow": "23.0.1",
+    "ruff": "0.16.10"
+  },
+  "full_suite": {
+    "passed": 237,
+    "skipped": 1,
+    "duration_seconds": 192.54,
+    "exit_code": 0,
+    "pythonpath": "worktree/src",
+    "skip_reason": "Windows symlink creation privilege unavailable; Linux CI exercises case"
+  },
+  "ruff": {
+    "exit_code": 0,
+    "scope": "src tests scripts evaluation"
+  },
+  "source_sha256": {
+    "src/arena_copilot/__init__.py": "0d92732b1ceb03f62ea44952eab82c7f1db2d4fc1cf9c9f86a48dd5df3fc6236",
+    "src/arena_copilot/agent.py": "0774ebe38d07cf62aee6789dc4d78197480b19bae2d28dfda1a3b2961ad9cdb0",
+    "src/arena_copilot/analytics.py": "6011d1b6dc4ff1dbb8291c420aa92d4440145c568ed108086bd6d91eff94f65d",
+    "src/arena_copilot/api.py": "dcc8ba9e2d80f1da7a2294b9d31219a91e1b263e135a1ac8615dab4b01b7d8b9",
+    "src/arena_copilot/cli.py": "1e60350616b4470eed803efec89e309b60e19a46f0bafc1faae10ac2de46b25f",
+    "src/arena_copilot/live.py": "c49beff66bce32544d2587ec8879a3612c8567aed97cfde58a15a8143f92a859",
+    "src/arena_copilot/live_agent.py": "89558bfd1f46e2cd6666c36d6293935e96735347154a812c9261deaecd11c31a",
+    "src/arena_copilot/live_publication.py": "e564bb22b3e2078c9de4720dc1b6e82697352daf3e8a8d0a8573baae8b091c53",
+    "src/arena_copilot/observability.py": "d765212fd70ad37c7c1cde2099f5ef215f0d2ea37f9bd1198ca98118315e6450",
+    "src/arena_copilot/openfootball.py": "c7b9a9366177c16cea1cd174d8a9d6665be4789cd588f87bf43d71a67250694c",
+    "src/arena_copilot/research_agent.py": "9b709312512ae0c2a0dea8d469ec39f2fd26edc02b9d9bbaa8178ac5ba5169de",
+    "src/arena_copilot/retrieval.py": "9cc5242eb903a0f302d66e5492e898d6b4c3ededc1d46de074f239270fa26c90",
+    "src/arena_copilot/snapshot.py": "ad3c74fe225e91ce188cd4c333ac0399a5b79ffd35f2d622f2ae44a59edda18a",
+    "src/arena_copilot/sports.py": "a705385a2900902cbb3e45b1a9eb36b8587fb6990ea43773acadd613249b120e",
+    "src/arena_copilot/tools.py": "06080b82e7908b0d873705169a44ba6bc52e500b48de34941164fba033b1d17c",
+    "src/arena_copilot/ui.py": "116007c015b1285326bea7458ad45cb5878f89ba275826f8a77433f4c7728170"
+  },
+  "previous_checkpoint": {
+    "passed": 227,
+    "duration_seconds": 188.11,
+    "live_agent_source_sha256": "80160e903c4fac274b084932b2438b474a45e6851c247cdc4771818beff83715"
+  },
+  "post_form_ui_regression": {
+    "passed": 3,
+    "profile_skipped": 1,
+    "duration_seconds": 23.0,
+    "scope": "Local current-workspace fixture journeys after explicit completion-bound labels"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "recorded_at": "2026-10-06T12:37:35.010936+00:00",
+  "status": "passed",
+  "version": "0.5.0",
+  "scope": "Actual local full software suite and Ruff; fixtures/model doubles, not native inference or semantic evaluation",
+  "full_suite": {
+    "passed": 84,
+    "duration_seconds": 63.81,
+    "exit_code": 0,
+    "optional_legacy_streamlit_test": "included locally",
+    "environment": "quiet host, no inference or Docker build"
+  },
+  "ruff": "passed",
+  "research_dataset_version": "20d06e8e5af0886e",
+  "as_of": "2026-10-06T12:19:31.263499Z",
+  "matches": 2831,
+  "source_editions": 10,
+  "worldcup_records": 104,
+  "source_teams": 261,
+  "national_teams": 48,
+  "actual_failures_retained": [
+    {
+      "scope": "Initial independent test expected canonical feedback404 rather than existing400",
+      "product_change": false,
+      "passed": 82,
+      "failed": 1,
+      "duration_seconds": 48.98
+    }
+  ],
+  "independent_checks": [
+    "v1 and v2 exact typed schemas, content identities and JSON/Parquet parity",
+    "numeric-offset UTC conversion independent of source calendar-date filters",
+    "pinned World Cup raw-body SHA and all 104 current match identities",
+    "coherently resealed scores, opponents, source clock, ground and group rejected",
+    "national/club namespaced IDs and bounded profiles derived from current records",
+    "source team pagination, invalid contexts and unknown IDs",
+    "real-source tools, citation scope and feedback ledger independent from synthetic chat",
+    "six-tool bound, unsupported percentages and forecast abstention before generation"
+  ],
+  "public_payload": {
+    "uncompressed_bytes": 9596001,
+    "gzip_reference_bytes": 764780,
+    "note": "Reference compression; actual deployed transport checked separately. Lazy source-view loading."
+  },
+  "source_sha256": {
+    "src/arena_copilot/openfootball.py": "d11117e85a298e4c44af4ce010529dffa80e5cc861af2898df15f3f0b0544af7",
+    "src/arena_copilot/api.py": "2b2c467c9d72abe589b594a610dfede5b8b3dff57473652e7fc5085ef0193d7f",
+    "src/arena_copilot/research_agent.py": "9b709312512ae0c2a0dea8d469ec39f2fd26edc02b9d9bbaa8178ac5ba5169de",
+    "src/arena_copilot/resources/worldcup_2026.json": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+    "tests/test_openfootball.py": "d826314cff7c8e20d7167b595a2abceb8f1926bff940add0c1eeeac5c6b14a2e",
+    "tests/test_research_agent.py": "7142b7795ba3fbc89f954682b82002ee1fcd685160b167b2027c9d4cdb202ced",
+    "tests/test_research_team_independent.py": "4ab52bd0c357695d98a75072dee6b3064095c77cdcd251202c2e7eb284de527c",
+    "tests/test_openfootball_v1.py": "ce212cd059bc60ea14fab57304a24ad7516dfd57c2b64e1df1a36e476f08070c"
+  },
+  "boundaries": [
+    "No full human-reviewed semantic scorecard",
+    "No real-source forecasts or official standings",
+    "World Cup raw reference is community CC0, not official FIFA authentication",
+    "Actual collection begins availability now; no fabricated historical observation clocks",
+    "Databricks workspace runtime remains unverified"
+  ],
+  "source_hash_scope": "Local working-tree bytes; Git text normalization is recorded separately",
+  "source_sha256_lf_normalized": {
+    "src/arena_copilot/openfootball.py": "d11117e85a298e4c44af4ce010529dffa80e5cc861af2898df15f3f0b0544af7",
+    "src/arena_copilot/api.py": "2b2c467c9d72abe589b594a610dfede5b8b3dff57473652e7fc5085ef0193d7f",
+    "src/arena_copilot/research_agent.py": "9b709312512ae0c2a0dea8d469ec39f2fd26edc02b9d9bbaa8178ac5ba5169de",
+    "tests/test_openfootball.py": "d826314cff7c8e20d7167b595a2abceb8f1926bff940add0c1eeeac5c6b14a2e",
+    "tests/test_research_agent.py": "7142b7795ba3fbc89f954682b82002ee1fcd685160b167b2027c9d4cdb202ced",
+    "tests/test_research_team_independent.py": "4ab52bd0c357695d98a75072dee6b3064095c77cdcd251202c2e7eb284de527c",
+    "tests/test_openfootball_v1.py": "ce212cd059bc60ea14fab57304a24ad7516dfd57c2b64e1df1a36e476f08070c"
+  },
+  "prior_full_suite": {
+    "passed": 83,
+    "duration_seconds": 180.17,
+    "optional_legacy_streamlit_test": "included locally"
+  },
+  "legacy_regression": {
+    "scope": "Two-row derived genuine v1 fixture, no migration or source-clock fabrication",
+    "dataset": "f07a33073ce37319",
+    "full_original_dataset": "5f99ba32f796fb23",
+    "standalone_passed": 1,
+    "standalone_duration_seconds": 0.81,
+    "original_row_ids_and_event_hashes_preserved": true,
+    "fixture_files_unchanged_after_read": true,
+    "final_full_suite_includes_this_case": true
+  },
+  "final_script_ruff": "Passed after final standalone smoke harness changes"
+}

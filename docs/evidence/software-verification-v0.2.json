@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-06T09:41:42.694487+00:00",
+  "scope": "Offline fixture and model-double software tests; no inference",
+  "tests_passed": 22,
+  "test_seconds": 9.98,
+  "ruff": "passed",
+  "browser_report": "browser-verification.json",
+  "model_inference": "reported separately",
+  "credential_scan": "No private-key/GitHub-token/API-key patterns in candidate tracked text; not a full security audit"
+}

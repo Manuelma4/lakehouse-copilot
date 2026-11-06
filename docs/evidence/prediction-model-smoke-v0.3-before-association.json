@@ -1,0 +1,74 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T10:29:05.141730+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Explain the stored forecast for synthetic:valorant:000593 and report its exact percentages.",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "The stored forecast for synthetic:valorant:000593 predicts a 38.24% chance for Crimson Circuit and 61.76% for Vector Five. This forecast is synthetic and uncalibrated, as indicated by the 'limitations' field in the predictions.json data.",
+    "citations": [
+      {
+        "id": "predictions.json",
+        "uri": "snapshot://ed9242317b501386/predictions.json"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_prediction",
+        "source": "predictions.json",
+        "rows": [
+          {
+            "match_id": "synthetic:valorant:000593",
+            "sport": "valorant",
+            "team_a": "Crimson Circuit",
+            "team_b": "Vector Five",
+            "start_time": "2025-04-09T20:00:00.000000Z",
+            "probabilities": {
+              "a": 0.38236301066333755,
+              "b": 0.6176369893366624
+            },
+            "model": "scaled_logistic_v1",
+            "data_kind": "synthetic",
+            "as_of": "2025-04-09T15:10:00.000000Z",
+            "evidence": {
+              "elo_a": 1575.19,
+              "elo_b": 1629.04,
+              "recent_form_a": 0.8,
+              "recent_form_b": 0.4,
+              "historical_matches_a": 72,
+              "historical_matches_b": 85,
+              "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+              "latest_result_used": "2025-04-09T15:10:00.000000Z"
+            },
+            "limitations": "Uncalibrated synthetic demonstration"
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "ead53404fdb548ecb764c7ca945e6a31",
+    "dataset_version": "ed9242317b501386",
+    "snapshot_fingerprint": "16e6942356eeaeaae0a6d68a4d4a262901fb5c8e9eff66bd30ab8dd32486b5f8",
+    "prompt_version": "arena-analyst-0.3",
+    "retrieval": "lexical",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "metrics": {
+      "latency_seconds": 41.31300960000044,
+      "generated_tokens": 90,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

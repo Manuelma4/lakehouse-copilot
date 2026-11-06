@@ -1,0 +1,472 @@
+{
+  "recorded_at": "2026-10-06T11:45:57.026041+00:00",
+  "release": "0.4.0",
+  "status": "local_browser_gates_passed",
+  "scope": "Isolated Chromium workflows against FastAPI with copied temporary data packages and the built public preview at /lakehouse-copilot/. Evidence mode only; no paid services or native model inference.",
+  "open_football_dataset": {
+    "research_version": "openfootball-research-1.0",
+    "dataset_version": "5f99ba32f796fb23",
+    "snapshot_fingerprint": "6be96d37f701227531ac1a7915faf75f04530caffeafba8b812f6236f5b21c58",
+    "data_kind": "open_data",
+    "as_of": "2026-10-06T11:06:31.626840Z",
+    "license": "CC0-1.0",
+    "source_editions": 9,
+    "matches": 2727,
+    "observed_results": 1088,
+    "unknown_results": 1639,
+    "canonical_compatible": false
+  },
+  "runner": {
+    "playwright": "1.63.0",
+    "browser": "Chromium",
+    "browser_version": "153.0.8010.12",
+    "browser_revision": "1243",
+    "node": "24.15.0",
+    "host": "Windows",
+    "workers": 1,
+    "retries": 0,
+    "locale": "en-GB",
+    "timezone": "UTC",
+    "desktop_viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mobile_emulation": "Pixel 7",
+    "api_base_url": "http://127.0.0.1:8765",
+    "live_base_url": "http://127.0.0.1:5178",
+    "static_base_url": "http://127.0.0.1:5179/lakehouse-copilot/"
+  },
+  "commands": {
+    "focused": "npx playwright test openfootball.spec.ts",
+    "full_regression": "npx playwright test",
+    "new_journey_stability": "npx playwright test openfootball.spec.ts --repeat-each=10",
+    "environment": "ARENA_TEST_PYTHON=C:\\Works\\.arena-venv\\Scripts\\python.exe; the launcher copies both packaged datasets into an owned temporary folder and sets PYTHONPATH to this repository src."
+  },
+  "focused": {
+    "raw_report": "web/test-results/openfootball-focused-pass.json",
+    "sha256": "1b6eb55593ee259cc7926f8040fd4c5ee1a7c0a0632eeb40ab642c12b9a61aa4",
+    "stats": {
+      "startTime": "2026-10-06T11:27:33.056Z",
+      "duration": 33538.597,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "runner_errors": 0,
+    "executions": 6,
+    "per_project": {
+      "live-desktop": 2,
+      "static-desktop": 2,
+      "static-mobile": 2
+    },
+    "p95_case_duration_ms": 6355,
+    "cases": [
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      }
+    ]
+  },
+  "full_regression": {
+    "raw_report": "web/test-results/openfootball-full-pass.json",
+    "sha256": "a4f319d9a37ab5dcea939c99c65299501a9143ae35b696d883799837417093c5",
+    "stats": {
+      "startTime": "2026-10-06T11:32:49.161Z",
+      "duration": 88597.977,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "runner_errors": 0,
+    "executions": 19,
+    "per_project": {
+      "live-desktop": 7,
+      "static-desktop": 6,
+      "static-mobile": 6
+    },
+    "p95_case_duration_ms": 9343,
+    "cases": [
+      {
+        "project": "live-desktop",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "an analyst switches sports, inspects exact forecasts and finds a team",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "evidence chat returns an owned trace, inspectable sources and stored feedback",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "local model failure is actionable and allows an evidence retry",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "static.spec.ts",
+        "journey": "the public subpath provides responsive forecasts, teams, quality and cited answers without a backend",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "static.spec.ts",
+        "journey": "historic match context preserves provider identities and ignores corrections learned later",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "static.spec.ts",
+        "journey": "the public subpath provides responsive forecasts, teams, quality and cited answers without a backend",
+        "consecutive_passes": 1,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "static.spec.ts",
+        "journey": "historic match context preserves provider identities and ignores corrections learned later",
+        "consecutive_passes": 1,
+        "retries": 0
+      }
+    ]
+  },
+  "new_journey_stability": {
+    "raw_report": "web/test-results/openfootball-stability-pass.json",
+    "sha256": "8d2cb7a0118d3e1d27f21ea8dada4c0e8849695b8d3401063b0c7d33ed5fb388",
+    "stats": {
+      "startTime": "2026-10-06T11:35:14.685Z",
+      "duration": 266220.57,
+      "expected": 60,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "runner_errors": 0,
+    "executions": 60,
+    "per_project": {
+      "live-desktop": 20,
+      "static-desktop": 20,
+      "static-mobile": 20
+    },
+    "p95_case_duration_ms": 6804,
+    "cases": [
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open football filters the nine reviewed editions before pagination and preserves unknown results",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "openfootball.spec.ts",
+        "journey": "open match research exposes precise source evidence, truthful score variants and navigable match links",
+        "consecutive_passes": 10,
+        "retries": 0
+      }
+    ],
+    "journey_definitions": 2,
+    "project_cases": 6,
+    "repeat_each": 10,
+    "pass_rate": 1.0,
+    "pass_on_retry_executions": 0
+  },
+  "source_identity": {
+    "fingerprint_captured_at": "2026-10-06T11:35:12.931355+00:00",
+    "captured_files": 97,
+    "aggregate_sha256": "fcaeeb1da3b12ed511edad5760d05dd0830975c943c7e66801f5f078f65017d6",
+    "detailed_ignored_artifact": "web/test-results/openfootball-final-source-fingerprint.json",
+    "scope": "Consumer runtime and packaged data, web source/tests/public assets, Python package metadata and web build/runner inputs; excludes docs, outputs and bytecode.",
+    "bar_completion_check": "All 97 captured file hashes matched immediately after the final 60-execution run. No browser-facing source or dataset changes occurred during that run.",
+    "browser_files_in_fingerprint": 32,
+    "browser_files_changed_at_report": [],
+    "files_changed_after_bar_at_report": [
+      "src/arena_copilot/openfootball.py"
+    ],
+    "subsequent_backend_validation": "After local browser completion, the parent tightened the research importer to require exact Gold schema/integer scores, bounded quarantine evidence, known prior archives for 304 and monotonic poll clocks. The parent reported 17 targeted Python tests and Ruff passing. The local 19 + 60 browser executions used the earlier accepted importer; final container verification and remote CI are separate evidence."
+  },
+  "asserted_workflows": [
+    "All nine source editions and aggregate 2727/1088/1639 counts; observed-result default and explicit all/unknown selection.",
+    "Region, edition, text and source-calendar-date filters applied before exact 25-row pagination; empty result state and reset.",
+    "Historical unknown result remains unavailable and date-only; actual 0-0 remains an observed result; local 18:30 clock does not claim a UTC instant.",
+    "Source FT 1-1, HT 1-0 and penalties 4-3 remain distinct; retrospective research records expose no stored forecast.",
+    "Source URL, CC0 license, checksum, dataset identity, derived team identity caveat and observation revision evidence in inspectable native drawers.",
+    "Deep-linked match reload, browser back/forward, clipboard link with status, Escape close and focus return, edition navigation and return to original synthetic Match center.",
+    "Public desktop/mobile packages make no /api requests; mobile filters remain operable and no horizontal document overflow is observed.",
+    "All 13 previous sports, point-in-time match/competition/team, forecast, evidence chat, feedback, unavailable-model and static restriction cases pass in the 19-case full regression."
+  ],
+  "prior_diagnostics": [
+    {
+      "raw_report": "web/test-results/openfootball-diagnostic-initial.json",
+      "sha256": "f3191f33be68e9bf6e88820f3d052b2ab8db09c935f1657d1e86ba877b692510",
+      "stats": {
+        "startTime": "2026-10-06T11:23:03.364Z",
+        "duration": 58206.396,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "classification": "product accessibility defect fixed",
+      "reason": "The native dialog accessible name omitted spaces around vs; the frontend corrected the actual heading."
+    },
+    {
+      "raw_report": "web/test-results/openfootball-diagnostic-provenance.json",
+      "sha256": "f1ec5135e237c3c8e0f01cf70c44a62150008f1ddc1746307e7c7a33f71463eb",
+      "stats": {
+        "startTime": "2026-10-06T11:25:53.706Z",
+        "duration": 71872.62299999999,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "classification": "test expectation corrected",
+      "reason": "The test expected an underscored identity code; the UI intentionally rendered its readable equivalent with the not-official caveat. Only the expectation was corrected."
+    },
+    {
+      "raw_report": "web/test-results/openfootball-full-transport-failure.json",
+      "sha256": "5f4fe2b7a8505d339917148f3c9c83fd12809579d734d45584485e89c2fd4416",
+      "stats": {
+        "startTime": "2026-10-06T11:28:25.877Z",
+        "duration": 96173.023,
+        "expected": 13,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "classification": "development-server infrastructure failure; termination cause undetermined",
+      "reason": "The Vite live development server stopped responding during the second live journey; later live navigations failed with connection refused while the API and public preview remained available. The cause of termination remains undetermined. Fresh instrumented full and repeat runs passed without weakening functional assertions.",
+      "failure_artifacts": {
+        "path": "web/test-results/openfootball-full-transport-failure-artifacts.zip",
+        "sha256": "b49f44ce3af3cb74f6aeeafde4dbc5f4d56b46e385e622b6c1513f5a1a0fc84c",
+        "includes": [
+          "Playwright traces",
+          "failure screenshots",
+          "videos",
+          "browser console/network attachments"
+        ]
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/images/open-football-results.png",
+      "sha256": "c1150a14fbcd9830f3e79af87f5da8d52d0d66379f3987c5f60c55d078bb07e4",
+      "width": 1440,
+      "height": 1000,
+      "description": "Published static desktop results and source edition directory",
+      "capture_source": "web/test-results/runs/openfootball-open-football-ed41d-d-preserves-unknown-results-static-desktop/open-football-results-static-desktop.png",
+      "altered": false
+    },
+    {
+      "path": "docs/images/open-football-mobile.png",
+      "sha256": "99b9cd50464948b97e148fe0cca040f882cfd8458a48e863f2676b75190354be",
+      "width": 1082,
+      "height": 2202,
+      "description": "Published static mobile results and collapsed source filters",
+      "capture_source": "web/test-results/runs/openfootball-open-football-ed41d-d-preserves-unknown-results-static-mobile/open-football-results-static-mobile.png",
+      "altered": false
+    },
+    {
+      "path": "docs/images/open-football-detail.png",
+      "sha256": "77cff80b24b7a68a5af1276b1717187dcb21c718bb3d3848b4c4fec3368cef94",
+      "width": 1440,
+      "height": 1000,
+      "description": "Published static desktop source score details and unresolved local clock",
+      "capture_source": "web/test-results/runs/openfootball-open-match-re-efc56-s-and-navigable-match-links-static-desktop/open-football-knockout-static-desktop.png",
+      "altered": false
+    },
+    {
+      "path": "docs/images/open-football-detail-mobile.png",
+      "sha256": "c02d9effe01ec7283b8a1fac508610971c28c7efef38b38ac3ff01fdef31e6aa",
+      "width": 1082,
+      "height": 2202,
+      "description": "Published static mobile match drawer and source FT/HT/penalties",
+      "capture_source": "web/test-results/runs/openfootball-open-match-re-efc56-s-and-navigable-match-links-static-mobile/open-football-knockout-static-mobile.png",
+      "altered": false
+    },
+    {
+      "path": "docs/images/open-football-unknown.png",
+      "sha256": "c59821e2027914c8a2077bcaf7c2cd68a107810e45ffbfd15637d2b9d7c485b9",
+      "width": 1440,
+      "height": 1000,
+      "description": "Published static desktop historical record with unknown result and date-only precision",
+      "capture_source": "web/test-results/runs/openfootball-open-match-re-efc56-s-and-navigable-match-links-static-desktop/open-football-unknown-static-desktop.png",
+      "altered": false
+    }
+  ],
+  "ci": {
+    "status": "pending_parent_verification",
+    "configured_command": "npm run test:e2e -- --repeat-each=10",
+    "configured_executions": 190,
+    "note": "CI is configured for all 19 project cases with ten repeats and zero retries against the final committed source. This local report does not claim that remote CI has completed."
+  },
+  "limitations": [
+    "Chromium desktop and Chromium Pixel 7 emulation only; no Firefox, WebKit, physical device or screen-reader certification.",
+    "This checks browser integration and deterministic evidence workflows, not native model semantic quality.",
+    "Community open-data imports can be incomplete or stale. Source dates/local clocks have no inferred UTC kickoff/completion; collection times do not establish historical pre-match availability.",
+    "OpenFootball records remain a separate research contract with unresolved name-derived team IDs, no official standings and no prediction eligibility.",
+    "A prior development-server termination remains unexplained; its complete failing run artifacts were retained and later full/stability runs passed with stdout instrumentation.",
+    "Raw JSON reports, detailed fingerprints, logs and failure traces are retained under ignored web/test-results in this workspace; published JSON summarizes actual measurements and hashes."
+  ]
+}

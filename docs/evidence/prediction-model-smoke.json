@@ -1,0 +1,70 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T08:26:06.757957+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Read the stored prediction for match synthetic:valorant:000599. What are the two team win probabilities?",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "The two team win probabilities for match synthetic:valorant:000599 are 33.71% for Zero Latitude and 66.29% for Echo Division.",
+    "citations": [
+      {
+        "id": "predictions.json",
+        "uri": "snapshot://a21b3d2589a0558f/predictions.json"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_prediction",
+        "source": "predictions.json",
+        "rows": [
+          {
+            "match_id": "synthetic:valorant:000599",
+            "sport": "valorant",
+            "team_a": "Zero Latitude",
+            "team_b": "Echo Division",
+            "start_time": "2025-04-10T20:00:00.000000Z",
+            "probabilities": {
+              "a": 0.33706754345856194,
+              "b": 0.6629324565414381
+            },
+            "model": "scaled_logistic_v1",
+            "data_kind": "synthetic",
+            "as_of": "2025-04-09T15:10:00.000000Z",
+            "evidence": {
+              "elo_a": 1368.67,
+              "elo_b": 1473.12,
+              "recent_form_a": 0.6,
+              "recent_form_b": 0.6,
+              "historical_matches_a": 69,
+              "historical_matches_b": 74,
+              "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+              "latest_result_used": "2025-04-09T15:10:00.000000Z"
+            },
+            "limitations": "Uncalibrated synthetic demonstration"
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "add96d2124af479790da331118bb4aa2",
+    "dataset_version": "a21b3d2589a0558f",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "metrics": {
+      "latency_seconds": 46.283387299999504,
+      "generated_tokens": 68,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

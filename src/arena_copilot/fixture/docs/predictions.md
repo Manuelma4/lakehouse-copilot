@@ -1,0 +1,3 @@
+# Prediction methodology
+
+The scaled_logistic_v1 baseline uses pre-match Elo difference, last-five form difference and capped history counts. Outcome labels never enter features. Only results completed before kickoff AND observed before the cutoff may be used. Football has team A win, draw and team B win probabilities; VALORANT has team A and team B series-win probabilities. Chronological 60/20/20 train/validation/test partitions keep equal kickoff timestamps together. The frequency baseline uses training outcomes only. Synthetic evaluation demonstrates the pipeline, not real predictive skill. Probabilities are not calibrated. Missing eligible history means prediction unavailable.

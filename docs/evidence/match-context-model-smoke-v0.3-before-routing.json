@@ -1,0 +1,36 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T10:32:11.811353+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Describe the pre-match form and head-to-head evidence for synthetic:football:000590.",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "failed",
+  "response": {
+    "answer": "abstained",
+    "citations": [],
+    "tool_results": [],
+    "trace_id": "9ce259d4b7824c309d2116e62d6893c1",
+    "dataset_version": "ed9242317b501386",
+    "snapshot_fingerprint": "16e6942356eeaeaae0a6d68a4d4a262901fb5c8e9eff66bd30ab8dd32486b5f8",
+    "prompt_version": "arena-analyst-0.3",
+    "retrieval": "lexical",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": true,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "metrics": {
+      "latency_seconds": 129.34081440000045,
+      "generated_tokens": 427,
+      "tool_calls": 0
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

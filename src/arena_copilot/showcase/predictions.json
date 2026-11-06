@@ -1,0 +1,206 @@
+[
+  {
+    "match_id": "synthetic:football:000592",
+    "sport": "football",
+    "team_a": "Harbor United",
+    "team_b": "Northbridge FC",
+    "start_time": "2025-04-09T16:00:00.000000Z",
+    "probabilities": {
+      "a": 0.6999139654910186,
+      "b": 0.1090926074910893,
+      "draw": 0.1909934270178921
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1666.9,
+      "elo_b": 1537.66,
+      "recent_form_a": 0.6,
+      "recent_form_b": 0.5,
+      "historical_matches_a": 68,
+      "historical_matches_b": 69,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T10:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:football:000594",
+    "sport": "football",
+    "team_a": "Northbridge FC",
+    "team_b": "Harbor United",
+    "start_time": "2025-04-10T00:00:00.000000Z",
+    "probabilities": {
+      "a": 0.1332954152689793,
+      "b": 0.7064051171634266,
+      "draw": 0.1602994675675942
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1537.66,
+      "elo_b": 1666.9,
+      "recent_form_a": 0.5,
+      "recent_form_b": 0.6,
+      "historical_matches_a": 69,
+      "historical_matches_b": 68,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T10:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:football:000596",
+    "sport": "football",
+    "team_a": "Riverside Athletic",
+    "team_b": "Northbridge FC",
+    "start_time": "2025-04-10T08:00:00.000000Z",
+    "probabilities": {
+      "a": 0.32126540924185665,
+      "b": 0.5101685150906461,
+      "draw": 0.16856607566749723
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1514.71,
+      "elo_b": 1537.66,
+      "recent_form_a": 0.9,
+      "recent_form_b": 0.5,
+      "historical_matches_a": 73,
+      "historical_matches_b": 69,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T10:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:football:000598",
+    "sport": "football",
+    "team_a": "Westhaven United",
+    "team_b": "Eastgate FC",
+    "start_time": "2025-04-10T16:00:00.000000Z",
+    "probabilities": {
+      "a": 0.448329765213834,
+      "b": 0.3178659856451144,
+      "draw": 0.2338042491410515
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1384.92,
+      "elo_b": 1367.31,
+      "recent_form_a": 0.1,
+      "recent_form_b": 0.1,
+      "historical_matches_a": 78,
+      "historical_matches_b": 74,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T10:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:valorant:000593",
+    "sport": "valorant",
+    "team_a": "Crimson Circuit",
+    "team_b": "Vector Five",
+    "start_time": "2025-04-09T20:00:00.000000Z",
+    "probabilities": {
+      "a": 0.38236301066333755,
+      "b": 0.6176369893366624
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1575.19,
+      "elo_b": 1629.04,
+      "recent_form_a": 0.8,
+      "recent_form_b": 0.4,
+      "historical_matches_a": 72,
+      "historical_matches_b": 85,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T15:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:valorant:000595",
+    "sport": "valorant",
+    "team_a": "Vector Five",
+    "team_b": "Aurora Protocol",
+    "start_time": "2025-04-10T04:00:00.000000Z",
+    "probabilities": {
+      "a": 0.7057461895336621,
+      "b": 0.2942538104663379
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1629.04,
+      "elo_b": 1449.43,
+      "recent_form_a": 0.4,
+      "recent_form_b": 0.2,
+      "historical_matches_a": 85,
+      "historical_matches_b": 62,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T15:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:valorant:000597",
+    "sport": "valorant",
+    "team_a": "Neon Wolves",
+    "team_b": "Echo Division",
+    "start_time": "2025-04-10T12:00:00.000000Z",
+    "probabilities": {
+      "a": 0.6424346338535654,
+      "b": 0.3575653661464346
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1601.28,
+      "elo_b": 1473.12,
+      "recent_form_a": 0.8,
+      "recent_form_b": 0.6,
+      "historical_matches_a": 72,
+      "historical_matches_b": 74,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T15:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  },
+  {
+    "match_id": "synthetic:valorant:000599",
+    "sport": "valorant",
+    "team_a": "Zero Latitude",
+    "team_b": "Echo Division",
+    "start_time": "2025-04-10T20:00:00.000000Z",
+    "probabilities": {
+      "a": 0.33706754345856194,
+      "b": 0.6629324565414381
+    },
+    "model": "scaled_logistic_v1",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "evidence": {
+      "elo_a": 1368.67,
+      "elo_b": 1473.12,
+      "recent_form_a": 0.6,
+      "recent_form_b": 0.6,
+      "historical_matches_a": 69,
+      "historical_matches_b": 74,
+      "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+      "latest_result_used": "2025-04-09T15:10:00.000000Z"
+    },
+    "limitations": "Uncalibrated synthetic demonstration"
+  }
+]

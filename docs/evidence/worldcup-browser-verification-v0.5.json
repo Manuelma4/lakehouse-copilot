@@ -1,0 +1,448 @@
+{
+  "recorded_at": "2026-10-06T12:52:44.347865+00:00",
+  "release": "0.5.0",
+  "status": "passed_local_browser_gate",
+  "reviewer_role": "Independent test automation agent",
+  "human_reviewed": false,
+  "scope": "Actual isolated Chromium browser journeys against a copied validated v2 research fixture, the local FastAPI server, and the production static build with the GitHub Pages base path. No paid APIs or native inference in this browser suite.",
+  "environment": {
+    "platform": "Windows",
+    "node": "24.15.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "chromium_build": 1243,
+    "workers": 1,
+    "retries": 0,
+    "test_timeout_ms": 30000,
+    "assertion_timeout_ms": 10000,
+    "locale": "en-GB",
+    "timezone": "UTC",
+    "desktop_viewport_css_pixels": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mobile_device": "Pixel 7",
+    "mobile_viewport_css_pixels": {
+      "width": 412,
+      "height": 839
+    },
+    "mobile_device_scale_factor": 2.625,
+    "static_base_path": "/lakehouse-copilot/",
+    "fixture_setup": "Research and canonical showcase packages copied to an owned temporary directory before starting the isolated API. Each journey has its own browser context and unique feedback trace; Ollama deliberately points to an unavailable isolated port for the explicit error journey."
+  },
+  "dataset": {
+    "research_version": "openfootball-research-2.0",
+    "dataset_version": "20d06e8e5af0886e",
+    "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+    "as_of": "2026-10-06T12:19:31.263499Z",
+    "records": 2831,
+    "editions": 10,
+    "observed_results": 1192,
+    "unknown_results": 1639,
+    "teams": 261,
+    "national_teams": 48,
+    "worldcup_records": 104,
+    "worldcup_source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+    "canonical_showcase_dataset": "ed9242317b501386"
+  },
+  "full_regression": {
+    "stats": {
+      "startTime": "2026-10-06T12:30:17.003Z",
+      "duration": 185350.295,
+      "expected": 28,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "command": "npx playwright test",
+    "exit_code": 0,
+    "passed": 28,
+    "failed": 0,
+    "retries": 0,
+    "duration_seconds": 185.350295,
+    "scope": "All existing synthetic football/VALORANT, OpenFootball source records, chat/feedback, and new WorldCup/team journeys across configured projects."
+  },
+  "final_stability_bar": {
+    "stats": {
+      "startTime": "2026-10-06T12:44:05.250Z",
+      "duration": 370078.46599999996,
+      "expected": 90,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "command": "npx playwright test worldcup-team.spec.ts --repeat-each=10",
+    "exit_code": 0,
+    "passed": 90,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "retries": 0,
+    "duration_seconds": 370.078466,
+    "p95_test_duration_ms": 7384,
+    "percentile_method": "Nearest rank, ceil(0.95 * n), measured per-test duration including screenshot capture where present.",
+    "max_test_duration_ms": 9432,
+    "cases": [
+      {
+        "project": "live-desktop",
+        "journey": "World Cup source dates, UTC rollover and knockout phases remain distinct in match research",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 5034,
+        "max_ms": 5034,
+        "min_ms": 2573
+      },
+      {
+        "project": "live-desktop",
+        "journey": "national source teams navigate by stable IDs through profiles, records, opponents and browser history",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 6802,
+        "max_ms": 6802,
+        "min_ms": 5243
+      },
+      {
+        "project": "live-desktop",
+        "journey": "research evidence uses the selected real source context with explicit static limits and separate local feedback",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 9432,
+        "max_ms": 9432,
+        "min_ms": 6894
+      },
+      {
+        "project": "static-desktop",
+        "journey": "World Cup source dates, UTC rollover and knockout phases remain distinct in match research",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 2516,
+        "max_ms": 2516,
+        "min_ms": 1928
+      },
+      {
+        "project": "static-desktop",
+        "journey": "national source teams navigate by stable IDs through profiles, records, opponents and browser history",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 5697,
+        "max_ms": 5697,
+        "min_ms": 2961
+      },
+      {
+        "project": "static-desktop",
+        "journey": "research evidence uses the selected real source context with explicit static limits and separate local feedback",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 3133,
+        "max_ms": 3133,
+        "min_ms": 2522
+      },
+      {
+        "project": "static-mobile",
+        "journey": "World Cup source dates, UTC rollover and knockout phases remain distinct in match research",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 2677,
+        "max_ms": 2677,
+        "min_ms": 1967
+      },
+      {
+        "project": "static-mobile",
+        "journey": "national source teams navigate by stable IDs through profiles, records, opponents and browser history",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 3796,
+        "max_ms": 3796,
+        "min_ms": 2988
+      },
+      {
+        "project": "static-mobile",
+        "journey": "research evidence uses the selected real source context with explicit static limits and separate local feedback",
+        "passed": 10,
+        "failed": 0,
+        "retries": 0,
+        "p95_ms": 3128,
+        "max_ms": 3128,
+        "min_ms": 2325
+      }
+    ],
+    "projects": {
+      "live-desktop": 30,
+      "static-desktop": 30,
+      "static-mobile": 30
+    },
+    "host_admission": "Parent confirmed no running Docker containers, no loaded Ollama models, and no further model/build/test jobs before the unchanged fresh bar. No source/test/configuration edits or timeout increases during the qualified bar."
+  },
+  "verified_browser_workflows": [
+    "Region/edition/source-calendar-date filters expose all 104 WorldCup records and preserve June11 local-day filtering even when UTC kickoff rolls to June12.",
+    "Source FT, ET and penalty stages remain separate; final record104 shows FT0-0 and ET1-0; record74 retains FT1-1, ET1-1 and penalties3-4 with original side ordering.",
+    "Pinned raw URL/checksum, source group/ground, numeric-offset UTC and missing completion/forecast limitations are visible in match evidence.",
+    "National team directory has48 unique source identities; region/type intersections, search, load-more, stable-ID profile navigation, reload/back and unknown-ID handling work.",
+    "Mexico profile shows exactly5 imported records,5 observed,0 unknown; opponents link by source ID and all-team-records filters by that ID.",
+    "Real-source chat evidence/citations/dataset/fingerprint stay scoped to selected match/team; local feedback persists on its own trace; unavailable local AI reports an error without silent substitution.",
+    "Public static answers are explicitly deterministic, offer no local-model/feedback control, and produce no /api probes; unsupported real-source forecasts abstain with the actual quality evidence.",
+    "Tested mobile/desktop documents fit their viewports; native dialog Escape restores focus; source and synthetic journeys retain separate route/data identities."
+  ],
+  "input_freeze": {
+    "captured_at": "2026-10-06T12:34:19.389595+00:00",
+    "verified_after_bar_at": "2026-10-06T12:52:44.347865+00:00",
+    "file_count": 104,
+    "aggregate_sha256": "74e0a5a8f8ad7bb68cc0ffc6bd5e1961653a34f63d4990714a0ab6817511f7ba",
+    "changed_files": [],
+    "scope": "All 104 baseline paths spanning consumer runtime/resources/packages, web source/tests/public assets, and web/package/build configuration. Standalone model scripts, documentation/evidence and later additional Python test files are outside this browser-input freeze.",
+    "files": {
+      "pyproject.toml": "b90238d77fd679e3a514f9b33a031f87e6be1c177fe25533b809dcbb767a6dbe",
+      "src/arena_copilot/__init__.py": "59bf00e1e44e306e4be612c212e630e35e01a6e1604e64b940b4f331c03fa36c",
+      "src/arena_copilot/agent.py": "0774ebe38d07cf62aee6789dc4d78197480b19bae2d28dfda1a3b2961ad9cdb0",
+      "src/arena_copilot/analytics.py": "6011d1b6dc4ff1dbb8291c420aa92d4440145c568ed108086bd6d91eff94f65d",
+      "src/arena_copilot/api.py": "2b2c467c9d72abe589b594a610dfede5b8b3dff57473652e7fc5085ef0193d7f",
+      "src/arena_copilot/cli.py": "1e60350616b4470eed803efec89e309b60e19a46f0bafc1faae10ac2de46b25f",
+      "src/arena_copilot/fixture/bronze/events.jsonl": "bd0719896ee6e0ab6c520b93ba8e2e0030f118f3f417806ea99c889baf0a7ec5",
+      "src/arena_copilot/fixture/catalog.json": "422d53c928b6d043df34dffc4749226d654ca5a2e98be7215929d5d8673d1202",
+      "src/arena_copilot/fixture/docs/limitations.md": "8ebc0d5a737c57350ee4cebfd7f2840a1ef4b878904ae47aade1cc000d9bdd58",
+      "src/arena_copilot/fixture/docs/metrics.md": "3ed83c4886f5db0a9d231e419bbb47397d87254eae7eb780777512716ab009e0",
+      "src/arena_copilot/fixture/docs/overview.md": "7413db4f4cc476c8a221745a5009a7a1e923e1fb356bab2f382089bfc0e9d52c",
+      "src/arena_copilot/fixture/docs/predictions.md": "d297bc4dbc0946e3d1fc522fee18cfd8f6f87654c46b26bba4387c4df5a3bdc6",
+      "src/arena_copilot/fixture/docs/privacy.md": "203dc827f8795cff9d8959fe57bf6da6e56ea3b80a5539759a695fb89e896606",
+      "src/arena_copilot/fixture/docs/providers.md": "79c170a6d0a833481e8a87841d27e97de145074a2a0bd1db7b7becb60ba6a64d",
+      "src/arena_copilot/fixture/docs/quality.md": "e702a39137e993a7ddcf2f0f08db21fce746ca5424aa86ba06fd996d888f59ed",
+      "src/arena_copilot/fixture/docs/streaming.md": "482430125c681b5ce72d2a9aefbb6b6615b7898196dcd6bc2c3908c8fa4ce9ee",
+      "src/arena_copilot/fixture/gold/match_history.parquet": "9e4ecb0a39b7bd1d7dfe258358bb89a3f31b1534febb8e83c12b3cc3db1d8d9e",
+      "src/arena_copilot/fixture/gold/matches.parquet": "a42c0acbdec5cf0d9290d77e3f215e34ece7a948a62eaaae2d4d81b11274fb06",
+      "src/arena_copilot/fixture/gold/team_stats.parquet": "ac5d997f9cb9f16f5910cefbac8826ec7c65ec6fc9a11ed8aa6f7ae53d82aea5",
+      "src/arena_copilot/fixture/incidents.json": "94861b7e860f8ef9f74bd03dd939cdc3e9089cd7b04b139b9fb35072d6fd1742",
+      "src/arena_copilot/fixture/lineage.json": "f5650fde946380ea10da968187ce360a3d44afd40a0fe3b26ff956b7442fb790",
+      "src/arena_copilot/fixture/manifest.json": "950fbfe955d387306f0f9b28a4828e2735efd9e07b4c0c8b61aaa74de6559b22",
+      "src/arena_copilot/fixture/metrics.json": "155b3032d5986b7f06b6f6740de9b33e43f1f33955be6085f023f961672d6e04",
+      "src/arena_copilot/fixture/model_report.json": "cd48b7d47380a87af6be9ff685d9b43fa9f2f3f02ae55cd5b5ddc0c645dcd510",
+      "src/arena_copilot/fixture/predictions.json": "f5f5738ec61407743d36785df6a16aa55e41634d2ed88c0c140ba38b58281701",
+      "src/arena_copilot/fixture/quality.json": "a0e5fec80771f801c270de058ef2840e96019cf15fdcb955f233de7b737036c8",
+      "src/arena_copilot/observability.py": "d765212fd70ad37c7c1cde2099f5ef215f0d2ea37f9bd1198ca98118315e6450",
+      "src/arena_copilot/openfootball.py": "d11117e85a298e4c44af4ce010529dffa80e5cc861af2898df15f3f0b0544af7",
+      "src/arena_copilot/research_agent.py": "9b709312512ae0c2a0dea8d469ec39f2fd26edc02b9d9bbaa8178ac5ba5169de",
+      "src/arena_copilot/research_fixture/competitions.json": "50fbc875027c4a912c6d9237f42bf822e7c637d46a03928ee3a80650886aad3f",
+      "src/arena_copilot/research_fixture/gold/match_history.parquet": "45338968dd2a409ee8360aa3c53d5d747fa16201cd7924b786403b1ae4d4021e",
+      "src/arena_copilot/research_fixture/gold/matches.parquet": "45338968dd2a409ee8360aa3c53d5d747fa16201cd7924b786403b1ae4d4021e",
+      "src/arena_copilot/research_fixture/history.json": "cf4cf07b26e3c4f634dee4bf57e97bd3285067e2cf3e4867aa6918dc637df948",
+      "src/arena_copilot/research_fixture/lineage.json": "5f573a772fad9ad97a5ab731242ddbe87d83b8a7644a02b9261c36c4797e4fca",
+      "src/arena_copilot/research_fixture/manifest.json": "b8e8247db8f9f8f0c8c2458204d76bdc073821d6e693340313a2ad2cf3d04465",
+      "src/arena_copilot/research_fixture/matches.json": "cf4cf07b26e3c4f634dee4bf57e97bd3285067e2cf3e4867aa6918dc637df948",
+      "src/arena_copilot/research_fixture/polls.json": "76a713e76a1fba8360fb8792f35fa2269718a67925d88105639dfa5bbf506473",
+      "src/arena_copilot/research_fixture/quality.json": "fcabb353cd099cb0711df7c74821fb1a244213817bd3e6b9f93c4859265fa796",
+      "src/arena_copilot/research_fixture/quarantine.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "src/arena_copilot/research_fixture/sources.json": "8d3a5157d95b5b9da98a2f7f52357cd38224d27ef4ce1ceebb326a3144e375e7",
+      "src/arena_copilot/resources/openfootball_sources.json": "65a10bf02435daa3f468d5fcfa4e48f63a53bfa002330a0870b192ef39f90439",
+      "src/arena_copilot/resources/worldcup_2026.json": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+      "src/arena_copilot/retrieval.py": "9cc5242eb903a0f302d66e5492e898d6b4c3ededc1d46de074f239270fa26c90",
+      "src/arena_copilot/showcase/bronze/events.jsonl": "92a4978fc30211338c3edd01656be5917a0972ff08a112af6ef102b9321c8e65",
+      "src/arena_copilot/showcase/catalog.json": "422d53c928b6d043df34dffc4749226d654ca5a2e98be7215929d5d8673d1202",
+      "src/arena_copilot/showcase/docs/limitations.md": "8ebc0d5a737c57350ee4cebfd7f2840a1ef4b878904ae47aade1cc000d9bdd58",
+      "src/arena_copilot/showcase/docs/metrics.md": "3ed83c4886f5db0a9d231e419bbb47397d87254eae7eb780777512716ab009e0",
+      "src/arena_copilot/showcase/docs/overview.md": "7413db4f4cc476c8a221745a5009a7a1e923e1fb356bab2f382089bfc0e9d52c",
+      "src/arena_copilot/showcase/docs/predictions.md": "d297bc4dbc0946e3d1fc522fee18cfd8f6f87654c46b26bba4387c4df5a3bdc6",
+      "src/arena_copilot/showcase/docs/privacy.md": "203dc827f8795cff9d8959fe57bf6da6e56ea3b80a5539759a695fb89e896606",
+      "src/arena_copilot/showcase/docs/providers.md": "79c170a6d0a833481e8a87841d27e97de145074a2a0bd1db7b7becb60ba6a64d",
+      "src/arena_copilot/showcase/docs/quality.md": "e702a39137e993a7ddcf2f0f08db21fce746ca5424aa86ba06fd996d888f59ed",
+      "src/arena_copilot/showcase/docs/streaming.md": "482430125c681b5ce72d2a9aefbb6b6615b7898196dcd6bc2c3908c8fa4ce9ee",
+      "src/arena_copilot/showcase/gold/match_history.parquet": "afa905c0abbc8bb95ab0868cce23ff2fb0e1293a845b025c08ad20a375b0a5e8",
+      "src/arena_copilot/showcase/gold/matches.parquet": "320bce9ed46df2cb39971e3a6525766f283c074e38441dd12d2bf8d1884cd26b",
+      "src/arena_copilot/showcase/gold/team_stats.parquet": "ac5d997f9cb9f16f5910cefbac8826ec7c65ec6fc9a11ed8aa6f7ae53d82aea5",
+      "src/arena_copilot/showcase/incidents.json": "94861b7e860f8ef9f74bd03dd939cdc3e9089cd7b04b139b9fb35072d6fd1742",
+      "src/arena_copilot/showcase/lineage.json": "f5650fde946380ea10da968187ce360a3d44afd40a0fe3b26ff956b7442fb790",
+      "src/arena_copilot/showcase/manifest.json": "a0b2a426de67e9e616794baf4aabde1374043900e930bd0318f8b5cdf1f35540",
+      "src/arena_copilot/showcase/metrics.json": "155b3032d5986b7f06b6f6740de9b33e43f1f33955be6085f023f961672d6e04",
+      "src/arena_copilot/showcase/model_report.json": "cd48b7d47380a87af6be9ff685d9b43fa9f2f3f02ae55cd5b5ddc0c645dcd510",
+      "src/arena_copilot/showcase/predictions.json": "f5f5738ec61407743d36785df6a16aa55e41634d2ed88c0c140ba38b58281701",
+      "src/arena_copilot/showcase/quality.json": "4cfcdace7280b60693caffb3831316a3e3d7a187386c9bef6e0f90a5ed1ce1bb",
+      "src/arena_copilot/snapshot.py": "ad3c74fe225e91ce188cd4c333ac0399a5b79ffd35f2d622f2ae44a59edda18a",
+      "src/arena_copilot/sports.py": "a705385a2900902cbb3e45b1a9eb36b8587fb6990ea43773acadd613249b120e",
+      "src/arena_copilot/tools.py": "06080b82e7908b0d873705169a44ba6bc52e500b48de34941164fba033b1d17c",
+      "src/arena_copilot/ui.py": "116007c015b1285326bea7458ad45cb5878f89ba275826f8a77433f4c7728170",
+      "web/index.html": "d48b7643463258b4d752b181011a1da4dc7b5dae9d056e42d1ab6882a232ec3c",
+      "web/package-lock.json": "e47b0790c9f3605f76bcca781eea2c432a68efe6f41b1eb8a715126c3f164660",
+      "web/package.json": "a563c8687bf131653a077afa1caada3994c7a96b1c4eab6913cbfb03be5bd08e",
+      "web/playwright.config.ts": "522b414632d3cb31ce929d6aacf19e2a184bf7c69eceaee07dec9934a7e961d0",
+      "web/public/favicon.svg": "e097159cec503a54044a0835b0caee3415922a3d805480e0f0f40ec52759b514",
+      "web/public/licenses/DM-Sans-OFL.txt": "6fbd040a29c2037a765dfb9f2561e9965b5c95c6dcb5dce516089d63d5f17af7",
+      "web/public/licenses/Lucide-ISC.txt": "668dcc52803480e0a026b31140a4cae668772663cd764e5991d252eef03f98db",
+      "web/public/licenses/Manrope-OFL.txt": "d826ab6583b12c26807d8716a545bdbbb672df04f48608a364ba9efdbe501c30",
+      "web/public/open-football.json": "56714c32fbe10f570d7fff894c4ca1aee992f0a1e43791b21f9d6d1c8b245f7e",
+      "web/public/snapshot.json": "38d7ec1e58ea9dd75e877f18ffd6dc2428a27d0c7a2ca91a178d594dc73d1730",
+      "web/src/App.tsx": "77e81f3644dc7f98a6d8404a1f7c0f9df3273a4e4f1b01b79cb45b7c4ae04ce6",
+      "web/src/components/openFootball.css": "c21723a0b9d9f1f32d99b974dc71a6e707826f25ed55e3569be77728cdef4a42",
+      "web/src/components/openFootballShared.tsx": "8cebfd96dec381a1d7a0608f33a95d2d664bd15606cd7fcf317d9c7f6e6296c7",
+      "web/src/components/OpenFootballTeams.tsx": "e2652371950c2cb0d211b33da4297ecefa93909fb4b7c4db8c707b14961b300e",
+      "web/src/components/OpenFootballWorkspace.tsx": "a5f33fd96934008a4c4aa68c1cf4b77a9a1f8d998e68ef8562abfc8a15456461",
+      "web/src/components/ResearchQuestion.tsx": "1ef74261596f1fc077d9d0bfee7ba592be78f0acd30115285ae953c49e73759c",
+      "web/src/components/sports.css": "2ba162912516e5cc8ceff92f2cfe9da476bf109e7db86ac72df7b5ce750d031a",
+      "web/src/components/SportsWorkspace.tsx": "c26c3bdff1e9004c9f741e1e6d4db28b950389511c5af5a53e23213ae6cf2416",
+      "web/src/components/ui.tsx": "0496af1632376dba4dfdd46044a8646fab02569aa7dbc1252778919c17f75324",
+      "web/src/data.ts": "89510ae8212b48d3f59ce59721d7595db2ea4687ffbc748ab3656523f6c740cc",
+      "web/src/main.tsx": "de0f9832521af476e4980a1751b39f37868b55071d6754d46d51f15cdc68b101",
+      "web/src/openFootball.ts": "50bb15ebdf4a7308d2fb96f53d1347d95033d2d7fd0d1c2764674740de62de55",
+      "web/src/researchChat.ts": "96cda42261cf3e7dd7593d3855a5afeb69ee3863b5eed95d0894127e0b147a0d",
+      "web/src/sports.ts": "c760653213244c16059660597d163a410afe1577019a6360331585bc1ed69f81",
+      "web/src/styles.css": "b04bff515974974b8f95faca71a0672ed4d66f514b8089f9a9c01ade5885342d",
+      "web/src/types.ts": "88f619c943a5d03afdcbe6948ff9c787750e7857d0374396b40276c320065e70",
+      "web/tests/domain-ground-truth.ts": "930a9aaa4a81e2a83745e73ac5aaafedc20d6d0d4a6bb7084e0a43356a71dce1",
+      "web/tests/domain.spec.ts": "288a90bc99ca3cd198ab0a57da50ca38dd161569021a8b6ebe3e1324611e71ea",
+      "web/tests/fixtures.ts": "27503c3580269ce966015e4e8ad00ee4a32ebb035c622b65fa35b2768358b1a4",
+      "web/tests/journeys.ts": "905bf4da2935b4933ba1807f9a24ea3a83d97d9294114f176772c6689565c7f1",
+      "web/tests/live.spec.ts": "aca7f7ffa37012cbe0662d45eec11b1ccfee63d9da616ec3e7fee2aab8a14ecb",
+      "web/tests/openfootball.spec.ts": "2219b9eacec2b57ad6b5a310f0e23a8d34394e3df134a02470d0ba1ede130637",
+      "web/tests/start-api.mjs": "f2a6d2b1347e819ef62b43ad143886ee8949023ef93d5a1636c9cf502f651ce0",
+      "web/tests/start-static.mjs": "7e5a1ce8b84e9076a6b77ba8d9563505738a29036498c6f68e529efe3592fe6f",
+      "web/tests/static.spec.ts": "393f9a1faca8fba347c4b77fcb01c52b9f6f18f541f7f3bd48ccb7a4d7ce39d7",
+      "web/tests/worldcup-team.spec.ts": "d879440d60fa10a7487f0092d52dd8f3a696db51b5da52057ba67a9eaa5856d7",
+      "web/vite.config.ts": "825c7590886bac5f342270255db089990a3841d15689871013374b0eeaf6ca87"
+    }
+  },
+  "retained_diagnostics": [
+    {
+      "run": "initial_new_journey_diagnostic",
+      "stats": {
+        "startTime": "2026-10-06T12:26:48.583Z",
+        "duration": 99756.98499999999,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 7,
+        "flaky": 0
+      },
+      "classification": "Harness readiness/exact-selector/expanded-details/changed-copy expectations; corrected before the passing full suite. No app behavior was relaxed to satisfy those checks.",
+      "raw_report": "web/test-results/worldcup-diagnostic-1.json",
+      "artifacts": "web/test-results/worldcup-diagnostic-1-artifacts.zip"
+    },
+    {
+      "recorded_at": "2026-10-06T12:43:46.938411+00:00",
+      "status": "interrupted_incomplete",
+      "planned_executions": 90,
+      "printed_passes": 16,
+      "printed_failures": 1,
+      "failure": "30-second test timeout, followed by 30-second browser-context teardown timeout",
+      "retries": 0,
+      "qualified_stability_bar": false,
+      "cause": "Not proven. Concurrent model and Docker jobs were running on the host. The unchanged journey passed in the full suite and subsequent partial repeats. A fresh unchanged bar runs after confirmed host quiescence.",
+      "artifacts": [
+        "web/test-results/worldcup-stability-interrupted-1-artifacts.zip",
+        "web/test-results/worldcup-stability-interrupted-1-server-log.txt"
+      ],
+      "source_sha256": "74e0a5a8f8ad7bb68cc0ffc6bd5e1961653a34f63d4990714a0ab6817511f7ba",
+      "all_104_files_unchanged_after_interruption": true,
+      "raw_report_note": "SIGINT did not write a fresh Playwright JSON report; results.json still belonged to the prior full 28-case pass. Printed counts are recorded from the preserved server log, not that older report."
+    }
+  ],
+  "captures": [
+    {
+      "file": "docs/images/worldcup-mexico.png",
+      "source_project": "static-desktop",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "2f8e3fd012356709f077068be7308ed48c8fd738795202cbf62c35a35bc33303",
+      "browser_test": "web/test-results/runs/worldcup-team-national-sou-027a3-ponents-and-browser-history-static-desktop/worldcup-mexico-static-desktop.png"
+    },
+    {
+      "file": "docs/images/worldcup-mexico-mobile.png",
+      "source_project": "static-mobile",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1082,
+        "height": 2202
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "c1c7418caaf4e98a960bbbe3d4e287fdf89ce2575cbca5a89c19d07bdcb7d955",
+      "browser_test": "web/test-results/runs/worldcup-team-national-sou-027a3-ponents-and-browser-history-static-mobile/worldcup-mexico-static-mobile.png"
+    },
+    {
+      "file": "docs/images/worldcup-offset.png",
+      "source_project": "static-desktop",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "8eb4f401bbfcd1536f2ad6d9ca33041ca73242e28ea3fd45fd32bd75a2a7bf70",
+      "browser_test": "web/test-results/runs/worldcup-team-World-Cup-so-c132c--distinct-in-match-research-static-desktop/worldcup-offset-static-desktop.png"
+    },
+    {
+      "file": "docs/images/worldcup-offset-mobile.png",
+      "source_project": "static-mobile",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1082,
+        "height": 2202
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "ae890ad8a58971e691432d03137399a08643d36be8ad0787881c8a8847d810c4",
+      "browser_test": "web/test-results/runs/worldcup-team-World-Cup-so-c132c--distinct-in-match-research-static-mobile/worldcup-offset-static-mobile.png"
+    },
+    {
+      "file": "docs/images/worldcup-final.png",
+      "source_project": "static-desktop",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "2699e5d8d3f084aa070a734ceaf3bd4e44b697009273bf4c244efb51f0326a23",
+      "browser_test": "web/test-results/runs/worldcup-team-World-Cup-so-c132c--distinct-in-match-research-static-desktop/worldcup-final-static-desktop.png"
+    },
+    {
+      "file": "docs/images/worldcup-final-mobile.png",
+      "source_project": "static-mobile",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1082,
+        "height": 2202
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "99420fcc89db77d8c7343a672e36eb93ed708b8d438e3a8d5ccf04d95ae7a985",
+      "browser_test": "web/test-results/runs/worldcup-team-World-Cup-so-c132c--distinct-in-match-research-static-mobile/worldcup-final-static-mobile.png"
+    },
+    {
+      "file": "docs/images/worldcup-research.png",
+      "source_project": "static-desktop",
+      "repeat_index": 0,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "kind": "actual_unmodified_viewport_capture",
+      "sha256": "82163baa4284c7788103863b66b54550d8dc0ee3ea22a967ee9f22e472c0d155",
+      "browser_test": "web/test-results/runs/worldcup-team-research-evi-4db3e-and-separate-local-feedback-static-desktop/worldcup-research-static-desktop.png"
+    }
+  ],
+  "actual_native_inference_review": "docs/evidence/worldcup-agent-semantic-review-v0.5.json; three agent-reviewed examples, separate from this deterministic browser gate.",
+  "remote_ci": {
+    "status": "pending_separate_parent_verification",
+    "configured_executions": 280,
+    "note": "All 28 configured cases repeated ten times with zero retries; this local report does not claim a remote run has passed."
+  },
+  "limitations": [
+    "Only Chromium and the specified viewports were exercised.",
+    "Keyboard/overflow checks do not constitute screen-reader testing or WCAG certification.",
+    "Ten quiet-host passes do not prove behavior under unbounded concurrent local model/compute workloads; the earlier incomplete timeout remains recorded and its cause is not proven.",
+    "WorldCup fidelity is to the pinned community CC0 source, not official FIFA results. Generic club source packages remain unsigned/self-consistent.",
+    "No real-team forecast, official standings, Databricks workspace execution, or completed 120-case human semantic scorecard is claimed."
+  ],
+  "raw_evidence_sha256": {
+    "worldcup-full-pass.json": "ba64abd6bd6a8c58d710df560081d764700768bc8a42b706ed7d4469c0371f72",
+    "worldcup-stability-final-pass.json": "384714a95ab2bd2069b428651da66c82af8c145cd6a0f80281f3fde4fbd9e342",
+    "worldcup-diagnostic-1.json": "d4b52e09d9cfb6bd7d446e6d434c75bcac8518af5043a091db5e39d8c304da6c",
+    "worldcup-stability-interrupted-1-summary.json": "43b1349aad6cfd7f2df5c5595ebd92b0e3b816a629df06ab9a503b6003202f27",
+    "worldcup-stability-final-server-log.txt": "65d5dd1330c12643b897b2e7a72f3c0a77c2668a2bcfa6aed07f4df57e231245"
+  }
+}

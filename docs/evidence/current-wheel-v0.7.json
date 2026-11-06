@@ -1,0 +1,220 @@
+{
+  "recorded_at": "2026-10-07T09:38:10.336829+00:00",
+  "version": "0.7.0",
+  "status": "required_subchecks_passed_after_api_harness_correction",
+  "scope": "Isolated extracted wheel runtime using existing dependencies",
+  "wheel": {
+    "build": {
+      "elapsed_seconds": 15.906,
+      "exit_code": 0,
+      "log": "logs/consumer-build.log"
+    },
+    "build_dependencies": {
+      "configured_index": "https://pypi.org/simple",
+      "official_wheel_urls": [],
+      "packages": [
+        {
+          "metadata_sha256": "3800d9b91dceea2065a6ed6279383362e97ac38b8e56b9343f404ee531860099",
+          "name": "autocommand",
+          "source": "isolated PEP 517 build environment",
+          "version": "2.2.2"
+        },
+        {
+          "metadata_sha256": "8215c54ead77d9dc5a108a25c6bdc72b5999aa6f62c9499a440359412afa5a51",
+          "name": "backports.tarfile",
+          "source": "isolated PEP 517 build environment",
+          "version": "1.2.0"
+        },
+        {
+          "metadata_sha256": "a3e38b9ee4326289d4864704f30e299ee769e2309ce9f4a75f0de1a50ad0a356",
+          "name": "importlib_metadata",
+          "source": "isolated PEP 517 build environment",
+          "version": "8.7.1"
+        },
+        {
+          "metadata_sha256": "5c2fd09012c954f139b10624978d5335a654c34014cd06f6f466ca683dbc9c56",
+          "name": "jaraco.text",
+          "source": "isolated PEP 517 build environment",
+          "version": "4.0.0"
+        },
+        {
+          "metadata_sha256": "0435ebfc52055c5a9974ed20c171b6454383eaf9dbb1508814ba7ad97c59d712",
+          "name": "jaraco.context",
+          "source": "isolated PEP 517 build environment",
+          "version": "6.1.0"
+        },
+        {
+          "metadata_sha256": "2e79da8dc3469924abe3ac8b22a3feb5692a79bf9f47bbc86b6535d618641849",
+          "name": "jaraco.functools",
+          "source": "isolated PEP 517 build environment",
+          "version": "4.4.0"
+        },
+        {
+          "metadata_sha256": "6ab3515145abe58b067f087c867631cf4cf5d653fed81b9642ee12086c3904b8",
+          "name": "more-itertools",
+          "source": "isolated PEP 517 build environment",
+          "version": "10.8.0"
+        },
+        {
+          "metadata_sha256": "3362bb7d6a26da2962ba8daaa4785cd0bacac21aba908a1195cc8f59580a265a",
+          "name": "packaging",
+          "source": "isolated PEP 517 build environment",
+          "version": "26.0"
+        },
+        {
+          "metadata_sha256": "bbc5216d5f4c77bfbc57227264d52e66bccde71ccf79e75e1a6046d029d30223",
+          "name": "platformdirs",
+          "source": "isolated PEP 517 build environment",
+          "version": "4.4.0"
+        },
+        {
+          "metadata_sha256": "f5ac0a1f8fba908b4646cd655309e91aad969b6787616ac571ca462a3832ffce",
+          "name": "tomli",
+          "source": "isolated PEP 517 build environment",
+          "version": "2.4.0"
+        },
+        {
+          "metadata_sha256": "22910aa97ca89cbcc20a019e27fe31360b7929a4bd66ca0d310f99a44f6ccd35",
+          "name": "wheel",
+          "source": "isolated PEP 517 build environment",
+          "version": "0.46.3"
+        },
+        {
+          "metadata_sha256": "bdd67d4d16cf0bf3b893e7d18cd3d2d774adb82f37ed985bc7770c607226b35b",
+          "name": "zipp",
+          "source": "isolated PEP 517 build environment",
+          "version": "3.23.0"
+        },
+        {
+          "metadata_sha256": "3ef2975718dd31cabdd5829455e9b868ca14dbf79ed8fed2de0af4e87347006e",
+          "name": "setuptools",
+          "source": "isolated PEP 517 build environment",
+          "version": "84.0.0"
+        }
+      ],
+      "shared_install": false
+    },
+    "bytes": 1260653,
+    "distribution": "arena-copilot",
+    "filename": "arena_copilot-0.7.0-py3-none-any.whl",
+    "label": "consumer",
+    "license_bytes_exact": true,
+    "members": 77,
+    "readme_metadata_exact": true,
+    "readme_text_only": true,
+    "record_verified": true,
+    "sha256": "94558941c8ff289c99ab83ae77eb606027e6d99a0cac73ce32ee47cc3204718a",
+    "source_bytes_exact": true,
+    "source_files": 71,
+    "uncompressed_bytes": 11181244,
+    "version": "0.7.0"
+  },
+  "build_backend": {
+    "shared_install": false,
+    "name": "setuptools",
+    "version": "84.0.0",
+    "acquisition": "pip reported cached public PyPI wheel in each isolated PEP 517 environment",
+    "note": "Additional dist-info records in the original build inventory belong to setuptools vendored packages, not separately acquired top-level build dependencies"
+  },
+  "synthetic_snapshot": {
+    "dataset_version": "ed9242317b501386",
+    "matches": 600,
+    "schema_version": "2.0",
+    "status": "passed"
+  },
+  "cc0_research_snapshot": {
+    "dataset_version": "20d06e8e5af0886e",
+    "license": "CC0-1.0",
+    "matches": 2831,
+    "research_version": "openfootball-research-2.0",
+    "status": "passed"
+  },
+  "mock_bridge": {
+    "mock_transport_clients": 1,
+    "mocked_http_requests": 12,
+    "stages": [
+      "initial",
+      "resolved",
+      "conflicted",
+      "last-good"
+    ],
+    "status": "passed"
+  },
+  "local_api": {
+    "api_state_before_after_empty": true,
+    "asgi_transport_clients": 1,
+    "assistant_lifespan_started": false,
+    "bridge_files_unchanged": true,
+    "http_status": 200,
+    "providers": [
+      {
+        "displayed": 1,
+        "error_code": null,
+        "producer_state": "ready",
+        "provider": "football-data",
+        "retained_total": 1,
+        "serving_last_good": false,
+        "stale": true,
+        "state": "stale",
+        "wire_agrees_with_registry": true
+      },
+      {
+        "displayed": 6,
+        "error_code": "authentication_denied",
+        "producer_state": "degraded",
+        "provider": "pandascore",
+        "retained_total": 6,
+        "serving_last_good": true,
+        "stale": true,
+        "state": "degraded",
+        "wire_agrees_with_registry": true
+      }
+    ],
+    "schema_version": "arena-live-display-2.0",
+    "status": "passed"
+  },
+  "module_origins_audited": 24,
+  "distribution_versions": [
+    {
+      "located_in_extraction": true,
+      "name": "arena-lakehouse",
+      "version": "0.7.0"
+    },
+    {
+      "located_in_extraction": true,
+      "name": "arena-copilot",
+      "version": "0.7.0"
+    }
+  ],
+  "guard_setup": {
+    "socket_attempts_blocked_after_setup": 0,
+    "outbound_dns_guard_after_setup": true,
+    "initialization_socketpair_connections": 1,
+    "stdlib_event_loop_before_imports": true
+  },
+  "shared_install_inventory_unchanged": true,
+  "retained_attempts": [
+    {
+      "status": "failed",
+      "scope": "First combined verifier",
+      "reason": "Socket guard also blocked Windows event-loop socketpair initialization; successful wheel/fixture/bridge subchecks retained",
+      "report_sha256": "fa5574da640afca7605a65d4be36e5fe82f06cae97c13cc424c78287f9559b28"
+    },
+    {
+      "status": "failed",
+      "scope": "First API-only attempt",
+      "reason": "Harness used private last_error_code instead of public error_code",
+      "report_sha256": "e80f5cd7fd1cfd43cde827bb46144432c21fa5fa163bdf5872b04d76e6f0a0a2"
+    },
+    {
+      "status": "passed",
+      "scope": "Corrected API-only attempt",
+      "seconds": 29.516,
+      "report_sha256": "3811888cf0bfa9108e074c95726023ddd1ebf3497454eda9abe0f154c5724675"
+    }
+  ],
+  "provider_network_requests": 0,
+  "model_requests": 0,
+  "spark_runs": 0,
+  "limits": "Read-only display API; assistant lifespan was not started. Existing runtime dependencies were reused. This does not establish a clean dependency installation, Linux runtime, provider/model/Spark execution or managed-platform verification."
+}

@@ -1,0 +1,219 @@
+{
+  "recorded_at": "2026-10-06T10:53:05.131583+00:00",
+  "status": "passed",
+  "scope": "Real isolated Chromium workflows against FastAPI and the production static build at /lakehouse-copilot/; deterministic evidence mode, no model inference.",
+  "dataset_version": "ed9242317b501386",
+  "data_kind": "synthetic",
+  "as_of": "2025-04-09T15:10:00.000000Z",
+  "runner": {
+    "playwright": "1.63.0",
+    "browser": "Chromium",
+    "workers": 1,
+    "retries": 0,
+    "repeat_each": 10
+  },
+  "stability": {
+    "source": "web/test-results/results.json",
+    "sha256": "49e7078cf1352871fa10ffadcdc84e838978c3d47349d3bcd9c4f2bc7437cd25",
+    "stats": {
+      "startTime": "2026-10-06T10:42:22.347Z",
+      "duration": 564874.88,
+      "expected": 130,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "runner_errors": 0,
+    "journey_definitions": 7,
+    "project_cases": 13,
+    "executions": 130,
+    "per_project": {
+      "live-desktop": 50,
+      "static-desktop": 40,
+      "static-mobile": 40
+    },
+    "p95_case_duration_ms": 9927,
+    "cases": [
+      {
+        "project": "live-desktop",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "an analyst switches sports, inspects exact forecasts and finds a team",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "evidence chat returns an owned trace, inspectable sources and stored feedback",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "live-desktop",
+        "file": "live.spec.ts",
+        "journey": "local model failure is actionable and allows an evidence retry",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "static.spec.ts",
+        "journey": "historic match context preserves provider identities and ignores corrections learned later",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-desktop",
+        "file": "static.spec.ts",
+        "journey": "the public subpath provides responsive forecasts, teams, quality and cited answers without a backend",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "domain.spec.ts",
+        "journey": "competition research connects observed tables, historic matches and team profiles across sports",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "domain.spec.ts",
+        "journey": "match research combines date, competition and team filters with truthful scores and pagination",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "static.spec.ts",
+        "journey": "historic match context preserves provider identities and ignores corrections learned later",
+        "consecutive_passes": 10,
+        "retries": 0
+      },
+      {
+        "project": "static-mobile",
+        "file": "static.spec.ts",
+        "journey": "the public subpath provides responsive forecasts, teams, quality and cited answers without a backend",
+        "consecutive_passes": 10,
+        "retries": 0
+      }
+    ]
+  },
+  "source_freeze": {
+    "recorded_at": "2026-10-06T10:42:45.094987+00:00",
+    "inputs": 55,
+    "aggregate_sha256": "e4dd3dcd580f7c2589810d343eb4eb2e5a5019753edd47edca5c72779fd9c0a6",
+    "changed_inputs": []
+  },
+  "covered_workflows": [
+    "Combined UTC date, team, competition and match-ID filtering with real server response verification",
+    "Scheduled score unavailable versus completed football goals and VALORANT maps",
+    "Pagination and explicit empty states",
+    "Observed competition tables and point totals from the original bronze event log",
+    "Event to match to team navigation; query-string links, browser back/forward and reload",
+    "Point-in-time form and head-to-head from known revisions, strict completion cutoff and ID joins",
+    "Original small fixture with duplicate display names and a correction learned after historical kickoff",
+    "Three-outcome football and two-outcome VALORANT stored forecast evidence",
+    "Cited chat answers, actual context-source inspection, owned traces and feedback",
+    "Actionable unavailable-model error and deterministic evidence retry",
+    "Static no-backend restrictions, responsive document sizing and mobile keyboard navigation"
+  ],
+  "prior_diagnostic": {
+    "source": "web/test-results/diagnostic-v0.3-results.json",
+    "passed": 13,
+    "duration_ms": 59264.141,
+    "note": "Before final native-model routing fix; not used as the final repeat bar."
+  },
+  "interrupted_run": {
+    "source": "web/test-results/interrupted-stability-v0.3.json",
+    "completed_passes": 35,
+    "completed_failures": 0,
+    "note": "Stopped at parent request before a backend fix; not counted toward final stability."
+  },
+  "limitations": [
+    "Chromium desktop and emulated Pixel 7 only; other browser engines and physical devices not verified.",
+    "Full WCAG conformance and screen-reader behavior not certified.",
+    "Generative semantic quality and prediction accuracy are outside this browser suite; native-model smoke evidence is recorded separately.",
+    "This records local execution; the configured ten-repeat CI gate must be read from its actual GitHub Actions run."
+  ],
+  "screenshots": [
+    {
+      "path": "docs/images/arena-overview.png",
+      "sha256": "7fc8e43ea4802e46baf676ef3db7dbb081a9d14c70b8549104105a88b4ec64bd",
+      "source_artifact": "web/test-results/runs/domain-match-research-comb-048f6-thful-scores-and-pagination-static-desktop/arena-match-center-static-desktop.png"
+    },
+    {
+      "path": "docs/images/arena-mobile.png",
+      "sha256": "ee9f2557ba3f8dd9a0e5cbec752ebe64b16dd457161f4d04d0aadce15ccd8398",
+      "source_artifact": "web/test-results/runs/domain-match-research-comb-048f6-thful-scores-and-pagination-static-mobile/arena-match-center-static-mobile.png"
+    },
+    {
+      "path": "docs/images/arena-forecast.png",
+      "sha256": "3490932dd28672f59235848ead5d96964d860a079596444d5739cff854d826d5",
+      "source_artifact": "web/test-results/runs/static-the-public-subpath--0542f-d-answers-without-a-backend-static-desktop/arena-public-forecast.png"
+    },
+    {
+      "path": "docs/images/arena-valorant.png",
+      "sha256": "42cb276b7906c54a23467f4ed28bf30a2a1ca93aa8372bfbdca957582d98490c",
+      "source_artifact": "web/test-results/runs/live-an-analyst-switches-s-5c43b--forecasts-and-finds-a-team-live-desktop/arena-live-valorant.png"
+    },
+    {
+      "path": "docs/images/arena-evidence.png",
+      "sha256": "70a1c4d8b9ecfec73ee59679d6a8fbdcde27eac4b7fca20296eabb4719aadfd8",
+      "source_artifact": "web/test-results/runs/live-evidence-chat-returns-cd353-sources-and-stored-feedback-live-desktop/arena-live-evidence.png"
+    },
+    {
+      "path": "docs/images/arena-valorant-event.png",
+      "sha256": "00f0a69747b5a4e0e2976bc3278e02426da3e577d36e0c8223cee06d90c6ec89",
+      "source_artifact": "web/test-results/runs/domain-competition-researc-f9694-team-profiles-across-sports-static-desktop/arena-valorant-event-static-desktop.png"
+    },
+    {
+      "path": "docs/images/arena-competition.png",
+      "sha256": "7886d4fcbf77d1f1c76133c3ed79b280245549479d8385003380a693407e3d68",
+      "source_artifact": "web/test-results/runs/domain-competition-researc-f9694-team-profiles-across-sports-static-desktop/arena-competition-static-desktop.png"
+    },
+    {
+      "path": "docs/images/arena-historic-match.png",
+      "sha256": "330273d2b7e43bc1d9c2409fb21e677ac4966038732d7aefcc595c15c7bc6143",
+      "source_artifact": "web/test-results/runs/domain-match-research-comb-048f6-thful-scores-and-pagination-static-desktop/arena-historic-match-static-desktop.png"
+    },
+    {
+      "path": "docs/images/arena-historic-match-mobile.png",
+      "sha256": "10399307df5511bfe1f513d8ef60ee0b8a36bc3af78b4ac36c9c549ccb29f561",
+      "source_artifact": "web/test-results/runs/domain-match-research-comb-048f6-thful-scores-and-pagination-static-mobile/arena-historic-match-static-mobile.png"
+    },
+    {
+      "path": "docs/images/arena-match-context.png",
+      "sha256": "c90821ef953e8d4492c2f42ecd3b7c74f779b0cb8b101a37ba5b1bfc3c286978",
+      "source_artifact": "web/test-results/runs/live-evidence-chat-returns-cd353-sources-and-stored-feedback-live-desktop/arena-match-context-live.png"
+    }
+  ]
+}

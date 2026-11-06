@@ -1,0 +1,368 @@
+{
+  "recorded_at": "2026-10-06T12:32:13.870868+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "scope": "Three actual local research inference examples; integration checks, not a human-reviewed scorecard",
+  "dataset_version": "20d06e8e5af0886e",
+  "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "cases": [
+    {
+      "id": "final-score-stages",
+      "question": "What are the source FT and extra-time score stages for this match? Keep them separate and state whether this package provides a real-team prediction.",
+      "context": {
+        "match_id": "openfootball:match:636870ca04352f217b45e0bf"
+      },
+      "reference": {
+        "teams": [
+          "Spain",
+          "Argentina"
+        ],
+        "stages": {
+          "et": [
+            1,
+            0
+          ],
+          "ft": [
+            0,
+            0
+          ],
+          "ht": [
+            0,
+            0
+          ]
+        },
+        "prediction_eligible": false
+      },
+      "status": "failed",
+      "response": {
+        "answer": "No real-team forecast is available in this research package. All imported records are prediction-ineligible; retrospective collection does not establish pre-match availability.",
+        "citations": [
+          {
+            "id": "quality.json",
+            "uri": "snapshot://20d06e8e5af0886e/quality.json"
+          }
+        ],
+        "tool_results": [
+          {
+            "tool": "research_quality",
+            "source": "quality.json",
+            "rows": [
+              {
+                "date_only": 1042,
+                "local_minute": 1685,
+                "match_count": 2831,
+                "notes": [
+                  "Source calendar dates and local wall times; UTC kickoff derived only from an explicit numeric offset; completion remains unknown",
+                  "Observed open-data coverage; incomplete or stale source results remain unknown; not official standings",
+                  "Name-derived team identities remain unresolved and are not official IDs",
+                  "Preserved ft/et/p scores do not establish a 90-minute prediction target",
+                  "Historical availability begins at actual revision collection, never at historical kickoff"
+                ],
+                "observed_results": 1192,
+                "offset_minute": 104,
+                "prediction_ineligible": 2831,
+                "quarantine_rows": 0,
+                "revision_count": 2831,
+                "scope": "Observed current staging rows; not official standings",
+                "source_count": 10,
+                "unknown_results": 1639,
+                "unresolved_team_identities": 261,
+                "unresolved_timezones": 2727
+              }
+            ]
+          }
+        ],
+        "trace_id": "07859ac1669b4640a237d9daebcf1973",
+        "dataset_version": "20d06e8e5af0886e",
+        "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+        "contract_version": "openfootball-research-2.0",
+        "data_kind": "open_data",
+        "provider": "openfootball",
+        "as_of": "2026-10-06T12:19:31.263499Z",
+        "prompt_version": "arena-research-0.5.0",
+        "mode": "ollama",
+        "model": "qwen3:4b",
+        "model_digest": null,
+        "abstained": true,
+        "metrics": {
+          "latency_seconds": 0.04734619999726419,
+          "generated_tokens": 0,
+          "tool_calls": 1
+        },
+        "grounding": "Source references validated; semantic factual support requires separate evaluation"
+      }
+    },
+    {
+      "id": "source-date-utc-rollover",
+      "question": "What is the original source date and local kickoff, and what is the offset-derived UTC kickoff for this match? Explain the date rollover.",
+      "context": {
+        "match_id": "openfootball:match:393c90c0c9a0d2c92c7f3949"
+      },
+      "reference": {
+        "source_date": "2026-06-11",
+        "local_time": "20:00",
+        "utc_offset_minutes": -360,
+        "start_time": "2026-06-12T02:00:00.000000Z",
+        "timezone": null,
+        "completed_at": null
+      },
+      "status": "passed",
+      "response": {
+        "answer": "The original source date is 2026-06-11 (source_date) and local kickoff is 20:00 (local_time). The offset-derived UTC kickoff is 2026-06-12T02:00:00.000000Z (start_time). The date rollover occurs because the UTC offset is -360 minutes (UTC-6), so the local time of 20:00 on June 11, 2026 converts to 02:00 on June 12, 2026 in UTC.",
+        "citations": [
+          {
+            "id": "gold/match_history.parquet",
+            "uri": "snapshot://20d06e8e5af0886e/gold/match_history.parquet"
+          }
+        ],
+        "tool_results": [
+          {
+            "tool": "research_match",
+            "source": "gold/match_history.parquet",
+            "rows": [
+              {
+                "match_id": "openfootball:match:393c90c0c9a0d2c92c7f3949",
+                "edition_id": "worldcup-2026",
+                "competition": "World Cup 2026",
+                "round": "Matchday 1",
+                "team_a": "South Korea",
+                "team_b": "Czech Republic",
+                "team_a_id": "openfootball:team:175650d02388bb999ba217a2",
+                "team_b_id": "openfootball:team:66e48ef9526002da51736c11",
+                "source_date": "2026-06-11",
+                "local_time": "20:00",
+                "utc_offset_minutes": -360,
+                "start_time": "2026-06-12T02:00:00.000000Z",
+                "kickoff_precision": "offset_minute",
+                "result_status": "observed_result",
+                "score_basis": "source_ft_unverified_regulation",
+                "prediction_eligible": false,
+                "observed_at": "2026-10-06T12:19:28.503601Z",
+                "source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+                "source_group": "Group A",
+                "ground": "Guadalajara (Zapopan)",
+                "source_match_number": null,
+                "source_score_stages": {
+                  "ft": [
+                    2,
+                    1
+                  ],
+                  "ht": [
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "revisions_total": 1,
+            "forecast_status": "unavailable_unresolved_time_and_target",
+            "history_basis": "retrospective_source_observations"
+          }
+        ],
+        "trace_id": "7f2d4b91676449c69aaa0edbaf979a5e",
+        "dataset_version": "20d06e8e5af0886e",
+        "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+        "contract_version": "openfootball-research-2.0",
+        "data_kind": "open_data",
+        "provider": "openfootball",
+        "as_of": "2026-10-06T12:19:31.263499Z",
+        "prompt_version": "arena-research-0.5.0",
+        "mode": "ollama",
+        "model": "qwen3:4b",
+        "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "abstained": false,
+        "metrics": {
+          "latency_seconds": 70.45213680000234,
+          "generated_tokens": 166,
+          "tool_calls": 1
+        },
+        "grounding": "Source references validated; semantic factual support requires separate evaluation"
+      }
+    },
+    {
+      "id": "mexico-imported-coverage",
+      "question": "How many imported records and observed and unknown results does this team have? Is this its complete official performance record?",
+      "context": {
+        "team_id": "openfootball:team:6893d6bd9fc02a0ac0f8c51f"
+      },
+      "reference": {
+        "team_name": "Mexico",
+        "record_count": 5,
+        "observed_results": 5,
+        "unknown_results": 0,
+        "coverage_note": "Counts describe imported source records, not complete team history or official performance."
+      },
+      "status": "passed",
+      "response": {
+        "answer": "This team has 5 imported records and 5 observed results with 0 unknown results. This is not its complete official performance record as per the coverage note: 'Counts describe imported source records, not complete team history or official performance.'",
+        "citations": [
+          {
+            "id": "gold/matches.parquet",
+            "uri": "snapshot://20d06e8e5af0886e/gold/matches.parquet"
+          }
+        ],
+        "tool_results": [
+          {
+            "tool": "research_team",
+            "source": "gold/matches.parquet",
+            "rows": [
+              {
+                "team_id": "openfootball:team:6893d6bd9fc02a0ac0f8c51f",
+                "team_name": "Mexico",
+                "team_namespace": "openfootball-national-men",
+                "team_type": "national",
+                "region": "International",
+                "record_count": 5,
+                "observed_results": 5,
+                "unknown_results": 0,
+                "edition_ids": [
+                  "worldcup-2026"
+                ],
+                "latest_source_date": "2026-07-05",
+                "editions": [
+                  {
+                    "edition_id": "worldcup-2026",
+                    "name": "World Cup 2026",
+                    "season": "2026",
+                    "record_count": 5,
+                    "observed_results": 5,
+                    "unknown_results": 0
+                  }
+                ],
+                "recent_match_limit": 25,
+                "coverage_note": "Counts describe imported source records, not complete team history or official performance."
+              }
+            ],
+            "recent_matches": [
+              {
+                "match_id": "openfootball:match:8ca8ee97445edb94c9e0814e",
+                "edition_id": "worldcup-2026",
+                "competition": "World Cup 2026",
+                "round": "Round of 16",
+                "team_a": "Mexico",
+                "team_b": "England",
+                "team_a_id": "openfootball:team:6893d6bd9fc02a0ac0f8c51f",
+                "team_b_id": "openfootball:team:c338539c8d256d72991c7144",
+                "source_date": "2026-07-05",
+                "local_time": "18:00",
+                "utc_offset_minutes": -360,
+                "start_time": "2026-07-06T00:00:00.000000Z",
+                "kickoff_precision": "offset_minute",
+                "result_status": "observed_result",
+                "score_basis": "source_ft_unverified_regulation",
+                "prediction_eligible": false,
+                "observed_at": "2026-10-06T12:19:28.503601Z",
+                "source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+                "source_group": null,
+                "ground": "Mexico City",
+                "source_match_number": 92,
+                "source_score_stages": {
+                  "ft": [
+                    2,
+                    3
+                  ],
+                  "ht": [
+                    1,
+                    2
+                  ]
+                }
+              },
+              {
+                "match_id": "openfootball:match:e177f534e23ad3a978947522",
+                "edition_id": "worldcup-2026",
+                "competition": "World Cup 2026",
+                "round": "Round of 32",
+                "team_a": "Mexico",
+                "team_b": "Ecuador",
+                "team_a_id": "openfootball:team:6893d6bd9fc02a0ac0f8c51f",
+                "team_b_id": "openfootball:team:0e96a2baad5b94b45314e05c",
+                "source_date": "2026-06-30",
+                "local_time": "19:00",
+                "utc_offset_minutes": -360,
+                "start_time": "2026-07-01T01:00:00.000000Z",
+                "kickoff_precision": "offset_minute",
+                "result_status": "observed_result",
+                "score_basis": "source_ft_unverified_regulation",
+                "prediction_eligible": false,
+                "observed_at": "2026-10-06T12:19:28.503601Z",
+                "source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+                "source_group": null,
+                "ground": "Mexico City",
+                "source_match_number": 79,
+                "source_score_stages": {
+                  "ft": [
+                    2,
+                    0
+                  ],
+                  "ht": [
+                    1,
+                    0
+                  ]
+                }
+              },
+              {
+                "match_id": "openfootball:match:d364a9d66371e8e9aecd1994",
+                "edition_id": "worldcup-2026",
+                "competition": "World Cup 2026",
+                "round": "Matchday 14",
+                "team_a": "Czech Republic",
+                "team_b": "Mexico",
+                "team_a_id": "openfootball:team:66e48ef9526002da51736c11",
+                "team_b_id": "openfootball:team:6893d6bd9fc02a0ac0f8c51f",
+                "source_date": "2026-06-24",
+                "local_time": "19:00",
+                "utc_offset_minutes": -360,
+                "start_time": "2026-06-25T01:00:00.000000Z",
+                "kickoff_precision": "offset_minute",
+                "result_status": "observed_result",
+                "score_basis": "source_ft_unverified_regulation",
+                "prediction_eligible": false,
+                "observed_at": "2026-10-06T12:19:28.503601Z",
+                "source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+                "source_group": "Group A",
+                "ground": "Mexico City",
+                "source_match_number": null,
+                "source_score_stages": {
+                  "ft": [
+                    0,
+                    3
+                  ],
+                  "ht": [
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "recent_returned": 3
+          }
+        ],
+        "trace_id": "74d0e9e700b44639a8598f47dbdc5a7e",
+        "dataset_version": "20d06e8e5af0886e",
+        "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+        "contract_version": "openfootball-research-2.0",
+        "data_kind": "open_data",
+        "provider": "openfootball",
+        "as_of": "2026-10-06T12:19:31.263499Z",
+        "prompt_version": "arena-research-0.5.0",
+        "mode": "ollama",
+        "model": "qwen3:4b",
+        "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "abstained": false,
+        "metrics": {
+          "latency_seconds": 83.84916949999752,
+          "generated_tokens": 76,
+          "tool_calls": 1
+        },
+        "grounding": "Source references validated; semantic factual support requires separate evaluation"
+      }
+    }
+  ],
+  "status": "failed",
+  "semantic_review": "Pending; citation membership does not establish factual support"
+}

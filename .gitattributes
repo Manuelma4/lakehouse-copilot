@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.parquet binary
+# Checksums cover exact bytes: Git must never rewrite snapshot newlines.
+src/arena_copilot/fixture/** -text whitespace=cr-at-eol
+src/arena_copilot/showcase/** -text whitespace=cr-at-eol
+src/arena_copilot/research_fixture/** -text whitespace=cr-at-eol
+src/arena_copilot/resources/worldcup_2026.json -text -diff
+tests/fixtures/research_v1/** -text whitespace=cr-at-eol

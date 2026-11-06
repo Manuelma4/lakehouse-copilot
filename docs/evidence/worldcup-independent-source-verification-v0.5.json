@@ -1,0 +1,125 @@
+{
+  "recorded_at": "2026-10-06T12:37:37.205304+00:00",
+  "release": "0.5.0",
+  "status": "independent_producer_review_passed",
+  "primary_source": {
+    "url": "https://raw.githubusercontent.com/openfootball/worldcup.json/516d3825c3bd23fdc298c4014e84bde78f2d4965/2026/worldcup.json",
+    "reference": "516d3825c3bd23fdc298c4014e84bde78f2d4965",
+    "sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+    "bytes": 42736,
+    "license": "CC0-1.0",
+    "license_url": "https://github.com/openfootball/worldcup.json/blob/516d3825c3bd23fdc298c4014e84bde78f2d4965/LICENSE.md"
+  },
+  "anchors": [
+    {
+      "match": "South Korea vs Czech Republic",
+      "source_date": "2026-06-11",
+      "source_clock": "20:00 UTC-6",
+      "utc": "2026-06-12T02:00:00.000000Z",
+      "source_group": "Group A",
+      "ground": "Guadalajara (Zapopan)",
+      "source_match_number": null
+    },
+    {
+      "source_match_number": 74,
+      "match": "Germany vs Paraguay",
+      "ft": [
+        1,
+        1
+      ],
+      "ht": [
+        0,
+        1
+      ],
+      "et": [
+        1,
+        1
+      ],
+      "penalties": [
+        3,
+        4
+      ]
+    },
+    {
+      "source_match_number": 104,
+      "match": "Spain vs Argentina",
+      "ft": [
+        0,
+        0
+      ],
+      "ht": [
+        0,
+        0
+      ],
+      "et": [
+        1,
+        0
+      ],
+      "utc": "2026-07-19T19:00:00.000000Z"
+    }
+  ],
+  "producer_execution": {
+    "command": "PYTHONPATH=src python -m pytest tests/test_worldcup_independent.py -q",
+    "cases": 21,
+    "passed": 21,
+    "duration_seconds": 1.75,
+    "ruff": "passed",
+    "test_file": "tests/test_worldcup_independent.py",
+    "test_file_sha256": "99159e94619cb324287d83f92ac0c7ae0de3bc3e697abb92e968391d758cda19"
+  },
+  "checks": [
+    "Pinned source is national and rejects an unreviewed reference.",
+    "Source calendar date and explicit offset produce the exact UTC rollover; no IANA zone or completion is invented.",
+    "FT, HT, ET and penalties remain independent; a source FT draw is not converted into an extra-time or penalty winner.",
+    "Only provided source numbers define numbered identities; pure-parser corrected identities remain stable and conflicting numbered rows quarantine symmetrically.",
+    "Invalid boolean/float/text source numbers, unsupported clock zones/ranges and control characters are quarantined.",
+    "Persisted pinned acquisition rejects incomplete fixture bytes before any workspace write.",
+    "Actual pinned body imports104 rows with48 names, retains exact archive bytes and replays with0newrevisions/104unchanged.",
+    "Export checksums match actual emitted bytes.",
+    "Four internally coherent resealed FT/group/ground/opponent mutations retaining the genuine archive digest are rejected by the publisher with no destination created."
+  ],
+  "trust_boundaries": {
+    "fixed_worldcup_source": "Collector verifies exact pinned raw SHA. Publisher and consumer independently compare business fields against runtime-bundled trusted raw bytes and require complete104-match current coverage. This covers fixed-source fields, not official result accuracy.",
+    "club_sources": "Generic club packages retain consistency, schema, provenance, revision and inventory checks. They are unsigned; package integrity does not independently authenticate every club source field against an immutable raw reference.",
+    "source_identity": "Source-derived national/club IDs use reviewed namespaces and normalized names; they are not official federation or provider team identifiers.",
+    "availability": "Numeric offsets can resolve kickoff only. Completion remains null; actual collection timestamps do not establish historical pre-match availability. Every imported research row remains forecast-ineligible."
+  },
+  "diagnostics": [
+    {
+      "cases": 15,
+      "passed": 14,
+      "failed": 1,
+      "scope": "Initial parser-only diagnostic before catalogue metadata confirmation",
+      "reason": "Expected region World from the initial wire proposal; the parent had chosen International. The expectation was updated after explicit contract confirmation. No primary source assertion or product behavior was changed."
+    }
+  ],
+  "consumer_scope": "Independent consumer tests/test_research_team_independent.py adds reviewed coverage/team/API, resealed immutable-source attacks and source-aware research agent fixtures. Parent-owned full consumer verification is recorded separately.",
+  "limitations": [
+    "No network calls occur in the committed independent tests; reviewed CC0 bytes are vendored.",
+    "This is source fidelity and contract testing, not verification against official FIFA data.",
+    "No inference quality, real forecast evaluation, Databricks deployment or cross-browser certification is implied."
+  ],
+  "agent_reviewed_coverage": {
+    "matches": 104,
+    "national_teams": 48,
+    "numbered_knockout_matches": 32,
+    "source_match_numbers": [
+      73,
+      104
+    ],
+    "unnumbered_group_matches": 72,
+    "numeric_offsets_minutes": {
+      "-240": 42,
+      "-300": 22,
+      "-360": 13,
+      "-420": 27
+    },
+    "score_shapes": {
+      "ft_ht": 95,
+      "ft_ht_et": 5,
+      "ft_ht_et_p": 4
+    }
+  },
+  "reviewer_role": "Independent test automation agent",
+  "human_reviewed": false
+}

@@ -1,0 +1,89 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T10:53:37.668793+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "For synthetic:football:000590, report the recorded cutoff, each team name and played/wins/draws/losses, and the head-to-head total.",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "For synthetic:football:000590, cutoff: 2025-04-09T08:00:00+00:00, Eastgate FC: played=5, wins=0, draws=0, losses=5; Westhaven United: played=5, wins=0, draws=1, losses=4; head-to-head total: 12 matches (3 wins for Eastgate FC, 4 wins for Westhaven United, 5 draws).",
+    "citations": [
+      {
+        "id": "gold/match_history.parquet",
+        "uri": "snapshot://ed9242317b501386/gold/match_history.parquet"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_match_context",
+        "source": "gold/match_history.parquet",
+        "rows": [
+          {
+            "match": {
+              "match_id": "synthetic:football:000590",
+              "sport": "football",
+              "competition": "Continental Series",
+              "team_a": "Eastgate FC",
+              "team_b": "Westhaven United",
+              "start_time": "2025-04-09T08:00:00.000000Z",
+              "status": "finished",
+              "score_a": 2,
+              "score_b": 2,
+              "best_of": 1,
+              "score_unit": "goals"
+            },
+            "cutoff": "2025-04-09T08:00:00+00:00",
+            "history_basis": "observation_history",
+            "history_label": "Highest observed revision known by cutoff",
+            "form_a": {
+              "team_id": "football:5",
+              "team_name": "Eastgate FC",
+              "played": 5,
+              "wins": 0,
+              "draws": 0,
+              "losses": 5
+            },
+            "form_b": {
+              "team_id": "football:6",
+              "team_name": "Westhaven United",
+              "played": 5,
+              "wins": 0,
+              "draws": 1,
+              "losses": 4
+            },
+            "head_to_head": {
+              "total": 12,
+              "team_a_wins": 3,
+              "draws": 5,
+              "team_b_wins": 4
+            }
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "08941f1e27b846acb28bbbfdfd0230eb",
+    "dataset_version": "ed9242317b501386",
+    "snapshot_fingerprint": "16e6942356eeaeaae0a6d68a4d4a262901fb5c8e9eff66bd30ab8dd32486b5f8",
+    "prompt_version": "arena-analyst-0.3.2",
+    "retrieval": "lexical",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "metrics": {
+      "latency_seconds": 63.40236649999861,
+      "generated_tokens": 142,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

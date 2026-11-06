@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "ed9242317b501386",
+  "producer_version": "0.3.0",
+  "generated_at": "2026-10-06T10:10:10.433521+00:00",
+  "as_of": "2025-04-09T15:10:00.000000Z",
+  "data_kind": "synthetic",
+  "providers": [
+    "synthetic"
+  ],
+  "files": {
+    "bronze/events.jsonl": "92a4978fc30211338c3edd01656be5917a0972ff08a112af6ef102b9321c8e65",
+    "catalog.json": "422d53c928b6d043df34dffc4749226d654ca5a2e98be7215929d5d8673d1202",
+    "docs/limitations.md": "8ebc0d5a737c57350ee4cebfd7f2840a1ef4b878904ae47aade1cc000d9bdd58",
+    "docs/metrics.md": "3ed83c4886f5db0a9d231e419bbb47397d87254eae7eb780777512716ab009e0",
+    "docs/overview.md": "7413db4f4cc476c8a221745a5009a7a1e923e1fb356bab2f382089bfc0e9d52c",
+    "docs/predictions.md": "d297bc4dbc0946e3d1fc522fee18cfd8f6f87654c46b26bba4387c4df5a3bdc6",
+    "docs/privacy.md": "203dc827f8795cff9d8959fe57bf6da6e56ea3b80a5539759a695fb89e896606",
+    "docs/providers.md": "79c170a6d0a833481e8a87841d27e97de145074a2a0bd1db7b7becb60ba6a64d",
+    "docs/quality.md": "e702a39137e993a7ddcf2f0f08db21fce746ca5424aa86ba06fd996d888f59ed",
+    "docs/streaming.md": "482430125c681b5ce72d2a9aefbb6b6615b7898196dcd6bc2c3908c8fa4ce9ee",
+    "gold/match_history.parquet": "afa905c0abbc8bb95ab0868cce23ff2fb0e1293a845b025c08ad20a375b0a5e8",
+    "gold/matches.parquet": "320bce9ed46df2cb39971e3a6525766f283c074e38441dd12d2bf8d1884cd26b",
+    "gold/team_stats.parquet": "ac5d997f9cb9f16f5910cefbac8826ec7c65ec6fc9a11ed8aa6f7ae53d82aea5",
+    "incidents.json": "94861b7e860f8ef9f74bd03dd939cdc3e9089cd7b04b139b9fb35072d6fd1742",
+    "lineage.json": "f5650fde946380ea10da968187ce360a3d44afd40a0fe3b26ff956b7442fb790",
+    "metrics.json": "155b3032d5986b7f06b6f6740de9b33e43f1f33955be6085f023f961672d6e04",
+    "model_report.json": "cd48b7d47380a87af6be9ff685d9b43fa9f2f3f02ae55cd5b5ddc0c645dcd510",
+    "predictions.json": "f5f5738ec61407743d36785df6a16aa55e41634d2ed88c0c140ba38b58281701",
+    "quality.json": "4cfcdace7280b60693caffb3831316a3e3d7a187386c9bef6e0f90a5ed1ce1bb"
+  }
+}

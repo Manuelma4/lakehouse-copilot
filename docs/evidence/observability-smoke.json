@@ -1,0 +1,13 @@
+{
+  "status": "verified_locally",
+  "recorded_at": "2026-10-06T09:08:16.462544+00:00",
+  "mlflow": "3.16.1",
+  "storage": "MLflow OSS SQLite",
+  "span_names": [
+    "arena.request",
+    "arena.retrieve",
+    "arena.answer"
+  ],
+  "arena_trace_id": "5ea73afcedc840c19c95c7e10d3edbb9",
+  "scope": "Actual telemetry smoke in evidence mode; no model inference"
+}

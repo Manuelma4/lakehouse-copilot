@@ -1,0 +1,27 @@
+{
+  "answer": "The football prediction model uses a scaled_logistic_v1 baseline that incorporates pre-match Elo difference, last-five form difference, and capped history counts. Outcome labels (win/draw/loss) are excluded from features to avoid overfitting. Probabilities are not calibrated, as explicitly stated in the predictions.md document. The limitations.md document confirms that the model is not calibrated and that synthetic evaluation demonstrates the pipeline without real predictive skill.",
+  "citations": [
+    {
+      "id": "docs/predictions.md",
+      "uri": "snapshot://a21b3d2589a0558f/docs/predictions.md"
+    },
+    {
+      "id": "docs/limitations.md",
+      "uri": "snapshot://a21b3d2589a0558f/docs/limitations.md"
+    }
+  ],
+  "tool_results": [],
+  "trace_id": "eec2a2a19b5c41d9910aaf9edf92738f",
+  "dataset_version": "a21b3d2589a0558f",
+  "data_kind": "synthetic",
+  "as_of": "2025-04-09T15:10:00.000000Z",
+  "mode": "ollama",
+  "model": "qwen3:4b",
+  "abstained": false,
+  "metrics": {
+    "latency_seconds": 102.49759270000004,
+    "generated_tokens": 523,
+    "tool_calls": 0
+  },
+  "grounding": "Source references validated; semantic factual support requires evaluation"
+}

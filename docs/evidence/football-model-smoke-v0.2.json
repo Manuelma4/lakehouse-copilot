@@ -1,0 +1,75 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T09:42:40.960827+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Read the prediction for synthetic:football:000598. What are the team A, draw and team B probabilities?",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "Westhaven United: 44.83%, Eastgate FC: 31.79%, Draw: 23.38%",
+    "citations": [
+      {
+        "id": "predictions.json",
+        "uri": "snapshot://a21b3d2589a0558f/predictions.json"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_prediction",
+        "source": "predictions.json",
+        "rows": [
+          {
+            "match_id": "synthetic:football:000598",
+            "sport": "football",
+            "team_a": "Westhaven United",
+            "team_b": "Eastgate FC",
+            "start_time": "2025-04-10T16:00:00.000000Z",
+            "probabilities": {
+              "a": 0.448329765213834,
+              "b": 0.3178659856451144,
+              "draw": 0.2338042491410515
+            },
+            "model": "scaled_logistic_v1",
+            "data_kind": "synthetic",
+            "as_of": "2025-04-09T15:10:00.000000Z",
+            "evidence": {
+              "elo_a": 1384.92,
+              "elo_b": 1367.31,
+              "recent_form_a": 0.1,
+              "recent_form_b": 0.1,
+              "historical_matches_a": 78,
+              "historical_matches_b": 74,
+              "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+              "latest_result_used": "2025-04-09T10:10:00.000000Z"
+            },
+            "limitations": "Uncalibrated synthetic demonstration"
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "2033f75731b04777802f0178ec408e85",
+    "dataset_version": "a21b3d2589a0558f",
+    "snapshot_fingerprint": "9712196aa2763ac6adf2345fefe934ca093ec7748ff5e44dafa2c931a2e8619c",
+    "prompt_version": "arena-analyst-0.2.1",
+    "retrieval": "lexical",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "metrics": {
+      "latency_seconds": 68.73324239999965,
+      "generated_tokens": 58,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}

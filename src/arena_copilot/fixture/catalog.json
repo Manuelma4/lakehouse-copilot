@@ -1,0 +1,269 @@
+[
+  {
+    "name": "matches",
+    "layer": "gold",
+    "description": "Current canonical match revisions",
+    "columns": [
+      {
+        "name": "best_of",
+        "type": "int64",
+        "description": "best of"
+      },
+      {
+        "name": "competition",
+        "type": "string",
+        "description": "competition"
+      },
+      {
+        "name": "completed_at",
+        "type": "string",
+        "description": "completed at"
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "description": "event id"
+      },
+      {
+        "name": "match_id",
+        "type": "string",
+        "description": "match id"
+      },
+      {
+        "name": "observed_at",
+        "type": "string",
+        "description": "observed at"
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "description": "provider"
+      },
+      {
+        "name": "revision",
+        "type": "int64",
+        "description": "revision"
+      },
+      {
+        "name": "score_a",
+        "type": "int64",
+        "description": "score a"
+      },
+      {
+        "name": "score_b",
+        "type": "int64",
+        "description": "score b"
+      },
+      {
+        "name": "sport",
+        "type": "string",
+        "description": "sport"
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "description": "start time"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "description": "status"
+      },
+      {
+        "name": "team_a",
+        "type": "string",
+        "description": "team a"
+      },
+      {
+        "name": "team_a_id",
+        "type": "string",
+        "description": "team a id"
+      },
+      {
+        "name": "team_b",
+        "type": "string",
+        "description": "team b"
+      },
+      {
+        "name": "team_b_id",
+        "type": "string",
+        "description": "team b id"
+      }
+    ],
+    "primary_key": [
+      "match_id"
+    ]
+  },
+  {
+    "name": "team_stats",
+    "layer": "gold",
+    "description": "Completed-match team aggregates",
+    "columns": [
+      {
+        "name": "sport",
+        "type": "string",
+        "description": "sport"
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "description": "team id"
+      },
+      {
+        "name": "team_name",
+        "type": "string",
+        "description": "team name"
+      },
+      {
+        "name": "matches",
+        "type": "int64",
+        "description": "matches"
+      },
+      {
+        "name": "wins",
+        "type": "int64",
+        "description": "wins"
+      },
+      {
+        "name": "draws",
+        "type": "int64",
+        "description": "draws"
+      },
+      {
+        "name": "losses",
+        "type": "int64",
+        "description": "losses"
+      },
+      {
+        "name": "score_for",
+        "type": "int64",
+        "description": "score for"
+      },
+      {
+        "name": "score_against",
+        "type": "int64",
+        "description": "score against"
+      },
+      {
+        "name": "last_match_at",
+        "type": "string",
+        "description": "last match at"
+      },
+      {
+        "name": "win_rate",
+        "type": "double",
+        "description": "win rate"
+      }
+    ],
+    "primary_key": [
+      "sport",
+      "team_id"
+    ]
+  },
+  {
+    "name": "match_history",
+    "layer": "gold",
+    "description": "Observation-time match revision history",
+    "columns": [
+      {
+        "name": "best_of",
+        "type": "int64",
+        "description": "best of"
+      },
+      {
+        "name": "competition",
+        "type": "string",
+        "description": "competition"
+      },
+      {
+        "name": "completed_at",
+        "type": "string",
+        "description": "completed at"
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "description": "event id"
+      },
+      {
+        "name": "match_id",
+        "type": "string",
+        "description": "match id"
+      },
+      {
+        "name": "observed_at",
+        "type": "string",
+        "description": "observed at"
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "description": "provider"
+      },
+      {
+        "name": "revision",
+        "type": "int64",
+        "description": "revision"
+      },
+      {
+        "name": "score_a",
+        "type": "int64",
+        "description": "score a"
+      },
+      {
+        "name": "score_b",
+        "type": "int64",
+        "description": "score b"
+      },
+      {
+        "name": "sport",
+        "type": "string",
+        "description": "sport"
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "description": "start time"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "description": "status"
+      },
+      {
+        "name": "team_a",
+        "type": "string",
+        "description": "team a"
+      },
+      {
+        "name": "team_a_id",
+        "type": "string",
+        "description": "team a id"
+      },
+      {
+        "name": "team_b",
+        "type": "string",
+        "description": "team b"
+      },
+      {
+        "name": "team_b_id",
+        "type": "string",
+        "description": "team b id"
+      },
+      {
+        "name": "valid_from",
+        "type": "string",
+        "description": "valid from"
+      },
+      {
+        "name": "valid_to",
+        "type": "string",
+        "description": "valid to"
+      }
+    ],
+    "primary_key": [
+      "match_id",
+      "revision"
+    ]
+  }
+]

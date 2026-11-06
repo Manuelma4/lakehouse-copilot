@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-06T11:49:46.695768+00:00",
+  "status": "passed",
+  "version": "0.4.0",
+  "scope": "Offline contracts/API and regression tests; actual network acquisition and browser/container checks are separate",
+  "full_suite": {
+    "passed": 61,
+    "duration_seconds": 51.55,
+    "optional_legacy_streamlit_test": "included locally"
+  },
+  "ruff": "passed",
+  "research_dataset_version": "5f99ba32f796fb23",
+  "as_of": "2026-10-06T11:06:31.626840Z",
+  "matches": 2727,
+  "source_editions": 9,
+  "independent_import_checks": [
+    "checksum and exact file scope",
+    "dataset content hash",
+    "JSON/Parquet parity",
+    "fixed packaged CC0 source catalogue",
+    "name-derived IDs and revision content identity",
+    "latest history/current and source poll availability",
+    "source-date precision, missing score and forecast ineligibility",
+    "measured directory and quality summaries",
+    "read-only Arrow queries retain verified values after disk mutation",
+    "exact Arrow Gold schema and integer score types",
+    "bounded quarantine counts and prior archived checksum for 304",
+    "monotonic per-source poll clocks"
+  ],
+  "public_payload": {
+    "uncompressed_bytes": 8211147,
+    "gzip_reference_bytes": 615376,
+    "note": "Reference compression only; actual deployed transport measured separately. Loaded on opening the research view."
+  },
+  "source_sha256": {
+    "src/arena_copilot/openfootball.py": "1494c168dc94e46df3144fd08eb550128a806fb30579a6e32468a4e2f3788c70",
+    "src/arena_copilot/api.py": "f1a8019fd012f04dabf6ef56a37f7b1e5f2ae01c7b463b7c2e6526febc8ad7a5",
+    "tests/test_openfootball.py": "5bfa439e7ac61ea523139e5990be7e95ed597c3d5e25cf33656915e60f02bdb6",
+    "scripts/export_openfootball.py": "68f6045973ecda27bb99ae9914444edcd906d8e0cbda912d0aebc6c1217bef71"
+  },
+  "boundaries": [
+    "No model inference or semantic evaluation in software fixtures",
+    "No real-data forecasting or official standings",
+    "Original synthetic export continues to refuse authenticated provider snapshots"
+  ],
+  "prior_full_suite": {
+    "passed": 57,
+    "duration_seconds": 53.6,
+    "scope": "Before the final four strict poll/schema regressions"
+  }
+}

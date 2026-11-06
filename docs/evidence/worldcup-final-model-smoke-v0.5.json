@@ -1,0 +1,125 @@
+{
+  "recorded_at": "2026-10-06T12:39:04.968893+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "scope": "1 actual local research inference example(s); integration checks, not a human-reviewed scorecard",
+  "dataset_version": "20d06e8e5af0886e",
+  "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "cases": [
+    {
+      "id": "final-score-stages",
+      "question": "What are the source FT and extra-time score stages for this match? Keep them separate and identify the source sides.",
+      "context": {
+        "match_id": "openfootball:match:636870ca04352f217b45e0bf"
+      },
+      "reference": {
+        "teams": [
+          "Spain",
+          "Argentina"
+        ],
+        "stages": {
+          "et": [
+            1,
+            0
+          ],
+          "ft": [
+            0,
+            0
+          ],
+          "ht": [
+            0,
+            0
+          ]
+        },
+        "prediction_eligible": false
+      },
+      "status": "passed",
+      "response": {
+        "answer": "Source FT score: [0, 0] (Spain, Argentina); Source ET score: [1, 0] (Spain, Argentina)",
+        "citations": [
+          {
+            "id": "gold/match_history.parquet",
+            "uri": "snapshot://20d06e8e5af0886e/gold/match_history.parquet"
+          }
+        ],
+        "tool_results": [
+          {
+            "tool": "research_match",
+            "source": "gold/match_history.parquet",
+            "rows": [
+              {
+                "match_id": "openfootball:match:636870ca04352f217b45e0bf",
+                "edition_id": "worldcup-2026",
+                "competition": "World Cup 2026",
+                "round": "Final",
+                "team_a": "Spain",
+                "team_b": "Argentina",
+                "team_a_id": "openfootball:team:2909ebdb5c88d2f4e05f207a",
+                "team_b_id": "openfootball:team:b625a633ccd8f69f929f013f",
+                "source_date": "2026-07-19",
+                "local_time": "15:00",
+                "utc_offset_minutes": -240,
+                "start_time": "2026-07-19T19:00:00.000000Z",
+                "kickoff_precision": "offset_minute",
+                "result_status": "observed_result",
+                "score_basis": "source_ft_unverified_regulation",
+                "prediction_eligible": false,
+                "observed_at": "2026-10-06T12:19:28.503601Z",
+                "source_sha256": "0ae2c18109b5aa86bc11928b43586ca430c234804d5bbf808d2c3bf2051ecfca",
+                "source_group": null,
+                "ground": "New York/New Jersey (East Rutherford)",
+                "source_match_number": 104,
+                "source_score_stages": {
+                  "et": [
+                    1,
+                    0
+                  ],
+                  "ft": [
+                    0,
+                    0
+                  ],
+                  "ht": [
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "revisions_total": 1,
+            "forecast_status": "unavailable_unresolved_time_and_target",
+            "history_basis": "retrospective_source_observations"
+          }
+        ],
+        "trace_id": "5583cb286a2f404b9e2b1747394937d2",
+        "dataset_version": "20d06e8e5af0886e",
+        "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+        "contract_version": "openfootball-research-2.0",
+        "data_kind": "open_data",
+        "provider": "openfootball",
+        "as_of": "2026-10-06T12:19:31.263499Z",
+        "prompt_version": "arena-research-0.5.0",
+        "mode": "ollama",
+        "model": "qwen3:4b",
+        "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "abstained": false,
+        "metrics": {
+          "latency_seconds": 42.01289189999807,
+          "generated_tokens": 60,
+          "tool_calls": 1
+        },
+        "grounding": "Source references validated; semantic factual support requires separate evaluation"
+      }
+    }
+  ],
+  "status": "passed",
+  "model": "qwen3:4b",
+  "model_digest_before": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "model_digest_after": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "digest_scope": "Installed model captured before/after; per-response digest is best-effort and may be null",
+  "semantic_review": "Pending; citation membership does not establish factual support"
+}

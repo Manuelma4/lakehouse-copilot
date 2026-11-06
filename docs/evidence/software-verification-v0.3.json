@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-06T10:42:51.066854+00:00",
+  "version": "0.3.0",
+  "status": "passed",
+  "pytest": {
+    "passed": 44,
+    "duration_seconds": 9.5,
+    "scope": "Final local complete offline suite; includes optional legacy UI test"
+  },
+  "ruff": "passed",
+  "dataset_version": "ed9242317b501386",
+  "new_regressions": [
+    "competition filters before pagination",
+    "observed football points and VALORANT maps",
+    "point-in-time source revisions",
+    "UTC offsets and microsecond cutoffs",
+    "stable team identity and ambiguous names",
+    "read-only competition and match tools",
+    "forecast outcome association on direct and native routes",
+    "bounded nested tool excerpts",
+    "fixed-ID generative context route"
+  ],
+  "boundaries": [
+    "Fixture checks, not actual inference or production scale",
+    "Public browser journeys reported separately"
+  ],
+  "prompt_version": "arena-analyst-0.3.2"
+}

@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-06T09:31:26.292187+00:00",
+  "status": "passed",
+  "scope": "Actual incremental Spark export imported independently by the copilot; evidence mode only",
+  "schema_version": "2.0",
+  "dataset_version": "da011895d4bb171c",
+  "snapshot_fingerprint": "2d5efcc3204e6b547530c36013b664c047d22664f75b6389af06800351d3d77f",
+  "tool": "get_team_stats",
+  "rows": 8
+}

@@ -1,0 +1,18 @@
+{
+  "answer": "abstained",
+  "citations": [],
+  "tool_results": [],
+  "trace_id": "ad3bf8f7e2144505bea725acf6294ac4",
+  "dataset_version": "a21b3d2589a0558f",
+  "data_kind": "synthetic",
+  "as_of": "2025-04-09T15:10:00.000000Z",
+  "mode": "ollama",
+  "model": "qwen3:4b",
+  "abstained": true,
+  "metrics": {
+    "latency_seconds": 111.57708679999996,
+    "generated_tokens": 427,
+    "tool_calls": 0
+  },
+  "grounding": "Source references validated; semantic factual support requires evaluation"
+}

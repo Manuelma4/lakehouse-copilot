@@ -1,0 +1,16 @@
+[
+  {
+    "name": "win_rate",
+    "description": "Wins / finished matches",
+    "unit": "ratio",
+    "table": "team_stats",
+    "formula": "wins / matches"
+  },
+  {
+    "name": "score_for",
+    "description": "Goals for football; maps won for VALORANT",
+    "unit": "sport-specific",
+    "table": "team_stats",
+    "formula": "SUM(score_for)"
+  }
+]

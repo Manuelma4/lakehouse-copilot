@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-06T11:48:36.967554+00:00",
+  "status": "passed",
+  "image": "arena-copilot:0.4.0",
+  "scope": "Actual rebuilt Linux production container: installed package, web assets, separate verified CC0 API and synthetic evidence chat. No native inference/MLflow claim.",
+  "openapi_version": "0.4.0",
+  "checks": {
+    "/openapi.json": 200,
+    "/api/health": 200,
+    "/api/open-football/health": 200,
+    "/api/open-football/snapshot": 200,
+    "/api/open-football/competitions?region=Europe": 200,
+    "/api/open-football/competitions/colombia-primera-a-2025": 200,
+    "/api/open-football/matches?result_status=unknown_result&limit=100": 200,
+    "/api/open-football/matches/openfootball:match:03392e67e692177a012d3a9d": 200,
+    "/open-football.json": 200,
+    "/snapshot.json": 200,
+    "/": 200,
+    "/assets/index-owv4fnq_.js": 200,
+    "/assets/index-DalpUKRn.css": 200,
+    "/favicon.svg": 200
+  },
+  "research_health": {
+    "contract_version": "openfootball-research-1.0",
+    "dataset_version": "5f99ba32f796fb23",
+    "snapshot_fingerprint": "6be96d37f701227531ac1a7915faf75f04530caffeafba8b812f6236f5b21c58",
+    "as_of": "2026-10-06T11:06:31.626840Z",
+    "data_kind": "open_data",
+    "provider": "openfootball",
+    "license": "CC0-1.0",
+    "precision_note": "Source calendar dates and optional local wall times; no inferred UTC kickoff or completion",
+    "coverage_note": "Observed open-data coverage; incomplete or stale source results remain unknown; not official standings",
+    "rows": [],
+    "status": "ready",
+    "snapshot_verified": true,
+    "predictions_available": false
+  },
+  "research_matches": 2727,
+  "research_revisions": 2727,
+  "research_editions": 9,
+  "unknown_results": 1639,
+  "source_dates_and_null_clocks_verified": true,
+  "old_missing_result_not_zero_or_scheduled": true,
+  "separate_synthetic_chat_and_feedback": true,
+  "image_id": "sha256:e421b403204190950f336d70fd7dc37143b6c5a5a23eadf7b5dc47ece0884392",
+  "source_sha256": {
+    "src/arena_copilot/openfootball.py": "1494c168dc94e46df3144fd08eb550128a806fb30579a6e32468a4e2f3788c70",
+    "src/arena_copilot/api.py": "f1a8019fd012f04dabf6ef56a37f7b1e5f2ae01c7b463b7c2e6526febc8ad7a5",
+    "Dockerfile": "c293e268a044d662e3e0f3403ea435988b572547cc511eedf28b5b4bc1ae67a3"
+  },
+  "phase": "Final rebuilt image after strict schema/score/poll import validation; fresh container, not a restarted earlier image"
+}

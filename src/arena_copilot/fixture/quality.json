@@ -1,0 +1,17 @@
+{
+  "run_id": "590a6d1c218b4ddf999e5ef7990f62ab",
+  "checks": [
+    {
+      "rule": "schema_or_business_rule",
+      "table": "bronze_events",
+      "passed": 1192,
+      "failed": 2,
+      "severity": "warning"
+    }
+  ],
+  "summary": {
+    "valid_events": 1192,
+    "quarantined": 2,
+    "last_run_status": "succeeded"
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "incident_id": "db313c4f306664fe",
+    "rule": "schema_or_business_rule",
+    "table": "bronze_events",
+    "severity": "warning",
+    "description": "2 quarantined observations",
+    "status": "open",
+    "event_count": 2,
+    "remediation": "Inspect quarantined source records, correct and replay"
+  }
+]

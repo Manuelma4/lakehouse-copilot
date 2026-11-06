@@ -1,0 +1,61 @@
+{
+  "recorded_at": "2026-10-06T09:31:22.803666+00:00",
+  "scope": "Real Chromium journeys against isolated FastAPI and static GitHub Pages subpath preview; no model inference",
+  "status": "passed",
+  "current_regression": {
+    "source": "results.json",
+    "sha256": "1571b918f1f3026f005221de9e398fbf3afe757521565ef547f5afc83ef3b925",
+    "stats": {
+      "startTime": "2026-10-06T09:25:40.071Z",
+      "duration": 22202.502,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "runner_errors": 0
+  },
+  "stability": [
+    {
+      "source": "desktop-stability-results.json",
+      "sha256": "b9e1c8a5ecfaccc9f0dcc6fedb2a2d4459e9a28ae189591807c54124ccd9873a",
+      "stats": {
+        "startTime": "2026-10-06T09:18:52.177Z",
+        "duration": 220091.41700000002,
+        "expected": 40,
+        "skipped": 0,
+        "unexpected": 10,
+        "flaky": 0
+      },
+      "runner_errors": 0
+    },
+    {
+      "source": "mobile-stability-results.json",
+      "sha256": "6fc5895e8fc1607ef96e56e94938a40f3fa9eef149fe758026c6064b7336410f",
+      "stats": {
+        "startTime": "2026-10-06T09:24:51.105Z",
+        "duration": 43569.971,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "runner_errors": 0
+    }
+  ],
+  "retries": 0,
+  "desktop_consecutive_passes_per_case": 10,
+  "mobile_consecutive_passes": 10,
+  "diagnosed_failure": "The first stability run passed all 40 desktop executions but failed ten mobile executions because a test close-label selector matched both the drawer and inert header. Selector scoping was corrected; mobile then passed ten consecutive executions and the final five-case regression passed.",
+  "limitations": [
+    "Chromium only",
+    "Screen-reader and full WCAG conformance not verified"
+  ],
+  "screenshots": [
+    "docs/images/arena-overview.png",
+    "docs/images/arena-forecast.png",
+    "docs/images/arena-valorant.png",
+    "docs/images/arena-evidence.png",
+    "docs/images/arena-mobile.png"
+  ]
+}

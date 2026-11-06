@@ -1,0 +1,121 @@
+import { test, expect } from './fixtures'
+import { readFileSync } from 'node:fs'
+import { capture, expectForecast, forecasts, navigate, noPageOverflow } from './journeys'
+
+test('the public subpath provides responsive forecasts, teams, quality and cited answers without a backend', async ({ page }, testInfo) => {
+  const backendRequests: string[] = []
+  page.on('request', request => {
+    if (new URL(request.url()).pathname.startsWith('/api/')) backendRequests.push(request.url())
+  })
+  await page.goto('./')
+  await expect(page.getByText('Public snapshot', { exact: true })).toBeVisible()
+  await expect(page.getByText('Synthetic demonstration', { exact: true })).toBeVisible()
+  await capture(page, testInfo, 'arena-public-overview.png')
+  await noPageOverflow(page)
+  const menu = page.getByRole('button', { name: 'Open navigation menu', exact: true })
+  if (await menu.isVisible()) {
+    await menu.focus()
+    await page.keyboard.press('Enter')
+    const drawer = page.getByRole('complementary').filter({ has: page.getByRole('navigation', { name: 'Main navigation' }) })
+    const close = drawer.getByRole('button', { name: 'Close navigation menu', exact: true })
+    await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible()
+    await expect(close).toBeFocused()
+    await page.keyboard.press('Shift+Tab')
+    await expect(page.getByRole('link', { name: 'Manuel Maya portfolio (opens in new tab)', exact: true })).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(close).toBeFocused()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('navigation', { name: 'Main navigation' })).not.toBeVisible()
+    await expect(menu).toBeFocused()
+  }
+  await navigate(page, 'Forecasts')
+  await expectForecast(page, forecasts.find(p => p.sport === 'football')!)
+  await noPageOverflow(page)
+  await page.getByRole('button', { name: 'VALORANT', exact: true }).click()
+  const valorant = forecasts.find(p => p.sport === 'valorant')!
+  await expectForecast(page, valorant)
+  await capture(page, testInfo, 'arena-public-forecast.png')
+  await navigate(page, 'Team explorer')
+  await page.getByRole('textbox', { name: 'Search teams' }).fill('Neon Wolves')
+  await expect(page.getByRole('heading', { name: 'Neon Wolves', exact: true })).toBeVisible()
+  await expect(page.getByText('Map difference', { exact: true })).toBeVisible()
+  await noPageOverflow(page)
+  await navigate(page, 'Data & models')
+  await expect(page.getByRole('heading', { name: 'Dataset health', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Model report', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '2 quarantined observations', exact: true })).toBeVisible()
+  await expect(page.getByText('Neither result validates real-world performance.', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: /Prediction methodology/ }).click()
+  await expect(page.getByRole('dialog', { name: 'Prediction methodology', exact: true })).toBeVisible()
+  await expect(page.getByRole('dialog')).toContainText('Outcome labels never enter features')
+  await page.getByRole('button', { name: 'Close source' }).click()
+  await noPageOverflow(page)
+  await navigate(page, 'Ask Arena')
+  await expect(page.getByRole('checkbox', { name: 'Local AI', exact: true })).toBeDisabled()
+  await expect(page.getByRole('checkbox', { name: 'Hybrid retrieval', exact: true })).toBeDisabled()
+  await page.getByRole('textbox', { name: 'Your question' }).fill(`What are the forecast probabilities for ${valorant.match_id}?`)
+  await page.getByRole('main').getByRole('button', { name: 'Ask Arena', exact: true }).click()
+  await expect(page.getByText(/These are uncalibrated synthetic demonstration probabilities/)).toBeVisible()
+  await page.getByRole('button', { name: 'predictions.json', exact: true }).click()
+  await expect(page.getByRole('dialog', { name: 'predictions.json', exact: true })).toContainText(valorant.match_id)
+  await page.getByRole('button', { name: 'Close source' }).click()
+  await expect(page.getByRole('button', { name: 'Helpful answer', exact: true })).toHaveCount(0)
+  await page.getByRole('textbox', { name: 'Your question' }).fill('Forecast pandascore:valorant:missing-test-match')
+  await page.getByRole('main').getByRole('button', { name: 'Ask Arena', exact: true }).click()
+  await expect(page.getByText('No stored forecast matches that identifier or team. I cannot produce a new probability from the public snapshot.', { exact: true })).toBeVisible()
+  await expect(page.getByText('Insufficient or ambiguous evidence', { exact: true })).toBeVisible()
+  await noPageOverflow(page)
+  await capture(page, testInfo, 'arena-public-evidence.png')
+  await page.getByRole('button', { name: 'Refresh dataset', exact: true }).click()
+  await expect(page.getByText('Public snapshot', { exact: true })).toBeVisible()
+  expect(backendRequests, 'The static public site must never probe a nonexistent local API').toEqual([])
+})
+
+test('historic match context preserves provider identities and ignores corrections learned later', async ({ page }, testInfo) => {
+  // This original fixture is deliberately small: distinct IDs share a display
+  // name, a result correction arrives after kickoff, and one result completes
+  // exactly at the historical cutoff. Its expected answers are hand-reviewed.
+  const fixture = JSON.parse(readFileSync(new URL('../../tests/fixtures/sports-domain.json', import.meta.url), 'utf8'))
+  const snapshot = {
+    manifest: { schema_version: '2.0', ...fixture.manifest },
+    matches: fixture.matches,
+    match_history: fixture.history,
+    teams: [], predictions: [], model_report: { sports: {} },
+    quality: { checks: [], summary: { valid_events: fixture.history.length, quarantined: 0, last_run_status: 'succeeded' } },
+    incidents: [], catalog: [], lineage: [], documents: [],
+  }
+  await page.route('**/snapshot.json', route => route.fulfill({ json: snapshot }))
+  await page.goto('./')
+  await expect(page.getByText('Public snapshot', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Results', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Search matches', exact: true }).fill('target')
+  await expect(page.getByText('1 matching match', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: /^Inspect match / }).click()
+  const dialog = page.getByRole('dialog', { name: 'Same Club vs Same Club', exact: true })
+  await expect(dialog).toBeVisible()
+  const a = dialog.getByRole('region', { name: 'Team A recent form', exact: true })
+  const b = dialog.getByRole('region', { name: 'Team B recent form', exact: true })
+  await expect(a).toContainText('4 prior matches')
+  await expect(a).toContainText('2W · 1D · 1L')
+  await expect(b).toContainText('2 prior matches')
+  await expect(b).toContainText('1W · 0D · 1L')
+  const historicH2h = dialog.getByRole('region', { name: 'Head-to-head evidence', exact: true })
+  await expect(historicH2h).toContainText('2 prior meetings')
+  await expect(historicH2h).toContainText('2–1')
+  await expect(historicH2h).not.toContainText('0–4')
+  await capture(page, testInfo, `arena-cutoff-proof-${testInfo.project.name}.png`, false)
+  await page.keyboard.press('Escape')
+  await expect(dialog).not.toBeVisible()
+  await page.getByRole('button', { name: 'Upcoming', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Search matches', exact: true }).fill('upcoming')
+  await expect(page.getByText('1 matching match', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: /^Inspect match / }).click()
+  await expect(dialog).toBeVisible()
+  await expect(a).toContainText('5 prior matches')
+  await expect(a).toContainText('4W · 1D · 0L')
+  const futureH2h = dialog.getByRole('region', { name: 'Head-to-head evidence', exact: true })
+  await expect(futureH2h).toContainText('3 prior meetings')
+  await expect(futureH2h).toContainText('0–4')
+  await expect(dialog).toContainText('Scheduled at snapshot cutoff')
+  await noPageOverflow(page)
+})

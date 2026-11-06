@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-10-06T09:37:51.793909+00:00",
+  "status": "passed",
+  "image": "arena-copilot:0.2.0",
+  "scope": "Actual Linux Docker production web/API container, evidence mode; Ollama inference and MLflow not tested in this container",
+  "checks": {
+    "/favicon.svg": 200,
+    "/assets/index-eA2St6OI.js": 200,
+    "/assets/index-BT5zIjhJ.css": 200,
+    "/snapshot.json": 200,
+    "/api/overview?sport=valorant": 200
+  },
+  "health": {
+    "status": "ready",
+    "snapshot_verified": true,
+    "dataset_version": "a21b3d2589a0558f",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "snapshot_fingerprint": "9712196aa2763ac6adf2345fefe934ca093ec7748ff5e44dafa2c931a2e8619c",
+    "model": "qwen3:4b",
+    "ollama_status": "not_checked"
+  },
+  "fixture_matches": 600,
+  "cited_chat": true,
+  "stored_feedback": true,
+  "openapi_version": "0.2.0"
+}

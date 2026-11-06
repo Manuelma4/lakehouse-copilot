@@ -1,0 +1,87 @@
+{
+  "recorded_at": "2026-10-06T12:45:01.179530+00:00",
+  "reviewer_role": "Independent test automation agent",
+  "human_reviewed": false,
+  "scope": "Semantic review of three actual local model answers, separate from deterministic browser fixtures and automated citation membership. This is a three-example integration sample, not a broad quality scorecard.",
+  "dataset_version": "20d06e8e5af0886e",
+  "snapshot_fingerprint": "1b2614f2ec7e4e707880088e609082b8ec48d0bfa2b6051bb0dd5cc9e5c31790",
+  "model": "qwen3:4b",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "model_digest_before_after_equal": true,
+  "prompt_version": "arena-research-0.5.0",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "cases": [
+    {
+      "case_id": "source-date-utc-rollover",
+      "trace_id": "7f2d4b91676449c69aaa0edbaf979a5e",
+      "question": "What is the original source date and local kickoff, and what is the offset-derived UTC kickoff for this match? Explain the date rollover.",
+      "answer": "The original source date is 2026-06-11 (source_date) and local kickoff is 20:00 (local_time). The offset-derived UTC kickoff is 2026-06-12T02:00:00.000000Z (start_time). The date rollover occurs because the UTC offset is -360 minutes (UTC-6), so the local time of 20:00 on June 11, 2026 converts to 02:00 on June 12, 2026 in UTC.",
+      "review_status": "supported_by_selected_tool_fields_and_agent_reviewed_primary_anchors",
+      "supported_claims": [
+        "Original source day remains 2026-06-11; local time remains 20:00.",
+        "UTC-6 offset correctly yields 2026-06-12T02:00:00Z.",
+        "No IANA timezone or completed time is invented."
+      ],
+      "citation_source": "gold/match_history.parquet",
+      "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "latency_seconds": 70.45213680000234
+    },
+    {
+      "case_id": "mexico-imported-coverage",
+      "trace_id": "74d0e9e700b44639a8598f47dbdc5a7e",
+      "question": "How many imported records and observed and unknown results does this team have? Is this its complete official performance record?",
+      "answer": "This team has 5 imported records and 5 observed results with 0 unknown results. This is not its complete official performance record as per the coverage note: 'Counts describe imported source records, not complete team history or official performance.'",
+      "review_status": "supported_by_selected_tool_fields_and_agent_reviewed_primary_anchors",
+      "supported_claims": [
+        "Imported count 5, observed count 5, unknown count 0 match the selected Mexico tool evidence.",
+        "The answer explicitly rejects a complete official-performance interpretation.",
+        "No wins/draws/losses, standings, or model predictions are inferred."
+      ],
+      "citation_source": "gold/matches.parquet",
+      "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "latency_seconds": 83.84916949999752
+    },
+    {
+      "case_id": "final-score-stages",
+      "trace_id": "5583cb286a2f404b9e2b1747394937d2",
+      "question": "What are the source FT and extra-time score stages for this match? Keep them separate and identify the source sides.",
+      "answer": "Source FT score: [0, 0] (Spain, Argentina); Source ET score: [1, 0] (Spain, Argentina)",
+      "review_status": "supported_by_selected_tool_fields_and_agent_reviewed_primary_anchors",
+      "supported_claims": [
+        "FT [0,0] and ET [1,0] retain the Spain, Argentina ordering.",
+        "FT and ET remain explicitly separate stages.",
+        "No regulation-time winner, official tournament result, or forecast is invented."
+      ],
+      "citation_source": "gold/match_history.parquet",
+      "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "latency_seconds": 42.01289189999807
+    }
+  ],
+  "passed_agent_semantic_reviews": 3,
+  "limitations": [
+    "Primary anchors establish fidelity to the pinned community source, not official FIFA accuracy.",
+    "No statistical generalization, Recall@5 benchmark, human evaluation, or full 120-case semantic review is claimed.",
+    "Native model latencies are measured host-dependent examples, not service-level guarantees."
+  ],
+  "preserved_diagnostics": {
+    "mixed_initial_prompt": {
+      "path": "docs/evidence/worldcup-model-smoke-v0.5-initial.json",
+      "status": "The initial mixed score-and-prediction prompt deliberately hit the pre-model forecast-abstention guard. Generated tokens 0. The answer correctly refused unsupported predictions but did not answer score stages; excluded from the three successful inference examples."
+    },
+    "digest_metadata_failure": {
+      "path": "docs/evidence/worldcup-final-model-smoke-v0.5-digest-missing.json",
+      "status": "Earlier correct final-score response retained with missing best-effort response digest; final harness independently records stable installed model digest before and after."
+    }
+  },
+  "inputs": {
+    "docs/evidence/worldcup-model-smoke-v0.5-initial.json": "429acc93f259a4cbb197eb7b6fee89b55a997f4ac2843c8ff297cbd31a113800",
+    "docs/evidence/worldcup-final-model-smoke-v0.5.json": "3901493ce89c230bc52c5978017ad6903403676eba8a20f65f0e54bc3f8628e7",
+    "docs/evidence/worldcup-final-model-smoke-v0.5-digest-missing.json": "0ecc32547569550a3c3669806a5d47162b903a7d5f072a556d31ea6d348167f8"
+  },
+  "input_hash_scope": "Exact linked report bytes, LF-preserved for publication; response content unchanged"
+}

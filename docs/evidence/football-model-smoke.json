@@ -1,0 +1,71 @@
+{
+  "scope": "Single actual-inference smoke; not a human-reviewed evaluation scorecard",
+  "recorded_at": "2026-10-06T08:33:31.130779+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "question": "Read the prediction for synthetic:football:000592. Give both team win probabilities and the draw probability, and state whether these are synthetic.",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "configuration": {
+    "temperature": 0,
+    "context_tokens": 4096,
+    "thinking": false,
+    "concurrent_requests": 1
+  },
+  "status": "passed",
+  "response": {
+    "answer": "Harbor United win probability: 0.6999, Northbridge FC win probability: 0.1091, draw probability: 0.1909. These are synthetic predictions.",
+    "citations": [
+      {
+        "id": "predictions.json",
+        "uri": "snapshot://a21b3d2589a0558f/predictions.json"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "get_prediction",
+        "source": "predictions.json",
+        "rows": [
+          {
+            "match_id": "synthetic:football:000592",
+            "sport": "football",
+            "team_a": "Harbor United",
+            "team_b": "Northbridge FC",
+            "start_time": "2025-04-09T16:00:00.000000Z",
+            "probabilities": {
+              "a": 0.6999139654910186,
+              "b": 0.1090926074910893,
+              "draw": 0.1909934270178921
+            },
+            "model": "scaled_logistic_v1",
+            "data_kind": "synthetic",
+            "as_of": "2025-04-09T15:10:00.000000Z",
+            "evidence": {
+              "elo_a": 1666.9,
+              "elo_b": 1537.66,
+              "recent_form_a": 0.6,
+              "recent_form_b": 0.5,
+              "historical_matches_a": 68,
+              "historical_matches_b": 69,
+              "feature_cutoff": "2025-04-09T15:10:00.000000Z",
+              "latest_result_used": "2025-04-09T10:10:00.000000Z"
+            },
+            "limitations": "Uncalibrated synthetic demonstration"
+          }
+        ],
+        "status": "available"
+      }
+    ],
+    "trace_id": "25bba72b1cea43f59868a8e8e1dfb4e6",
+    "dataset_version": "a21b3d2589a0558f",
+    "data_kind": "synthetic",
+    "as_of": "2025-04-09T15:10:00.000000Z",
+    "mode": "ollama",
+    "model": "qwen3:4b",
+    "abstained": false,
+    "metrics": {
+      "latency_seconds": 66.28165649999937,
+      "generated_tokens": 71,
+      "tool_calls": 1
+    },
+    "grounding": "Source references validated; semantic factual support requires evaluation"
+  }
+}
