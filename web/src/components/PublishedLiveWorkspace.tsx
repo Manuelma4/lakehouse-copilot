@@ -589,9 +589,10 @@ export default function PublishedLiveWorkspace({
     ),
     cards = matched.slice(filters.page * 25, (filters.page + 1) * 25)
   useEffect(() => {
+    if (!data) return
     const max = Math.max(0, Math.ceil(matched.length / 25) - 1)
     if (filters.page > max) setFilters({ page: max }, true)
-  }, [matched.length, filters.page])
+  }, [data, matched.length, filters.page])
   const groups = useMemo(() => {
     const values = new Map<string, DisplayCard[]>()
     for (const card of cards) {

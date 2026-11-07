@@ -24,6 +24,32 @@ async function clockAndOpen(page: Page) {
   await page.clock.install({ time: new Date('2026-10-06T12:00:05Z') })
   await page.goto('./?view=live&live_status=scheduled')
 }
+
+for (const requestedPage of [1, 999]) {
+  test(`a page ${requestedPage} deep link waits for verified data before clamping`, async ({ page }) => {
+    let release!: () => void
+    const delayed = new Promise<void>((resolve) => { release = resolve })
+    await page.route('**/current/*.json', async (route) => {
+      await delayed
+      const filename = new URL(route.request().url()).pathname.split('/').at(-1)!
+      await route.fulfill({ contentType: 'application/json', body: packageFixture().bodies[filename] })
+    })
+    await page.clock.install({ time: new Date('2026-10-06T12:00:05Z') })
+    await page.goto(`./?view=live&live_status=scheduled&live_page=${requestedPage}`, {
+      waitUntil: 'domcontentloaded',
+    })
+    try {
+      await expect(page.getByRole('heading', { name: 'Verifying published current matches…' })).toBeVisible()
+      await expect(page).toHaveURL(new RegExp(`live_page=${requestedPage}(?:&|$)`))
+    } finally {
+      release()
+    }
+    await expect(page.getByRole('status').filter({ hasText: /^26 matches$/ })).toBeVisible()
+    await expect(page).toHaveURL(/live_page=1(?:&|$)/)
+    await expect(page.getByRole('button', { name: /^Inspect published match / })).toHaveCount(1)
+  })
+}
+
 async function retainLastGoodForResealedStates(page: Page, invalidModes: string[]) {
   let mode = 'v2-valid'
   const manifests = await intercept(page, () => mode)
