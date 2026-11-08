@@ -89,13 +89,17 @@ def validate_snapshot(root: Path) -> dict:
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
-        matches = {r["match_id"]: r for r in pq.read_table(root / "gold/matches.parquet",
-                   columns=["match_id", "sport", "status", "start_time"]).to_pylist()}
-        for match in matches.values():
+        rows = pq.read_table(root / "gold/matches.parquet",
+                   columns=["match_id", "sport", "status", "start_time"]).to_pylist()
+        matches = {}
+        for match in rows:
             if (not isinstance(match["match_id"], str) or match["sport"] not in ("football", "valorant")
                 or match["status"] not in ("scheduled", "running", "finished", "cancelled", "postponed")):
                 raise SnapshotError("Invalid canonical match identity, sport or status")
+            if match["match_id"] in matches:
+                raise SnapshotError("Duplicate canonical match identity")
             utc_time(match["start_time"])
+            matches[match["match_id"]] = match
         for prediction in predictions:
             if prediction["sport"] not in ("football", "valorant"):
                 raise SnapshotError("Prediction sport is unsupported")

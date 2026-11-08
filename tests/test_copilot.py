@@ -3,6 +3,8 @@ import json
 import shutil
 
 import pytest
+import pyarrow as pa
+import pyarrow.parquet as pq
 from fastapi.testclient import TestClient
 
 from arena_copilot.agent import Copilot, ModelUnavailable
@@ -51,6 +53,31 @@ def test_prediction_checksum_does_not_replace_semantic_validation(tmp_path):
     manifest_path.write_text(json.dumps(manifest))
     with pytest.raises(SnapshotError, match="Prediction"):
         validate_snapshot(root)
+
+
+@pytest.mark.parametrize("duplicate", ["identical", "conflicting", "distinct"])
+def test_canonical_match_identity_is_unique_even_with_valid_checksums(tmp_path, duplicate):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    extra = dict(rows[0])
+    if duplicate == "conflicting":
+        extra["team_b"] = "Another synthetic team"
+    elif duplicate == "distinct":
+        extra["match_id"] = "separate-canonical-match"
+    rows.append(extra)
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if duplicate == "distinct":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Duplicate canonical match identity"):
+            validate_snapshot(root)
 
 
 def test_tool_sql_injection_and_write_requests_are_rejected():
