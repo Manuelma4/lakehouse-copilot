@@ -89,6 +89,8 @@ def validate_snapshot(root: Path) -> dict:
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
+        if not isinstance(predictions, list):
+            raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet",
                    columns=["match_id", "sport", "status", "start_time"]).to_pylist()
         matches = {}
@@ -100,7 +102,11 @@ def validate_snapshot(root: Path) -> dict:
                 raise SnapshotError("Duplicate canonical match identity")
             utc_time(match["start_time"])
             matches[match["match_id"]] = match
+        prediction_ids = set()
         for prediction in predictions:
+            match_id = prediction["match_id"]
+            if match_id in prediction_ids:
+                raise SnapshotError("Duplicate prediction for canonical match")
             if prediction["sport"] not in ("football", "valorant"):
                 raise SnapshotError("Prediction sport is unsupported")
             probs = prediction["probabilities"]
@@ -109,11 +115,12 @@ def validate_snapshot(root: Path) -> dict:
                 or not math.isclose(sum(probs.values()), 1.0, abs_tol=1e-6)
                 or prediction["data_kind"] != manifest["data_kind"]):
                 raise SnapshotError("Prediction contract mismatch")
-            match = matches.get(prediction["match_id"])
+            match = matches.get(match_id)
             if (not match or match["sport"] != prediction["sport"] or match["status"] != "scheduled"
                 or utc_time(prediction["as_of"]) != utc_time(manifest["as_of"])
                 or utc_time(prediction["as_of"]) >= utc_time(match["start_time"])):
                 raise SnapshotError("Prediction is not consistent with its match or observation cutoff")
+            prediction_ids.add(match_id)
         return manifest
     except SnapshotError:
         raise

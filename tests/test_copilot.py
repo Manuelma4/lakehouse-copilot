@@ -55,6 +55,38 @@ def test_prediction_checksum_does_not_replace_semantic_validation(tmp_path):
         validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["identical", "conflicting", "object", "distinct", "empty"])
+def test_prediction_set_matches_snapshot_contract(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "predictions.json"
+    predictions = json.loads(path.read_text())
+    if case == "object":
+        predictions = {}
+    elif case == "empty":
+        predictions = []
+    elif case in ("identical", "conflicting"):
+        duplicate = dict(predictions[0])
+        if case == "conflicting":
+            original_a = duplicate["probabilities"]["a"]
+            duplicate["probabilities"] = dict.fromkeys(duplicate["probabilities"], 0)
+            duplicate["probabilities"]["a" if original_a != 1 else "b"] = 1
+        predictions.append(duplicate)
+    else:
+        predictions = list(reversed(predictions))
+    path.write_text(json.dumps(predictions))
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["predictions.json"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    if case in ("distinct", "empty"):
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Duplicate prediction|Predictions must be an array"):
+            validate_snapshot(root)
+
+
 @pytest.mark.parametrize("duplicate", ["identical", "conflicting", "distinct"])
 def test_canonical_match_identity_is_unique_even_with_valid_checksums(tmp_path, duplicate):
     root = tmp_path / "snapshot"
