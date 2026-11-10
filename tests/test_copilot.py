@@ -141,6 +141,34 @@ def test_canonical_match_identity_is_unique_even_with_valid_checksums(tmp_path, 
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["same id", "missing name", "empty id", "shared display name"])
+def test_canonical_match_requires_two_identified_teams(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    match = next(row for row in rows if row["status"] == "finished")
+    if case == "same id":
+        match["team_b_id"] = match["team_a_id"]
+    elif case == "missing name":
+        match["team_a"] = None
+    elif case == "empty id":
+        match["team_b_id"] = ""
+    else:
+        match["team_b"] = match["team_a"]
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "shared display name":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Invalid canonical match teams"):
+            validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []
