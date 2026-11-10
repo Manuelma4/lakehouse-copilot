@@ -92,7 +92,7 @@ def validate_snapshot(root: Path) -> dict:
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet",
-                   columns=["match_id", "sport", "status", "start_time"]).to_pylist()
+                   columns=["match_id", "sport", "team_a", "team_b", "status", "start_time"]).to_pylist()
         matches = {}
         for match in rows:
             if (not isinstance(match["match_id"], str) or match["sport"] not in ("football", "valorant")
@@ -120,6 +120,9 @@ def validate_snapshot(root: Path) -> dict:
                 or utc_time(prediction["as_of"]) != utc_time(manifest["as_of"])
                 or utc_time(prediction["as_of"]) >= utc_time(match["start_time"])):
                 raise SnapshotError("Prediction is not consistent with its match or observation cutoff")
+            if ((prediction.get("team_a"), prediction.get("team_b")) != (match["team_a"], match["team_b"])
+                or utc_time(prediction["start_time"]) != utc_time(match["start_time"])):
+                raise SnapshotError("Prediction teams or kickoff do not match the canonical match")
             prediction_ids.add(match_id)
         return manifest
     except SnapshotError:

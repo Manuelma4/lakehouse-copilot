@@ -1,6 +1,7 @@
 import hashlib
 import json
 import shutil
+from datetime import datetime, timedelta, timezone
 
 import pytest
 import pyarrow as pa
@@ -84,6 +85,34 @@ def test_prediction_set_matches_snapshot_contract(tmp_path, case):
         assert validate_snapshot(root)["schema_version"] == "2.0"
     else:
         with pytest.raises(SnapshotError, match="Duplicate prediction|Predictions must be an array"):
+            validate_snapshot(root)
+
+
+@pytest.mark.parametrize("case", ["swapped teams", "missing team", "different kickoff", "equivalent kickoff"])
+def test_forecast_names_and_kickoff_agree_with_canonical_match(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "predictions.json"
+    forecasts = json.loads(path.read_text())
+    forecast = forecasts[0]
+    kickoff = datetime.fromisoformat(forecast["start_time"])
+    if case == "swapped teams":
+        forecast["team_a"], forecast["team_b"] = forecast["team_b"], forecast["team_a"]
+    elif case == "missing team":
+        del forecast["team_a"]
+    elif case == "different kickoff":
+        forecast["start_time"] = (kickoff + timedelta(minutes=5)).isoformat()
+    else:
+        forecast["start_time"] = kickoff.astimezone(timezone(timedelta(hours=2))).isoformat()
+    path.write_text(json.dumps(forecasts))
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["predictions.json"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "equivalent kickoff":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Prediction teams or kickoff"):
             validate_snapshot(root)
 
 
