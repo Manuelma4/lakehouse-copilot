@@ -96,16 +96,17 @@ def validate_snapshot(root: Path) -> dict:
                    columns=["match_id", "sport", *team_fields, "status", "start_time"]).to_pylist()
         matches = {}
         for match in rows:
-            if (not isinstance(match["match_id"], str) or match["sport"] not in ("football", "valorant")
+            match_id = match["match_id"]
+            if (not isinstance(match_id, str) or not match_id or match["sport"] not in ("football", "valorant")
                 or match["status"] not in ("scheduled", "running", "finished", "cancelled", "postponed")):
                 raise SnapshotError("Invalid canonical match identity, sport or status")
-            if match["match_id"] in matches:
+            if match_id in matches:
                 raise SnapshotError("Duplicate canonical match identity")
             if (any(not isinstance(match[field], str) or not match[field] for field in team_fields)
                 or match["team_a_id"] == match["team_b_id"]):
                 raise SnapshotError("Invalid canonical match teams")
             utc_time(match["start_time"])
-            matches[match["match_id"]] = match
+            matches[match_id] = match
         prediction_ids = set()
         for prediction in predictions:
             match_id = prediction["match_id"]

@@ -116,17 +116,24 @@ def test_forecast_names_and_kickoff_agree_with_canonical_match(tmp_path, case):
             validate_snapshot(root)
 
 
-@pytest.mark.parametrize("duplicate", ["identical", "conflicting", "distinct"])
-def test_canonical_match_identity_is_unique_even_with_valid_checksums(tmp_path, duplicate):
+@pytest.mark.parametrize(("case", "error"), [
+    ("identical", "Duplicate canonical match identity"),
+    ("conflicting", "Duplicate canonical match identity"),
+    ("empty", "Invalid canonical match identity"),
+    ("distinct", None),
+])
+def test_canonical_match_identity_is_nonempty_and_unique(tmp_path, case, error):
     root = tmp_path / "snapshot"
     shutil.copytree(default_fixture(), root)
     path = root / "gold/matches.parquet"
     table = pq.read_table(path)
     rows = table.to_pylist()
     extra = dict(rows[0])
-    if duplicate == "conflicting":
+    if case == "conflicting":
         extra["team_b"] = "Another synthetic team"
-    elif duplicate == "distinct":
+    elif case == "empty":
+        extra["match_id"] = ""
+    elif case == "distinct":
         extra["match_id"] = "separate-canonical-match"
     rows.append(extra)
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
@@ -134,10 +141,10 @@ def test_canonical_match_identity_is_unique_even_with_valid_checksums(tmp_path, 
     manifest = json.loads(manifest_path.read_text())
     manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
     manifest_path.write_text(json.dumps(manifest))
-    if duplicate == "distinct":
+    if error is None:
         assert validate_snapshot(root)["schema_version"] == "2.0"
     else:
-        with pytest.raises(SnapshotError, match="Duplicate canonical match identity"):
+        with pytest.raises(SnapshotError, match=error):
             validate_snapshot(root)
 
 
