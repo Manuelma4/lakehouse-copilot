@@ -89,6 +89,16 @@ def validate_snapshot(root: Path) -> dict:
         }.items():
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
+        team_ids = set()
+        team_rows = pq.read_table(root / "gold/team_stats.parquet", columns=["sport", "team_id"]).to_pylist()
+        for team in team_rows:
+            sport, team_id = team["sport"], team["team_id"]
+            if sport not in ("football", "valorant") or not isinstance(team_id, str) or not team_id:
+                raise SnapshotError("Invalid team statistics identity")
+            key = (sport, team_id)
+            if key in team_ids:
+                raise SnapshotError("Duplicate team statistics identity")
+            team_ids.add(key)
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")

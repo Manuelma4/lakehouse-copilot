@@ -148,6 +148,36 @@ def test_canonical_match_identity_is_nonempty_and_unique(tmp_path, case, error):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize(("case", "error"), [
+    ("duplicate", "Duplicate team statistics identity"),
+    ("empty", "Invalid team statistics identity"),
+    ("cross-sport", None),
+])
+def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    extra = dict(rows[0])
+    if case == "empty":
+        extra["team_id"] = ""
+    elif case == "cross-sport":
+        extra["sport"] = "valorant" if extra["sport"] == "football" else "football"
+    rows.append(extra)
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    if error is None:
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match=error):
+            validate_snapshot(root)
+
+
 @pytest.mark.parametrize("case", ["same id", "missing name", "empty id", "shared display name"])
 def test_canonical_match_requires_two_identified_teams(tmp_path, case):
     root = tmp_path / "snapshot"
