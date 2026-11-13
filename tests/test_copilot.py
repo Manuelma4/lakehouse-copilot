@@ -178,6 +178,34 @@ def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize(("field", "value"), [
+    ("team_name", ""),
+    ("matches", 0),
+    ("wins", -1),
+    ("losses", None),
+    ("draws", 1000),
+    ("win_rate", "wrong fraction"),
+    ("win_rate", float("nan")),
+])
+def test_team_statistics_reject_inconsistent_aggregates(tmp_path, field, value):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    if value == "wrong fraction":
+        value = 0.0 if rows[0]["win_rate"] > 0.5 else 1.0
+    rows[0][field] = value
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Invalid team statistics values"):
+        validate_snapshot(root)
+
+
 @pytest.mark.parametrize("case", ["same id", "missing name", "empty id", "shared display name"])
 def test_canonical_match_requires_two_identified_teams(tmp_path, case):
     root = tmp_path / "snapshot"

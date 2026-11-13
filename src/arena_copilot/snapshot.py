@@ -90,7 +90,10 @@ def validate_snapshot(root: Path) -> dict:
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
         team_ids = set()
-        team_rows = pq.read_table(root / "gold/team_stats.parquet", columns=["sport", "team_id"]).to_pylist()
+        team_rows = pq.read_table(
+            root / "gold/team_stats.parquet",
+            columns=["sport", "team_id", "team_name", "matches", "wins", "draws", "losses", "win_rate"],
+        ).to_pylist()
         for team in team_rows:
             sport, team_id = team["sport"], team["team_id"]
             if sport not in ("football", "valorant") or not isinstance(team_id, str) or not team_id:
@@ -99,6 +102,16 @@ def validate_snapshot(root: Path) -> dict:
             if key in team_ids:
                 raise SnapshotError("Duplicate team statistics identity")
             team_ids.add(key)
+            played = team["matches"]
+            outcomes = (team["wins"], team["draws"], team["losses"])
+            rate = team["win_rate"]
+            if (not isinstance(team["team_name"], str) or not team["team_name"]
+                or type(played) is not int or played <= 0
+                or any(type(count) is not int or count < 0 for count in outcomes)
+                or sum(outcomes) != played
+                or type(rate) not in (int, float) or not 0 <= rate <= 1
+                or not math.isclose(rate, team["wins"] / played, rel_tol=1e-9)):
+                raise SnapshotError("Invalid team statistics values")
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
