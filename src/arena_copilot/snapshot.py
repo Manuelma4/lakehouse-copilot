@@ -109,6 +109,7 @@ def validate_snapshot(root: Path) -> dict:
                 or type(played) is not int or played <= 0
                 or any(type(count) is not int or count < 0 for count in outcomes)
                 or sum(outcomes) != played
+                or (sport == "valorant" and team["draws"] != 0)
                 or type(rate) not in (int, float) or not 0 <= rate <= 1
                 or not math.isclose(rate, team["wins"] / played, rel_tol=1e-9)):
                 raise SnapshotError("Invalid team statistics values")
