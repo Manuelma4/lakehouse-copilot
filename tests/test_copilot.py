@@ -272,6 +272,27 @@ def test_canonical_match_requires_two_identified_teams(tmp_path, case):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize(("score", "valid"), [(None, False), (-1, False), (0, True)])
+def test_finished_match_scores_are_usable(tmp_path, score, valid):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    match = next(row for row in rows if row["status"] == "finished" and row["sport"] == "football")
+    match["score_a"] = score
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if valid:
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Invalid canonical match score"):
+            validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []

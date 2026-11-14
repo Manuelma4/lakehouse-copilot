@@ -83,9 +83,10 @@ def validate_snapshot(root: Path) -> dict:
             if hashlib.sha256(item.read_bytes()).hexdigest() != expected:
                 raise SnapshotError(f"Checksum mismatch: {name}")
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
+        match_fields = ["match_id", "sport", *team_fields, "status", "start_time", "score_a", "score_b"]
         aggregate_scores = ("score_for", "score_against")
         for table, columns in {
-            "matches": {"match_id", "sport", *team_fields, "status", "start_time"},
+            "matches": set(match_fields),
             "team_stats": {"sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
                            "win_rate", *aggregate_scores},
         }.items():
@@ -120,8 +121,7 @@ def validate_snapshot(root: Path) -> dict:
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
-        rows = pq.read_table(root / "gold/matches.parquet",
-                   columns=["match_id", "sport", *team_fields, "status", "start_time"]).to_pylist()
+        rows = pq.read_table(root / "gold/matches.parquet", columns=match_fields).to_pylist()
         matches = {}
         for match in rows:
             match_id = match["match_id"]
@@ -133,6 +133,10 @@ def validate_snapshot(root: Path) -> dict:
             if (any(not isinstance(match[field], str) or not match[field] for field in team_fields)
                 or match["team_a_id"] == match["team_b_id"]):
                 raise SnapshotError("Invalid canonical match teams")
+            if match["status"] == "finished" and any(
+                type(match[field]) is not int or match[field] < 0 for field in ("score_a", "score_b")
+            ):
+                raise SnapshotError("Invalid canonical match score")
             utc_time(match["start_time"])
             matches[match_id] = match
         prediction_ids = set()

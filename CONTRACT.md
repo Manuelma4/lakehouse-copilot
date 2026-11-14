@@ -28,7 +28,8 @@ Provider-scoped IDs prevent identity collisions. A match has a sport, competitio
 source revision, two distinct teams, scheduled start, observation time, optional
 completion time, status, optional scores and best-of. All timestamps are UTC.
 Source revision is independent of arrival order. A finished match requires its
-outcome to be known no earlier than completion. Football scores are goals;
+outcome to be known no earlier than completion and a nonnegative integer score
+for each team. Football scores are goals;
 VALORANT scores are maps won, not rounds, kills or player performance.
 
 Team statistics count current completed matches. Draws count in the football
