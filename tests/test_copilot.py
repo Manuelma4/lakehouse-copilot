@@ -184,6 +184,8 @@ def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
     ("wins", -1),
     ("losses", None),
     ("draws", 1000),
+    ("score_for", -1),
+    ("score_against", None),
     ("win_rate", "wrong fraction"),
     ("win_rate", float("nan")),
 ])
@@ -214,7 +216,7 @@ def test_team_statistics_only_allow_draws_in_football(tmp_path, sport):
     table = pq.read_table(path)
     rows = table.to_pylist()
     rows.append(dict(rows[0], sport=sport, team_id="draw-control",
-                     matches=1, wins=0, draws=1, losses=0, win_rate=0.0))
+                     matches=1, wins=0, draws=1, losses=0, win_rate=0.0, score_for=0, score_against=0))
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
     manifest_path = root / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -226,6 +228,20 @@ def test_team_statistics_only_allow_draws_in_football(tmp_path, sport):
     else:
         with pytest.raises(SnapshotError, match="Invalid team statistics values"):
             validate_snapshot(root)
+
+
+def test_team_statistics_require_both_score_columns(tmp_path):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    pq.write_table(pq.read_table(path).drop_columns(["score_for"]), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Invalid team_stats table schema"):
+        validate_snapshot(root)
 
 
 @pytest.mark.parametrize("case", ["same id", "missing name", "empty id", "shared display name"])

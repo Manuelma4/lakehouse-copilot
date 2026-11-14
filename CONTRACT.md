@@ -34,6 +34,8 @@ VALORANT scores are maps won, not rounds, kills or player performance.
 Team statistics count current completed matches. Draws count in the football
 win-rate denominator but not the numerator. They never occur in a completed
 VALORANT series. Cancelling/correcting a match removes/replaces its contribution.
+The `score_for` and `score_against` columns hold nonnegative integer totals in
+each sport's scoring unit.
 
 ## Predictions
 

@@ -83,16 +83,19 @@ def validate_snapshot(root: Path) -> dict:
             if hashlib.sha256(item.read_bytes()).hexdigest() != expected:
                 raise SnapshotError(f"Checksum mismatch: {name}")
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
+        aggregate_scores = ("score_for", "score_against")
         for table, columns in {
             "matches": {"match_id", "sport", *team_fields, "status", "start_time"},
-            "team_stats": {"sport", "team_id", "team_name", "matches", "wins", "draws", "losses", "win_rate"},
+            "team_stats": {"sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
+                           "win_rate", *aggregate_scores},
         }.items():
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
         team_ids = set()
         team_rows = pq.read_table(
             root / "gold/team_stats.parquet",
-            columns=["sport", "team_id", "team_name", "matches", "wins", "draws", "losses", "win_rate"],
+            columns=["sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
+                     "win_rate", *aggregate_scores],
         ).to_pylist()
         for team in team_rows:
             sport, team_id = team["sport"], team["team_id"]
@@ -108,6 +111,7 @@ def validate_snapshot(root: Path) -> dict:
             if (not isinstance(team["team_name"], str) or not team["team_name"]
                 or type(played) is not int or played <= 0
                 or any(type(count) is not int or count < 0 for count in outcomes)
+                or any(type(team[field]) is not int or team[field] < 0 for field in aggregate_scores)
                 or sum(outcomes) != played
                 or (sport == "valorant" and team["draws"] != 0)
                 or type(rate) not in (int, float) or not 0 <= rate <= 1
