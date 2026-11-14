@@ -135,6 +135,7 @@ def test_canonical_match_identity_is_nonempty_and_unique(tmp_path, case, error):
         extra["match_id"] = ""
     elif case == "distinct":
         extra["match_id"] = "separate-canonical-match"
+        extra.update(status="scheduled", score_a=None, score_b=None, completed_at=None)
     rows.append(extra)
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
     manifest_path = root / "manifest.json"
@@ -162,13 +163,27 @@ def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
     extra = dict(next(row for row in rows if row["draws"] == 0))
     if case == "empty":
         extra["team_id"] = ""
-    elif case == "cross-sport":
-        extra["sport"] = "valorant" if extra["sport"] == "football" else "football"
-    rows.append(extra)
+    if case == "cross-sport":
+        other = next(row for row in rows if row["sport"] != extra["sport"])
+        original_id = other["team_id"]
+        other["team_id"] = extra["team_id"]
+        matches_path = root / "gold/matches.parquet"
+        matches_table = pq.read_table(matches_path)
+        matches = matches_table.to_pylist()
+        for match in matches:
+            if match["sport"] == other["sport"]:
+                for field in ("team_a_id", "team_b_id"):
+                    if match[field] == original_id:
+                        match[field] = other["team_id"]
+        pq.write_table(pa.Table.from_pylist(matches, schema=matches_table.schema), matches_path)
+    else:
+        rows.append(extra)
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
     manifest_path = root / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
     manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    if case == "cross-sport":
+        manifest["files"]["gold/matches.parquet"] = hashlib.sha256(matches_path.read_bytes()).hexdigest()
     manifest_path.write_text(json.dumps(manifest))
 
     if error is None:
@@ -215,8 +230,11 @@ def test_team_statistics_only_allow_draws_in_football(tmp_path, sport):
     path = root / "gold/team_stats.parquet"
     table = pq.read_table(path)
     rows = table.to_pylist()
-    rows.append(dict(rows[0], sport=sport, team_id="draw-control",
-                     matches=1, wins=0, draws=1, losses=0, win_rate=0.0, score_for=0, score_against=0))
+    if sport == "football":
+        assert any(row["sport"] == "football" and row["draws"] > 0 for row in rows)
+    else:
+        rows.append(dict(rows[0], sport=sport, team_id="draw-control",
+                         matches=1, wins=0, draws=1, losses=0, win_rate=0.0, score_for=0, score_against=0))
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
     manifest_path = root / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -241,6 +259,29 @@ def test_team_statistics_require_both_score_columns(tmp_path):
     manifest_path.write_text(json.dumps(manifest))
 
     with pytest.raises(SnapshotError, match="Invalid team_stats table schema"):
+        validate_snapshot(root)
+
+
+@pytest.mark.parametrize("change", ["score", "missing team", "extra team"])
+def test_team_scores_reconcile_to_completed_matches(tmp_path, change):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    if change == "score":
+        rows[0]["score_for"] += 1
+    elif change == "missing team":
+        rows.pop()
+    else:
+        rows.append(dict(rows[0], team_id="not-in-completed-matches"))
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Team statistics disagree with canonical match scores"):
         validate_snapshot(root)
 
 
@@ -279,7 +320,8 @@ def test_finished_match_scores_are_usable(tmp_path, score, valid):
     path = root / "gold/matches.parquet"
     table = pq.read_table(path)
     rows = table.to_pylist()
-    match = next(row for row in rows if row["status"] == "finished" and row["sport"] == "football")
+    match = next(row for row in rows if row["status"] == "finished" and row["sport"] == "football"
+                 and (not valid or row["score_a"] == score))
     match["score_a"] = score
     pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
     manifest_path = root / "manifest.json"

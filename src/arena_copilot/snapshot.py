@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+from collections import defaultdict
 from pathlib import Path, PurePosixPath
 from datetime import datetime, timezone
 
@@ -92,7 +93,7 @@ def validate_snapshot(root: Path) -> dict:
         }.items():
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
-        team_ids = set()
+        team_scores = {}
         team_rows = pq.read_table(
             root / "gold/team_stats.parquet",
             columns=["sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
@@ -103,9 +104,8 @@ def validate_snapshot(root: Path) -> dict:
             if sport not in ("football", "valorant") or not isinstance(team_id, str) or not team_id:
                 raise SnapshotError("Invalid team statistics identity")
             key = (sport, team_id)
-            if key in team_ids:
+            if key in team_scores:
                 raise SnapshotError("Duplicate team statistics identity")
-            team_ids.add(key)
             played = team["matches"]
             outcomes = (team["wins"], team["draws"], team["losses"])
             rate = team["win_rate"]
@@ -118,11 +118,13 @@ def validate_snapshot(root: Path) -> dict:
                 or type(rate) not in (int, float) or not 0 <= rate <= 1
                 or not math.isclose(rate, team["wins"] / played, rel_tol=1e-9)):
                 raise SnapshotError("Invalid team statistics values")
+            team_scores[key] = (team["score_for"], team["score_against"])
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet", columns=match_fields).to_pylist()
         matches = {}
+        scores = defaultdict(lambda: [0, 0])
         for match in rows:
             match_id = match["match_id"]
             if (not isinstance(match_id, str) or not match_id or match["sport"] not in ("football", "valorant")
@@ -137,8 +139,15 @@ def validate_snapshot(root: Path) -> dict:
                 type(match[field]) is not int or match[field] < 0 for field in ("score_a", "score_b")
             ):
                 raise SnapshotError("Invalid canonical match score")
+            if match["status"] == "finished":
+                for side, opponent in (("a", "b"), ("b", "a")):
+                    totals = scores[match["sport"], match[f"team_{side}_id"]]
+                    totals[0] += match[f"score_{side}"]
+                    totals[1] += match[f"score_{opponent}"]
             utc_time(match["start_time"])
             matches[match_id] = match
+        if team_scores != {key: tuple(total) for key, total in scores.items()}:
+            raise SnapshotError("Team statistics disagree with canonical match scores")
         prediction_ids = set()
         for prediction in predictions:
             match_id = prediction["match_id"]
