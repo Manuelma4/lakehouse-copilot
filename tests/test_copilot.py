@@ -335,6 +335,26 @@ def test_finished_match_scores_are_usable(tmp_path, score, valid):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize("best_of", [None, 0, 2, 9, 11])
+def test_finished_valorant_requires_a_score_consistent_with_best_of(tmp_path, best_of):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    match = next(row for row in rows if row["status"] == "finished"
+                 and row["sport"] == "valorant" and row["best_of"] == 3)
+    match["best_of"] = best_of
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Invalid completed VALORANT series score"):
+        validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []

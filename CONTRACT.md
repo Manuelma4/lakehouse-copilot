@@ -30,7 +30,9 @@ completion time, status, optional scores and best-of. All timestamps are UTC.
 Source revision is independent of arrival order. A finished match requires its
 outcome to be known no earlier than completion and a nonnegative integer score
 for each team. Football scores are goals;
-VALORANT scores are maps won, not rounds, kills or player performance.
+VALORANT scores are maps won, not rounds, kills or player performance. A
+completed VALORANT series has an odd `best_of` from 1 to 9 and exactly one
+team reaches the number of maps needed to win.
 
 Team statistics count current completed matches. Draws count in the football
 win-rate denominator but not the numerator. They never occur in a completed

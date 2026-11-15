@@ -84,7 +84,7 @@ def validate_snapshot(root: Path) -> dict:
             if hashlib.sha256(item.read_bytes()).hexdigest() != expected:
                 raise SnapshotError(f"Checksum mismatch: {name}")
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
-        match_fields = ["match_id", "sport", *team_fields, "status", "start_time", "score_a", "score_b"]
+        match_fields = ["match_id", "sport", *team_fields, "status", "start_time", "score_a", "score_b", "best_of"]
         aggregate_scores = ("score_for", "score_against")
         for table, columns in {
             "matches": set(match_fields),
@@ -140,6 +140,14 @@ def validate_snapshot(root: Path) -> dict:
             ):
                 raise SnapshotError("Invalid canonical match score")
             if match["status"] == "finished":
+                if match["sport"] == "valorant":
+                    best_of = match["best_of"]
+                    if type(best_of) is not int or not 1 <= best_of <= 9 or best_of % 2 == 0:
+                        raise SnapshotError("Invalid completed VALORANT series score")
+                    needed = best_of // 2 + 1
+                    score_a, score_b = match["score_a"], match["score_b"]
+                    if max(score_a, score_b) != needed or min(score_a, score_b) >= needed:
+                        raise SnapshotError("Invalid completed VALORANT series score")
                 for side, opponent in (("a", "b"), ("b", "a")):
                     totals = scores[match["sport"], match[f"team_{side}_id"]]
                     totals[0] += match[f"score_{side}"]
