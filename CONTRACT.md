@@ -26,12 +26,13 @@ Optional producer evidence includes `gold/match_history.parquet` and canonical
 
 Provider-scoped IDs prevent identity collisions. A match has a sport, competition,
 source revision, two distinct teams, scheduled start, observation time, optional
-completion time, status, optional scores and best-of. All timestamps are UTC.
-Source revision is independent of arrival order. A finished match requires its
-outcome to be known no earlier than completion and a nonnegative integer score
-for each team. Football scores are goals;
-VALORANT scores are maps won, not rounds, kills or player performance. A
-completed VALORANT series has an odd `best_of` from 1 to 9 and exactly one
+completion time, status, optional scores and best-of. The producer writes UTC timestamps.
+Source revision is independent of arrival order. A finished match must complete
+after its scheduled start and at or before its observation time. Timestamps
+are compared as UTC instants. Other match statuses have no completion time.
+Finished matches require a nonnegative integer score for each team. Football
+scores are goals. VALORANT scores are maps won, distinct from rounds, kills
+and player performance. A completed VALORANT series has an odd `best_of` from 1 to 9 and exactly one
 team reaches the number of maps needed to win.
 
 Team statistics count current completed matches. Draws count in the football

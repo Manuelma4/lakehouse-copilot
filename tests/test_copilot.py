@@ -355,6 +355,35 @@ def test_finished_valorant_requires_a_score_consistent_with_best_of(tmp_path, be
         validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["missing", "at-kickoff", "after-observation", "scheduled", "equivalent-offset"])
+def test_canonical_match_completion_has_a_valid_observation_cutoff(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    match = next(row for row in rows if row["status"] == ("scheduled" if case == "scheduled" else "finished"))
+    if case == "missing":
+        match["completed_at"] = None
+    elif case in ("at-kickoff", "scheduled"):
+        match["completed_at"] = match["start_time"]
+    elif case == "after-observation":
+        match["observed_at"] = match["start_time"]
+    elif case == "equivalent-offset":
+        completion = datetime.fromisoformat(match["completed_at"])
+        match["observed_at"] = completion.astimezone(timezone(timedelta(hours=2))).isoformat()
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "equivalent-offset":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Invalid canonical match completion"):
+            validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []

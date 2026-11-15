@@ -84,7 +84,8 @@ def validate_snapshot(root: Path) -> dict:
             if hashlib.sha256(item.read_bytes()).hexdigest() != expected:
                 raise SnapshotError(f"Checksum mismatch: {name}")
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
-        match_fields = ["match_id", "sport", *team_fields, "status", "start_time", "score_a", "score_b", "best_of"]
+        match_fields = ["match_id", "sport", *team_fields, "status", "start_time",
+                        "observed_at", "completed_at", "score_a", "score_b", "best_of"]
         aggregate_scores = ("score_for", "score_against")
         for table, columns in {
             "matches": set(match_fields),
@@ -139,7 +140,13 @@ def validate_snapshot(root: Path) -> dict:
                 type(match[field]) is not int or match[field] < 0 for field in ("score_a", "score_b")
             ):
                 raise SnapshotError("Invalid canonical match score")
+            start = utc_time(match["start_time"])
+            completion = match["completed_at"]
             if match["status"] == "finished":
+                observed = match["observed_at"]
+                if (not isinstance(completion, str) or not isinstance(observed, str)
+                    or not start < utc_time(completion) <= utc_time(observed)):
+                    raise SnapshotError("Invalid canonical match completion")
                 if match["sport"] == "valorant":
                     best_of = match["best_of"]
                     if type(best_of) is not int or not 1 <= best_of <= 9 or best_of % 2 == 0:
@@ -152,7 +159,8 @@ def validate_snapshot(root: Path) -> dict:
                     totals = scores[match["sport"], match[f"team_{side}_id"]]
                     totals[0] += match[f"score_{side}"]
                     totals[1] += match[f"score_{opponent}"]
-            utc_time(match["start_time"])
+            elif completion is not None:
+                raise SnapshotError("Invalid canonical match completion")
             matches[match_id] = match
         if team_scores != {key: tuple(total) for key, total in scores.items()}:
             raise SnapshotError("Team statistics disagree with canonical match scores")
