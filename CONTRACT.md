@@ -39,8 +39,10 @@ Team statistics count current completed matches. Draws count in the football
 win-rate denominator but not the numerator. They never occur in a completed
 VALORANT series. Cancelling/correcting a match removes/replaces its contribution.
 The `score_for` and `score_against` columns hold nonnegative integer totals in
-each sport's scoring unit. The consumer checks both totals against finished
-matches grouped by sport and team ID, including the set of teams in the table.
+each sport's scoring unit. The consumer checks those totals and the win, draw
+and loss counts against finished matches grouped by sport and team ID. Every
+team with a finished match must appear in the table, and the checked counts
+must sum to the reported completed-match count.
 
 ## Predictions
 

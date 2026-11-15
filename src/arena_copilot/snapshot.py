@@ -86,29 +86,27 @@ def validate_snapshot(root: Path) -> dict:
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
         match_fields = ["match_id", "sport", *team_fields, "status", "start_time",
                         "observed_at", "completed_at", "score_a", "score_b", "best_of"]
+        outcome_fields = ("wins", "draws", "losses")
         aggregate_scores = ("score_for", "score_against")
+        aggregate_fields = (*outcome_fields, *aggregate_scores)
+        team_stat_fields = ["sport", "team_id", "team_name", "matches", "win_rate", *aggregate_fields]
         for table, columns in {
             "matches": set(match_fields),
-            "team_stats": {"sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
-                           "win_rate", *aggregate_scores},
+            "team_stats": set(team_stat_fields),
         }.items():
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
-        team_scores = {}
-        team_rows = pq.read_table(
-            root / "gold/team_stats.parquet",
-            columns=["sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
-                     "win_rate", *aggregate_scores],
-        ).to_pylist()
+        team_totals = {}
+        team_rows = pq.read_table(root / "gold/team_stats.parquet", columns=team_stat_fields).to_pylist()
         for team in team_rows:
             sport, team_id = team["sport"], team["team_id"]
             if sport not in ("football", "valorant") or not isinstance(team_id, str) or not team_id:
                 raise SnapshotError("Invalid team statistics identity")
             key = (sport, team_id)
-            if key in team_scores:
+            if key in team_totals:
                 raise SnapshotError("Duplicate team statistics identity")
             played = team["matches"]
-            outcomes = (team["wins"], team["draws"], team["losses"])
+            outcomes = tuple(team[field] for field in outcome_fields)
             rate = team["win_rate"]
             if (not isinstance(team["team_name"], str) or not team["team_name"]
                 or type(played) is not int or played <= 0
@@ -119,13 +117,13 @@ def validate_snapshot(root: Path) -> dict:
                 or type(rate) not in (int, float) or not 0 <= rate <= 1
                 or not math.isclose(rate, team["wins"] / played, rel_tol=1e-9)):
                 raise SnapshotError("Invalid team statistics values")
-            team_scores[key] = (team["score_for"], team["score_against"])
+            team_totals[key] = {field: team[field] for field in aggregate_fields}
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet", columns=match_fields).to_pylist()
         matches = {}
-        scores = defaultdict(lambda: [0, 0])
+        match_totals = defaultdict(lambda: dict.fromkeys(aggregate_fields, 0))
         for match in rows:
             match_id = match["match_id"]
             if (not isinstance(match_id, str) or not match_id or match["sport"] not in ("football", "valorant")
@@ -156,14 +154,18 @@ def validate_snapshot(root: Path) -> dict:
                     if max(score_a, score_b) != needed or min(score_a, score_b) >= needed:
                         raise SnapshotError("Invalid completed VALORANT series score")
                 for side, opponent in (("a", "b"), ("b", "a")):
-                    totals = scores[match["sport"], match[f"team_{side}_id"]]
-                    totals[0] += match[f"score_{side}"]
-                    totals[1] += match[f"score_{opponent}"]
+                    totals = match_totals[match["sport"], match[f"team_{side}_id"]]
+                    score, other_score = match[f"score_{side}"], match[f"score_{opponent}"]
+                    totals["score_for"] += score
+                    totals["score_against"] += other_score
+                    totals["wins"] += int(score > other_score)
+                    totals["draws"] += int(score == other_score)
+                    totals["losses"] += int(score < other_score)
             elif completion is not None:
                 raise SnapshotError("Invalid canonical match completion")
             matches[match_id] = match
-        if team_scores != {key: tuple(total) for key, total in scores.items()}:
-            raise SnapshotError("Team statistics disagree with canonical match scores")
+        if team_totals != match_totals:
+            raise SnapshotError("Team statistics disagree with canonical match totals")
         prediction_ids = set()
         for prediction in predictions:
             match_id = prediction["match_id"]

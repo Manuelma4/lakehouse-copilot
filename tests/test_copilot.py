@@ -281,7 +281,35 @@ def test_team_scores_reconcile_to_completed_matches(tmp_path, change):
     manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
     manifest_path.write_text(json.dumps(manifest))
 
-    with pytest.raises(SnapshotError, match="Team statistics disagree with canonical match scores"):
+    with pytest.raises(SnapshotError, match="Team statistics disagree with canonical match totals"):
+        validate_snapshot(root)
+
+
+@pytest.mark.parametrize("change", ["extra match", "football draw", "valorant win"])
+def test_team_outcomes_reconcile_to_completed_matches(tmp_path, change):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    if change == "extra match":
+        team = rows[0]
+        team["matches"] += 1
+    elif change == "football draw":
+        team = next(row for row in rows if row["sport"] == "football" and row["draws"] > 0)
+        team["draws"] -= 1
+    else:
+        team = next(row for row in rows if row["sport"] == "valorant" and row["wins"] > 0)
+        team["wins"] -= 1
+    team["losses"] += 1
+    team["win_rate"] = team["wins"] / team["matches"]
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Team statistics disagree with canonical match totals"):
         validate_snapshot(root)
 
 
