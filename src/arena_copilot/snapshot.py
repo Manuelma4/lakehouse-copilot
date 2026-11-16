@@ -52,8 +52,8 @@ def validate_snapshot(root: Path) -> dict:
         manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8")).model_dump()
         if manifest["schema_version"] != "2.0" or manifest["data_kind"] not in ("synthetic", "api"):
             raise SnapshotError("Unsupported snapshot contract or data kind")
-        for key in ("generated_at", "as_of"):
-            utc_time(manifest[key])
+        utc_time(manifest["generated_at"])
+        cutoff = utc_time(manifest["as_of"])
         if (manifest["data_kind"] == "synthetic" and manifest["providers"] != ["synthetic"]
             or manifest["data_kind"] == "api" and (not manifest["providers"]
                 or not set(manifest["providers"]) <= {"football-data", "pandascore"})):
@@ -139,11 +139,15 @@ def validate_snapshot(root: Path) -> dict:
             ):
                 raise SnapshotError("Invalid canonical match score")
             start = utc_time(match["start_time"])
+            observation = match["observed_at"]
+            if not isinstance(observation, str):
+                raise SnapshotError("Invalid canonical match observation")
+            observed = utc_time(observation)
+            if observed > cutoff:
+                raise SnapshotError("Invalid canonical match observation after snapshot cutoff")
             completion = match["completed_at"]
             if match["status"] == "finished":
-                observed = match["observed_at"]
-                if (not isinstance(completion, str) or not isinstance(observed, str)
-                    or not start < utc_time(completion) <= utc_time(observed)):
+                if not isinstance(completion, str) or not start < utc_time(completion) <= observed:
                     raise SnapshotError("Invalid canonical match completion")
                 if match["sport"] == "valorant":
                     best_of = match["best_of"]
@@ -181,7 +185,7 @@ def validate_snapshot(root: Path) -> dict:
                 raise SnapshotError("Prediction contract mismatch")
             match = matches.get(match_id)
             if (not match or match["sport"] != prediction["sport"] or match["status"] != "scheduled"
-                or utc_time(prediction["as_of"]) != utc_time(manifest["as_of"])
+                or utc_time(prediction["as_of"]) != cutoff
                 or utc_time(prediction["as_of"]) >= utc_time(match["start_time"])):
                 raise SnapshotError("Prediction is not consistent with its match or observation cutoff")
             if ((prediction.get("team_a"), prediction.get("team_b")) != (match["team_a"], match["team_b"])

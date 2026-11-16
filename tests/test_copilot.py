@@ -412,6 +412,38 @@ def test_canonical_match_completion_has_a_valid_observation_cutoff(tmp_path, cas
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize(("status", "case"), [
+    ("finished", "future"), ("scheduled", "future"), ("scheduled", "missing"),
+    ("scheduled", "naive"), ("scheduled", "same-cutoff"),
+])
+def test_canonical_observation_respects_snapshot_cutoff(tmp_path, status, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    cutoff = datetime.fromisoformat(manifest["as_of"])
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    row = next(item for item in rows if item["status"] == status)
+    if case == "future":
+        row["observed_at"] = (cutoff + timedelta(seconds=1)).isoformat()
+    elif case == "missing":
+        row["observed_at"] = None
+    elif case == "naive":
+        row["observed_at"] = cutoff.replace(tzinfo=None).isoformat()
+    else:
+        row["observed_at"] = cutoff.astimezone(timezone(timedelta(hours=2))).isoformat()
+    pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "same-cutoff":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError, match="Invalid canonical match observation|timezone-aware"):
+            validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []
