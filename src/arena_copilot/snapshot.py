@@ -31,10 +31,15 @@ class Manifest(BaseModel):
 
 
 def utc_time(value: str) -> datetime:
+    if not isinstance(value, str):
+        raise SnapshotError("Snapshot timestamps must be ISO 8601 strings")
     parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if parsed.tzinfo is None:
         raise SnapshotError("Snapshot timestamps must be timezone-aware")
-    return parsed.astimezone(timezone.utc)
+    try:
+        return parsed.astimezone(timezone.utc)
+    except OverflowError as error:
+        raise SnapshotError("Snapshot timestamps must be representable in UTC") from error
 
 
 def snapshot_fingerprint(manifest: dict) -> str:

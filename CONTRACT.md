@@ -29,7 +29,9 @@ source revision, two distinct teams, scheduled start, observation time, optional
 completion time, status, optional scores and best-of. The producer writes UTC timestamps.
 Source revision is independent of arrival order. Every canonical observation
 must have a timezone and occur at or before the snapshot's `as_of` cutoff.
-Scheduled kickoff may be later than that cutoff. A finished match must complete
+Canonical kickoff and forecast timestamps must be strings that represent
+timezone-aware instants within the UTC datetime range. Scheduled kickoff may
+be later than the cutoff. A finished match must complete
 after its scheduled start and at or before its observation time. Timestamps
 are compared as UTC instants. Other match statuses have no completion time.
 Finished matches require a nonnegative integer score for each team. Football

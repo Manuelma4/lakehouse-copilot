@@ -444,6 +444,37 @@ def test_canonical_observation_respects_snapshot_cutoff(tmp_path, status, case):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize(("field", "value"), [
+    ("kickoff", None), ("forecast_cutoff", None), ("forecast_kickoff", 0),
+    ("kickoff", "0001-01-01T00:00:00+01:00"),
+    ("forecast_cutoff", "9999-12-31T23:59:59-01:00"),
+])
+def test_unusable_timestamps_raise_snapshot_error(tmp_path, field, value):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    if field == "kickoff":
+        name = "gold/matches.parquet"
+        path = root / name
+        table = pq.read_table(path)
+        rows = table.to_pylist()
+        row = next(item for item in rows if item["status"] == "scheduled")
+        row["start_time"] = value
+        pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), path)
+    else:
+        name = "predictions.json"
+        path = root / name
+        rows = json.loads(path.read_text())
+        rows[0]["as_of" if field == "forecast_cutoff" else "start_time"] = value
+        path.write_text(json.dumps(rows))
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"][name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(SnapshotError, match="Snapshot timestamps"):
+        validate_snapshot(root)
+
+
 def test_tool_sql_injection_and_write_requests_are_rejected():
     tools = Tools(default_fixture())
     assert tools.call("get_team_stats", {"team_name": "' OR 1=1 --"})["rows"] == []
