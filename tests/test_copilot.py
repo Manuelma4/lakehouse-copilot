@@ -41,12 +41,19 @@ def test_rejects_invalid_snapshot_before_use(tmp_path, change):
         validate_snapshot(root)
 
 
-def test_prediction_checksum_does_not_replace_semantic_validation(tmp_path):
+@pytest.mark.parametrize("case", ["out-of-range", "array", "null"])
+def test_prediction_checksum_does_not_replace_semantic_validation(tmp_path, case):
     root = tmp_path / "snapshot"
     shutil.copytree(default_fixture(), root)
     path = root / "predictions.json"
     predictions = json.loads(path.read_text())
-    predictions[0]["probabilities"]["a"] = 2.0
+    probabilities = predictions[0]["probabilities"]
+    if case == "out-of-range":
+        probabilities["a"] = 2.0
+    elif case == "array":
+        predictions[0]["probabilities"] = list(probabilities)
+    else:
+        predictions[0]["probabilities"] = None
     path.write_text(json.dumps(predictions))
     manifest_path = root / "manifest.json"
     manifest = json.loads(manifest_path.read_text())

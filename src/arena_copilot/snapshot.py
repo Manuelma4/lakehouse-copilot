@@ -184,7 +184,8 @@ def validate_snapshot(root: Path) -> dict:
                 raise SnapshotError("Prediction sport is unsupported")
             probs = prediction["probabilities"]
             classes = {"a", "b", "draw"} if prediction["sport"] == "football" else {"a", "b"}
-            if (set(probs) != classes or any(type(p) not in (int, float) or not 0 <= p <= 1 for p in probs.values())
+            if (not isinstance(probs, dict) or set(probs) != classes
+                or any(type(p) not in (int, float) or not 0 <= p <= 1 for p in probs.values())
                 or not math.isclose(sum(probs.values()), 1.0, abs_tol=1e-6)
                 or prediction["data_kind"] != manifest["data_kind"]):
                 raise SnapshotError("Prediction contract mismatch")
