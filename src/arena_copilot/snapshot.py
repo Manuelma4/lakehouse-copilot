@@ -57,8 +57,10 @@ def validate_snapshot(root: Path) -> dict:
         manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8")).model_dump()
         if manifest["schema_version"] != "2.0" or manifest["data_kind"] not in ("synthetic", "api"):
             raise SnapshotError("Unsupported snapshot contract or data kind")
-        utc_time(manifest["generated_at"])
+        generated = utc_time(manifest["generated_at"])
         cutoff = utc_time(manifest["as_of"])
+        if generated < cutoff:
+            raise SnapshotError("Snapshot was generated before its observation cutoff")
         if (manifest["data_kind"] == "synthetic" and manifest["providers"] != ["synthetic"]
             or manifest["data_kind"] == "api" and (not manifest["providers"]
                 or not set(manifest["providers"]) <= {"football-data", "pandascore"})):

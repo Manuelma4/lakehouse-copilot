@@ -41,6 +41,26 @@ def test_rejects_invalid_snapshot_before_use(tmp_path, change):
         validate_snapshot(root)
 
 
+@pytest.mark.parametrize("early", [False, True])
+def test_snapshot_generation_cannot_precede_observation_cutoff(tmp_path, early):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "manifest.json"
+    manifest = json.loads(path.read_text())
+    cutoff = datetime.fromisoformat(manifest["as_of"])
+    generated = cutoff.astimezone(timezone(timedelta(hours=-4)))
+    if early:
+        generated -= timedelta(microseconds=1)
+    manifest["generated_at"] = generated.isoformat()
+    path.write_text(json.dumps(manifest))
+
+    if early:
+        with pytest.raises(SnapshotError, match="generated before its observation cutoff"):
+            validate_snapshot(root)
+    else:
+        assert validate_snapshot(root) == manifest
+
+
 @pytest.mark.parametrize("case", ["out-of-range", "array", "null"])
 def test_prediction_checksum_does_not_replace_semantic_validation(tmp_path, case):
     root = tmp_path / "snapshot"
