@@ -199,6 +199,13 @@ def validate_snapshot(root: Path) -> dict:
             if ((prediction.get("team_a"), prediction.get("team_b")) != (match["team_a"], match["team_b"])
                 or utc_time(prediction["start_time"]) != utc_time(match["start_time"])):
                 raise SnapshotError("Prediction teams or kickoff do not match the canonical match")
+            evidence = prediction.get("evidence")
+            if (not isinstance(evidence, dict) or "latest_result_used" not in evidence
+                or utc_time(evidence.get("feature_cutoff")) != cutoff):
+                raise SnapshotError("Prediction feature evidence does not match the observation cutoff")
+            latest_result = evidence["latest_result_used"]
+            if latest_result is not None and utc_time(latest_result) > cutoff:
+                raise SnapshotError("Prediction feature evidence uses a result after the observation cutoff")
             prediction_ids.add(match_id)
         return manifest
     except SnapshotError:

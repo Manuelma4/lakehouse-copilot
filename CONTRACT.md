@@ -52,7 +52,9 @@ must sum to the reported completed-match count.
 ## Predictions
 
 Predictions identify match, sport, model, data kind, observation cutoff and feature
-evidence. Football classes: `a`, `b`, `draw`; VALORANT classes: `a`, `b`.
+evidence. The evidence's `feature_cutoff` must identify the same UTC instant
+as the forecast cutoff. Its `latest_result_used` is null when no result was
+used, or an observation at or before that cutoff. Football classes: `a`, `b`, `draw`; VALORANT classes: `a`, `b`.
 Probabilities must be a JSON object keyed by those class labels. Values must
 be finite, within [0,1] and sum to one. Synthetic and real data
 cannot share a training workspace. No result may be a probability fabricated by

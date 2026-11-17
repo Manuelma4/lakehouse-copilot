@@ -115,6 +115,36 @@ def test_prediction_set_matches_snapshot_contract(tmp_path, case):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["different cutoff", "future result", "equivalent cutoff", "no result"])
+def test_prediction_evidence_respects_its_cutoff(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "predictions.json"
+    predictions = json.loads(path.read_text())
+    forecast = predictions[0]
+    cutoff = datetime.fromisoformat(forecast["as_of"])
+    evidence = forecast["evidence"]
+    if case == "different cutoff":
+        evidence["feature_cutoff"] = (cutoff - timedelta(microseconds=1)).isoformat()
+    elif case == "future result":
+        evidence["latest_result_used"] = (cutoff + timedelta(microseconds=1)).isoformat()
+    elif case == "equivalent cutoff":
+        evidence["feature_cutoff"] = cutoff.astimezone(timezone(timedelta(hours=-4))).isoformat()
+    else:
+        evidence["latest_result_used"] = None
+    path.write_text(json.dumps(predictions))
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["predictions.json"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+
+    if case in ("different cutoff", "future result"):
+        with pytest.raises(SnapshotError, match="Prediction feature evidence"):
+            validate_snapshot(root)
+    else:
+        assert validate_snapshot(root)["dataset_version"] == manifest["dataset_version"]
+
+
 @pytest.mark.parametrize("case", ["swapped teams", "missing team", "different kickoff", "equivalent kickoff"])
 def test_forecast_names_and_kickoff_agree_with_canonical_match(tmp_path, case):
     root = tmp_path / "snapshot"
