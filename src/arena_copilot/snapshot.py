@@ -49,8 +49,8 @@ def snapshot_fingerprint(manifest: dict) -> str:
 
 
 def validate_snapshot(root: Path) -> dict:
-    root = Path(root).resolve(strict=True)
     try:
+        root = Path(root).resolve(strict=True)
         manifest_path = root / "manifest.json"
         if manifest_path.is_symlink() or manifest_path.stat().st_size > 2_000_000:
             raise SnapshotError("Unsafe manifest")

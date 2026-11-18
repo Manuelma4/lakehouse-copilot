@@ -41,6 +41,18 @@ def test_rejects_invalid_snapshot_before_use(tmp_path, change):
         validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["absent", "file-parent", "broken-link"])
+def test_snapshot_root_resolution_failures_use_snapshot_error(tmp_path, case):
+    root = tmp_path / "snapshot"
+    if case == "file-parent":
+        root.write_text("ordinary file")
+        root = root / "child"
+    elif case == "broken-link":
+        root.symlink_to(tmp_path / "absent-target", target_is_directory=True)
+    with pytest.raises(SnapshotError, match="Malformed snapshot payload"):
+        validate_snapshot(root)
+
+
 @pytest.mark.parametrize("early", [False, True])
 def test_snapshot_generation_cannot_precede_observation_cutoff(tmp_path, early):
     root = tmp_path / "snapshot"

@@ -58,6 +58,9 @@ Keep CPU inference and Spark in separate stages on a 16 GB machine.
 
 ## Snapshot imports and public export
 
+The validator reports missing roots, broken root links and invalid parent paths
+through the same `SnapshotError` contract as malformed package contents.
+
 ```bash
 arena-copilot ingest /path/to/producer/snapshot
 # Set ARENA_SNAPSHOT in .env to the validated copy reported above.
