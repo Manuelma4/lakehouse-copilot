@@ -104,6 +104,7 @@ def validate_snapshot(root: Path) -> dict:
             if not columns <= set(pq.read_schema(root / f"gold/{table}.parquet").names):
                 raise SnapshotError(f"Invalid {table} table schema")
         team_totals = {}
+        team_names = {}
         team_rows = pq.read_table(root / "gold/team_stats.parquet", columns=team_stat_fields).to_pylist()
         for team in team_rows:
             sport, team_id = team["sport"], team["team_id"]
@@ -125,11 +126,13 @@ def validate_snapshot(root: Path) -> dict:
                 or not math.isclose(rate, team["wins"] / played, rel_tol=1e-9)):
                 raise SnapshotError("Invalid team statistics values")
             team_totals[key] = {field: team[field] for field in aggregate_fields}
+            team_names[key] = team["team_name"]
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet", columns=match_fields).to_pylist()
         matches = {}
+        match_names = {}
         match_totals = defaultdict(lambda: dict.fromkeys(aggregate_fields, 0))
         for match in rows:
             match_id = match["match_id"]
@@ -152,6 +155,12 @@ def validate_snapshot(root: Path) -> dict:
             observed = utc_time(observation)
             if observed > cutoff:
                 raise SnapshotError("Invalid canonical match observation after snapshot cutoff")
+            for side in ("a", "b"):
+                key = (match["sport"], match[f"team_{side}_id"])
+                name_order = (observed, match_id)
+                previous = match_names.get(key)
+                if previous is None or name_order > previous[0]:
+                    match_names[key] = (name_order, match[f"team_{side}"])
             completion = match["completed_at"]
             if match["status"] == "finished":
                 if not isinstance(completion, str) or not start < utc_time(completion) <= observed:
@@ -177,6 +186,8 @@ def validate_snapshot(root: Path) -> dict:
             matches[match_id] = match
         if team_totals != match_totals:
             raise SnapshotError("Team statistics disagree with canonical match totals")
+        if any(team_names[key] != match_names[key][1] for key in team_names):
+            raise SnapshotError("Team statistics names disagree with latest canonical match names")
         prediction_ids = set()
         for prediction in predictions:
             match_id = prediction["match_id"]

@@ -47,7 +47,9 @@ The `score_for` and `score_against` columns hold nonnegative integer totals in
 each sport's scoring unit. The consumer checks those totals and the win, draw
 and loss counts against finished matches grouped by sport and team ID. Every
 team with a finished match must appear in the table, and the checked counts
-must sum to the reported completed-match count.
+must sum to the reported completed-match count. Each team name comes from
+its latest canonical observation, including scheduled or cancelled matches.
+Equal observation instants are ordered by canonical match ID.
 
 ## Predictions
 

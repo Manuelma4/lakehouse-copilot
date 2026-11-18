@@ -262,6 +262,54 @@ def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["wrong", "renamed", "stale", "tied"])
+def test_team_statistics_name_tracks_latest_canonical_observation(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    team_path = root / "gold/team_stats.parquet"
+    match_path = root / "gold/matches.parquet"
+    team_table, match_table = pq.read_table(team_path), pq.read_table(match_path)
+    teams, matches = team_table.to_pylist(), match_table.to_pylist()
+    team = teams[0]
+    if case == "wrong":
+        team["team_name"] = "Unrelated team"
+    else:
+        appearances = [(m, side) for m in matches if m["sport"] == team["sport"]
+                       for side in ("a", "b") if m[f"team_{side}_id"] == team["team_id"]]
+        appearances.sort(key=lambda item: (datetime.fromisoformat(item[0]["observed_at"]), item[0]["match_id"]))
+        latest, side = appearances[-1]
+        latest[f"team_{side}"] = "Updated team"
+        if case == "tied":
+            other, other_side = appearances[-2]
+            other["observed_at"] = latest["observed_at"]
+            chosen, chosen_side = max(((latest, side), (other, other_side)), key=lambda item: item[0]["match_id"])
+            chosen[f"team_{chosen_side}"] = "Updated team"
+        if case in ("renamed", "tied"):
+            team["team_name"] = "Updated team"
+        # Different offsets still identify the latest observation.
+        instant = datetime.fromisoformat(latest["observed_at"])
+        latest["observed_at"] = instant.astimezone(timezone(timedelta(hours=-4))).isoformat()
+    pq.write_table(pa.Table.from_pylist(teams, schema=team_table.schema), team_path)
+    pq.write_table(pa.Table.from_pylist(matches, schema=match_table.schema), match_path)
+    prediction_path = root / "predictions.json"
+    forecasts = json.loads(prediction_path.read_text())
+    by_id = {match["match_id"]: match for match in matches}
+    for forecast in forecasts:
+        match = by_id[forecast["match_id"]]
+        forecast["team_a"], forecast["team_b"] = match["team_a"], match["team_b"]
+    prediction_path.write_text(json.dumps(forecasts))
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    for name in ("gold/team_stats.parquet", "gold/matches.parquet", "predictions.json"):
+        manifest["files"][name] = hashlib.sha256((root / name).read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case in ("wrong", "stale"):
+        with pytest.raises(SnapshotError, match="Team statistics names"):
+            validate_snapshot(root)
+    else:
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+
+
 @pytest.mark.parametrize(("field", "value"), [
     ("team_name", ""),
     ("matches", 0),
