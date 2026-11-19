@@ -262,6 +262,36 @@ def test_team_statistics_use_a_unique_sport_and_team_id(tmp_path, case, error):
             validate_snapshot(root)
 
 
+@pytest.mark.parametrize("case", ["missing", "null", "invalid", "naive", "stale", "future", "equivalent"])
+def test_team_statistics_last_match_is_latest_canonical_completion(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/team_stats.parquet"
+    table = pq.read_table(path)
+    rows = table.to_pylist()
+    completed = datetime.fromisoformat(rows[0]["last_match_at"].replace("Z", "+00:00"))
+    if case == "missing":
+        table = table.drop(["last_match_at"])
+    else:
+        rows[0]["last_match_at"] = {
+            "null": None, "invalid": "not-a-time", "naive": completed.replace(tzinfo=None).isoformat(),
+            "stale": (completed - timedelta(seconds=1)).isoformat(),
+            "future": (completed + timedelta(days=3650)).isoformat(),
+            "equivalent": completed.astimezone(timezone(timedelta(hours=2))).isoformat(),
+        }[case]
+        table = pa.Table.from_pylist(rows, schema=table.schema)
+    pq.write_table(table, path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/team_stats.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "equivalent":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError):
+            validate_snapshot(root)
+
+
 @pytest.mark.parametrize("case", ["wrong", "renamed", "stale", "tied"])
 def test_team_statistics_name_tracks_latest_canonical_observation(tmp_path, case):
     root = tmp_path / "snapshot"

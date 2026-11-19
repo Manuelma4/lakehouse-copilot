@@ -96,7 +96,7 @@ def validate_snapshot(root: Path) -> dict:
         outcome_fields = ("wins", "draws", "losses")
         aggregate_scores = ("score_for", "score_against")
         aggregate_fields = (*outcome_fields, *aggregate_scores)
-        team_stat_fields = ["sport", "team_id", "team_name", "matches", "win_rate", *aggregate_fields]
+        team_stat_fields = ["sport", "team_id", "team_name", "matches", "win_rate", "last_match_at", *aggregate_fields]
         for table, columns in {
             "matches": set(match_fields),
             "team_stats": set(team_stat_fields),
@@ -105,6 +105,7 @@ def validate_snapshot(root: Path) -> dict:
                 raise SnapshotError(f"Invalid {table} table schema")
         team_totals = {}
         team_names = {}
+        team_completions = {}
         team_rows = pq.read_table(root / "gold/team_stats.parquet", columns=team_stat_fields).to_pylist()
         for team in team_rows:
             sport, team_id = team["sport"], team["team_id"]
@@ -127,12 +128,14 @@ def validate_snapshot(root: Path) -> dict:
                 raise SnapshotError("Invalid team statistics values")
             team_totals[key] = {field: team[field] for field in aggregate_fields}
             team_names[key] = team["team_name"]
+            team_completions[key] = utc_time(team["last_match_at"])
         predictions = json.loads((root / "predictions.json").read_text(encoding="utf-8"))
         if not isinstance(predictions, list):
             raise SnapshotError("Predictions must be an array")
         rows = pq.read_table(root / "gold/matches.parquet", columns=match_fields).to_pylist()
         matches = {}
         match_names = {}
+        match_completions = {}
         match_totals = defaultdict(lambda: dict.fromkeys(aggregate_fields, 0))
         for match in rows:
             match_id = match["match_id"]
@@ -163,7 +166,10 @@ def validate_snapshot(root: Path) -> dict:
                     match_names[key] = (name_order, match[f"team_{side}"])
             completion = match["completed_at"]
             if match["status"] == "finished":
-                if not isinstance(completion, str) or not start < utc_time(completion) <= observed:
+                if not isinstance(completion, str):
+                    raise SnapshotError("Invalid canonical match completion")
+                completed = utc_time(completion)
+                if not start < completed <= observed:
                     raise SnapshotError("Invalid canonical match completion")
                 if match["sport"] == "valorant":
                     best_of = match["best_of"]
@@ -174,7 +180,9 @@ def validate_snapshot(root: Path) -> dict:
                     if max(score_a, score_b) != needed or min(score_a, score_b) >= needed:
                         raise SnapshotError("Invalid completed VALORANT series score")
                 for side, opponent in (("a", "b"), ("b", "a")):
-                    totals = match_totals[match["sport"], match[f"team_{side}_id"]]
+                    key = match["sport"], match[f"team_{side}_id"]
+                    match_completions[key] = max(match_completions.get(key, completed), completed)
+                    totals = match_totals[key]
                     score, other_score = match[f"score_{side}"], match[f"score_{opponent}"]
                     totals["score_for"] += score
                     totals["score_against"] += other_score
@@ -188,6 +196,8 @@ def validate_snapshot(root: Path) -> dict:
             raise SnapshotError("Team statistics disagree with canonical match totals")
         if any(team_names[key] != match_names[key][1] for key in team_names):
             raise SnapshotError("Team statistics names disagree with latest canonical match names")
+        if team_completions != match_completions:
+            raise SnapshotError("Team statistics last-match times disagree with canonical completions")
         prediction_ids = set()
         for prediction in predictions:
             match_id = prediction["match_id"]

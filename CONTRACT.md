@@ -50,6 +50,8 @@ team with a finished match must appear in the table, and the checked counts
 must sum to the reported completed-match count. Each team name comes from
 its latest canonical observation, including scheduled or cancelled matches.
 Equal observation instants are ordered by canonical match ID.
+Each team's `last_match_at` must equal its latest finished canonical match's
+completion time as a UTC instant. Equivalent timezone offsets are accepted.
 
 ## Predictions
 

@@ -64,7 +64,7 @@ def publish(base, provider="football-data", rows=None, *, manifest_changes=None)
     schema = pa.schema([(key, pa.int64() if key in {"matches", "wins", "draws", "losses", "score_for", "score_against"}
                          else pa.float64() if key == "win_rate" else pa.string())
                         for key in ["sport", "team_id", "team_name", "matches", "wins", "draws", "losses",
-                                    "win_rate", "score_for", "score_against"]])
+                                    "win_rate", "score_for", "score_against", "last_match_at"]])
     stats = {}
     for row in rows:
         if row["status"] != "finished":
@@ -73,13 +73,16 @@ def publish(base, provider="football-data", rows=None, *, manifest_changes=None)
             sport, team = row["sport"], row[f"team_{side}_id"]
             scored, conceded = int(row[f"score_{side}"]), int(row[f"score_{other}"])
             aggregate = stats.setdefault((sport, team), dict(sport=sport, team_id=team,
-                team_name=row[f"team_{side}"], matches=0, wins=0, draws=0, losses=0, score_for=0, score_against=0))
+                team_name=row[f"team_{side}"], matches=0, wins=0, draws=0, losses=0, score_for=0, score_against=0,
+                last_match_at=row["completed_at"]))
             aggregate["matches"] += 1
             aggregate["wins"] += scored > conceded
             aggregate["draws"] += scored == conceded
             aggregate["losses"] += scored < conceded
             aggregate["score_for"] += scored
             aggregate["score_against"] += conceded
+            aggregate["last_match_at"] = max(aggregate["last_match_at"], row["completed_at"],
+                key=lambda value: datetime.fromisoformat(value.replace("Z", "+00:00")))
     for aggregate in stats.values():
         aggregate["win_rate"] = aggregate["wins"] / aggregate["matches"]
     pq.write_table(pa.Table.from_pylist(list(stats.values()), schema=schema), directory / "gold/team_stats.parquet")
