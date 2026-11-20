@@ -24,8 +24,8 @@ Optional producer evidence includes `gold/match_history.parquet` and canonical
 
 ## Match meaning
 
-Provider-scoped IDs prevent identity collisions. A match has a sport, competition,
-source revision, two distinct teams, scheduled start, observation time, optional
+Provider-scoped IDs prevent identity collisions. A match has a sport, a nonempty
+competition name, source revision, two distinct teams, scheduled start, observation time, optional
 completion time, status, optional scores and best-of. The producer writes UTC timestamps.
 Source revision is independent of arrival order. Every canonical observation
 must have a timezone and occur at or before the snapshot's `as_of` cutoff.

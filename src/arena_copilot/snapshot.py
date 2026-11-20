@@ -91,7 +91,7 @@ def validate_snapshot(root: Path) -> dict:
             if hashlib.sha256(item.read_bytes()).hexdigest() != expected:
                 raise SnapshotError(f"Checksum mismatch: {name}")
         team_fields = ("team_a_id", "team_a", "team_b_id", "team_b")
-        match_fields = ["match_id", "sport", *team_fields, "status", "start_time",
+        match_fields = ["match_id", "sport", "competition", *team_fields, "status", "start_time",
                         "observed_at", "completed_at", "score_a", "score_b", "best_of"]
         outcome_fields = ("wins", "draws", "losses")
         aggregate_scores = ("score_for", "score_against")
@@ -142,6 +142,8 @@ def validate_snapshot(root: Path) -> dict:
             if (not isinstance(match_id, str) or not match_id or match["sport"] not in ("football", "valorant")
                 or match["status"] not in ("scheduled", "running", "finished", "cancelled", "postponed")):
                 raise SnapshotError("Invalid canonical match identity, sport or status")
+            if not isinstance(match["competition"], str) or not match["competition"]:
+                raise SnapshotError("Invalid canonical match competition")
             if match_id in matches:
                 raise SnapshotError("Duplicate canonical match identity")
             if (any(not isinstance(match[field], str) or not match[field] for field in team_fields)

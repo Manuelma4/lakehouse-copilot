@@ -703,3 +703,27 @@ def test_unknown_prediction_abstains_without_inference(tmp_path, monkeypatch):
     response = agent.ask("Predict synthetic:valorant:999999")
     assert response["abstained"] and response["metrics"]["generated_tokens"] == 0
     assert response["tool_results"][0]["rows"] == []
+
+
+@pytest.mark.parametrize("case", ["missing", "null", "empty", "unicode"])
+def test_snapshot_requires_usable_competition_metadata(tmp_path, case):
+    root = tmp_path / "snapshot"
+    shutil.copytree(default_fixture(), root)
+    path = root / "gold/matches.parquet"
+    table = pq.read_table(path)
+    if case == "missing":
+        table = table.drop(["competition"])
+    else:
+        rows = table.to_pylist()
+        rows[0]["competition"] = {"null": None, "empty": "", "unicode": "Coupe d’Été 東京"}[case]
+        table = pa.Table.from_pylist(rows, schema=table.schema)
+    pq.write_table(table, path)
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["files"]["gold/matches.parquet"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest))
+    if case == "unicode":
+        assert validate_snapshot(root)["schema_version"] == "2.0"
+    else:
+        with pytest.raises(SnapshotError):
+            validate_snapshot(root)
