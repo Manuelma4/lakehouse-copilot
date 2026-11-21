@@ -9,14 +9,29 @@ needs the producer package installed.
 `manifest.json`: `schema_version` (`2.0`), `dataset_version` (16 hexadecimal
 characters), `producer_version`, `generated_at`, `as_of`, `data_kind`
 (`synthetic` or `api`), `providers`, and `files` (relative POSIX path to SHA-256).
-Every regular file except the manifest is covered. Reject unknown versions,
-missing/extra files, symlinks, path traversal and invalid payloads. Checksums
-detect modification; they are not a cryptographic proof of publisher identity.
+The loader accepts schema version 2.0. Every regular file except the manifest
+must be listed and hashed. Missing listed files and unlisted files both fail
+validation, even if every required file is present. Symlinks and paths that escape the snapshot are rejected.
+The local loader permits up to 2,000,000 bytes for the manifest and 512,000,000
+bytes for the combined listed files. Checksums detect modification and do not
+authenticate the publisher.
+
+### Dataset version and package fingerprint
+
+`dataset_version` is the producer's data identifier. Copilot's
+[package fingerprint](src/arena_copilot/snapshot.py) hashes a canonical JSON
+object with `schema_version`, `producer_version` and the file checksum map.
+The manifest clocks are outside this fingerprint. Two exports with the same
+data identifier can have different fingerprints if their file bytes differ,
+for example if Parquet writers encode the same rows differently. Use the
+fingerprint to identify the validated payload and compare decoded schemas
+and rows separately when checking writer compatibility.
 
 ## Required files
 
 - `catalog.json`, `metrics.json`, `lineage.json`, `quality.json`, `incidents.json`
-- `predictions.json`, `model_report.json`, `docs/*.md`
+- `predictions.json`, `model_report.json`
+- At least one listed Markdown document under `docs/`
 - `gold/matches.parquet`, `gold/team_stats.parquet`
 
 Optional producer evidence includes `gold/match_history.parquet` and canonical
