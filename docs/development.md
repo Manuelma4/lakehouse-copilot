@@ -61,17 +61,39 @@ Keep CPU inference and Spark in separate stages on a 16 GB machine.
 The validator reports missing roots, broken root links and invalid parent paths
 through the same `SnapshotError` contract as malformed package contents.
 
+Import from the repository root with the project environment active. Keep
+provider snapshots and state in ignored local directories.
+
 ```bash
-arena-copilot ingest /path/to/producer/snapshot
-# Set ARENA_SNAPSHOT in .env to the validated copy reported above.
-python scripts/export_web_snapshot.py
+arena-copilot --state data/private-import ingest data/input/producer-snapshot
 ```
 
 The [contract](../CONTRACT.md) validates paths, checksums, schemas, distributions
-and temporal cutoffs before activation. Imports create independent copies.
-Public asset export accepts original synthetic snapshots only; fetched provider
-data is not automatically republished. The static site uses the same observed
-competition and point-in-time match semantics as the API.
+and temporal cutoffs. Ingest validates the source, copies it into the state
+directory and validates the copy before recording it in that state's `ACTIVE`
+file. To serve the imported package, pass the absolute path printed by ingest.
+
+```bash
+arena-copilot --state data/private-import --snapshot "/path/reported/by/ingest" serve
+```
+
+`serve` selects its snapshot via `--snapshot`, then `ARENA_SNAPSHOT`, then the
+bundled showcase. It does not read the `ACTIVE` file for selection. Restart the
+local API to switch a running instance to a different snapshot.
+
+The public web exporter selects the bundled synthetic showcase by default.
+It takes a separate `--snapshot` argument for another eligible synthetic
+package. To review an export alongside the existing web asset, use an ignored
+output path.
+
+```bash
+python scripts/export_web_snapshot.py --output data/web-export/showcase.json
+```
+
+Omit `--output` to regenerate `web/public/snapshot.json`. The public export
+accepts original synthetic snapshots only. Keep fetched provider data private.
+The static site uses the same observed competition and point-in-time match
+semantics as the API.
 
 The independent OpenFootball CC0 research fixture is bundled separately. Its
 default API path is `src/arena_copilot/research_fixture`; `ARENA_OPEN_FOOTBALL`
