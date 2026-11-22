@@ -103,6 +103,27 @@ contract and source allowlist; it does not relax the synthetic export guard.
 The [research contract](openfootball-research.md) documents its source dates,
 unknown scores, poll history and disabled forecasting.
 
+## Preview the static web build
+
+The static build needs two generated JSON assets. From the repository root,
+with the project Python environment active, export both bundled packages before
+building the web app.
+
+```bash
+python scripts/export_web_snapshot.py
+python scripts/export_openfootball.py
+cd web
+npm ci
+VITE_STATIC_DEMO=true npm run build
+npm run preview
+```
+
+Open `http://127.0.0.1:4173`. The exporters write the ignored files
+`web/public/snapshot.json` and `web/public/open-football.json`. Vite copies them
+into the build output, where the static workspaces read them under the built
+base path. Re-export and rebuild if a published workspace shows stale data.
+The preview uses the synthetic showcase and the separate CC0 research package.
+
 ## Production container
 
 ```bash
