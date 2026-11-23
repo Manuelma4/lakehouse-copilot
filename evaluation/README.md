@@ -6,17 +6,32 @@ adversarial requests. Labels and the 75/25 development/holdout split are recorde
 before retrieval comparisons. These are AI-authored proposed labels; **human
 semantic review is pending**. The fixture's match IDs are intentionally fixed.
 
-Run document retrieval evaluation with actual Nomic embeddings:
+From the repository root with the project Python environment active, run the
+lexical baseline against the bundled synthetic showcase. It uses the local
+SQLite index and needs no embedding server.
 
-```powershell
-python scripts/evaluate_retrieval.py --hybrid
+```bash
+python scripts/evaluate_retrieval.py --output data/evaluation/lexical.json
 ```
 
-The report measures lexical, dense and RRF Recall@5 separately. Eight documents
-make this a small instructional corpus; high Recall@5 cannot establish useful
-performance on a larger corpus or answer correctness. Dense queries are embedded
-in one batch to avoid repeatedly loading the local model. No LLM judge or paid API
-is called.
+With the configured [local embedding model](../docs/development.md#generation-and-retrieval)
+running, collect the lexical, dense and RRF scores together.
+
+```bash
+python scripts/evaluate_retrieval.py --hybrid --output data/evaluation/hybrid.json
+```
+
+Both commands score the 60 document questions by development and holdout split.
+The hybrid run builds document vectors and embeds all document questions in one
+batch. It calls the embedding endpoint without requesting generated answers.
+Both commands use `data/copilot` for retrieval state. Use a separate checkout
+for the evaluation if another process is using that state. The explicit output
+paths keep new reports under ignored `data/`. Omitting `--output` writes to the
+versioned evidence path `docs/evidence/retrieval-evaluation.json`.
+
+Compare Recall@5 for each ranking and split on the same snapshot and corpus.
+The eight-document corpus is small and the labels still need human review.
+The scores measure source retrieval only.
 
 Before a full agent evaluation, review the source labels, scope of unanswerable
 questions and expected clarification behavior; freeze the holdout split. Evaluate

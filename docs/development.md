@@ -164,11 +164,10 @@ pip install -e '.[dev,observability]'
 # MLFLOW_TRACKING_URI=sqlite:///data/mlflow.db
 # MLFLOW_EXPERIMENT_NAME=arena-copilot-local
 mlflow ui --backend-store-uri sqlite:///data/mlflow.db --host 127.0.0.1 --port 5000
-python scripts/evaluate_retrieval.py --hybrid
 ```
 
-The [evaluation corpus](../evaluation/README.md) contains 120 draft cases awaiting
-human semantic review. Retrieval recall, citation membership and source support
+The [evaluation guide](../evaluation/README.md) gives lexical and hybrid commands
+with separate report paths. Its 120 draft cases await human semantic review. Retrieval recall, citation membership and source support
 are different measurements. The tiny document corpus cannot establish hybrid
 superiority. [Measured evidence](evidence/README.md) separates fixtures, embeddings,
 actual inference and optional MLflow spans.
