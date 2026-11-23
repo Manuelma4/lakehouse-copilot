@@ -158,19 +158,38 @@ the source version and fixture identity alongside measured results.
 
 ## Optional observability and evaluation
 
+From the repository root, with the Python environment active, install the
+observability extra and generate one trace with the bundled synthetic showcase.
+
 ```bash
-pip install -e '.[dev,observability]'
-# Configure in .env before starting the API:
-# MLFLOW_TRACKING_URI=sqlite:///data/mlflow.db
-# MLFLOW_EXPERIMENT_NAME=arena-copilot-local
-mlflow ui --backend-store-uri sqlite:///data/mlflow.db --host 127.0.0.1 --port 5000
+python -m pip install -e '.[dev,observability]'
+(
+  set -eu
+  mkdir -p data
+  trace_dir="$(mktemp -d data/mlflow-local.XXXXXX)"
+  export MLFLOW_TRACKING_URI="sqlite:///$trace_dir/traces.db"
+  export MLFLOW_EXPERIMENT_NAME=arena-synthetic-trace
+  arena-copilot --snapshot src/arena_copilot/showcase --state "$trace_dir/copilot" \
+    ask 'Show VALORANT team win rates' --mode evidence --retrieval lexical
+  mlflow server --backend-store-uri "$MLFLOW_TRACKING_URI" \
+    --default-artifact-root "$trace_dir/artifacts" --host 127.0.0.1 --port 5000 --workers 1
+)
 ```
 
+At `http://127.0.0.1:5000`, open the `arena-synthetic-trace` experiment. Look
+for `arena.request` with `arena.retrieve` and `arena.answer` spans. The example
+uses lexical retrieval in evidence mode and needs no Ollama model. The application
+also keeps its own SQLite trace ledger under `--state`. Both stores can contain
+questions, answers and evidence, so keep the generated directory local and ignored.
+The [recorded MLflow smoke](evidence/observability-smoke.json) verifies span
+creation with a synthetic question. It does not measure answer quality.
+
 The [evaluation guide](../evaluation/README.md) gives lexical and hybrid commands
-with separate report paths. Its 120 draft cases await human semantic review. Retrieval recall, citation membership and source support
-are different measurements. The tiny document corpus cannot establish hybrid
-superiority. [Measured evidence](evidence/README.md) separates fixtures, embeddings,
-actual inference and optional MLflow spans.
+with separate report paths. Its 120 draft cases await human semantic review.
+Retrieval recall, citation membership and source support are different
+measurements. The tiny document corpus cannot establish hybrid superiority.
+[Measured evidence](evidence/README.md) separates fixtures, embeddings, actual
+inference and optional MLflow spans.
 
 ## Source research verification
 
