@@ -131,10 +131,32 @@ docker compose up --build
 ```
 
 The image builds React and serves its assets alongside FastAPI on
-`http://127.0.0.1:8000`. Compose persists state and addresses host Ollama through
-`host.docker.internal`; the host service must accept that connection. The
-container smoke verifies web/API/evidence mode. Native model inference is
-measured separately.
+`http://127.0.0.1:8000`. Compose persists state and resolves host Ollama through
+`host.docker.internal` for optional inference.
+
+### Check the built container locally
+
+Use an isolated Compose project so the smoke's chat and feedback records stay
+in its volume. Run this from the repository root with the project Python
+environment active. Stop other services using host port 8000 first.
+
+```bash
+(
+  set -eu
+  docker compose -p arena-smoke up --build -d
+  mkdir -p data
+  smoke_out="$(mktemp -d data/container-smoke.XXXXXX)"
+  python scripts/smoke_container.py --url http://127.0.0.1:8000 --output "$smoke_out/report.json"
+  printf 'Container smoke report: %s\n' "$smoke_out/report.json"
+)
+```
+
+The explicit URL matches the Compose host port. The smoke checks bundled
+synthetic and OpenFootball assets, API responses, evidence-mode chat and stored
+feedback. It checks that a research forecast request abstains without generating
+tokens. These checks do not need Ollama or MLflow. A failed assertion can stop
+the script before it writes a report, so also check the command's exit status.
+Use `docker compose -p arena-smoke down` to stop the test project.
 
 ## Verification
 
