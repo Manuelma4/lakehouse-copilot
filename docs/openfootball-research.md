@@ -62,6 +62,40 @@ coverage rather than official performance. Envelopes expose the dataset version,
 coverage. Detail returns the exact source revision history. Missing datasets
 return an explicit service-unavailable response; unknown IDs return 404.
 
+### Check the source calendar locally
+
+With the Python environment from the [development guide](development.md) active,
+start the API from the repository root. Select the bundled CC0 package and give
+this check its own ignored state directory.
+
+```bash
+mkdir -p data
+research_state="$(mktemp -d data/openfootball-check.XXXXXX)" &&
+  ARENA_OPEN_FOOTBALL=src/arena_copilot/research_fixture \
+  ARENA_LIVE_WORKSPACE="$research_state/live" \
+  arena-copilot --snapshot src/arena_copilot/showcase --state "$research_state" serve
+```
+
+In a second terminal, check the research package and query one source calendar
+date:
+
+```bash
+curl -fsS --max-time 5 http://127.0.0.1:8000/open-football/health
+curl -fsS --max-time 5 --get http://127.0.0.1:8000/open-football/matches \
+  --data-urlencode 'edition_id=worldcup-2026' --data-urlencode 'search=Haiti' \
+  --data-urlencode 'date_from=2026-06-13' --data-urlencode 'date_to=2026-06-13'
+```
+
+Health should report `status: ready`, `snapshot_verified: true` and
+`predictions_available: false`. The bundled fixture returns one match,
+Haiti–Scotland, with `date_basis: source_calendar_date`. Its `source_date` is
+`2026-06-13`, while the explicit source offset gives a UTC kickoff of
+`2026-06-14T01:00:00.000000Z`. Both responses should identify the same research
+dataset and package fingerprint. This check uses the stored observations and
+requires no model or provider request.
+
+### Static research build and chat
+
 The CC0 build has a dedicated static JSON payload, loaded only when the Open
 football view is opened. Public builds do not probe a backend. Local
 `/open-football/chat` accepts at most one match, team or edition context and uses
