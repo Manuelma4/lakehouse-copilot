@@ -41,3 +41,37 @@ percentage assertions. It does not prove semantic truth. Actual local model
 examples record the question, expected source facts, response, tools, digest,
 prompt, dataset, configuration and latency. Independent semantic review and
 the planned human-reviewed 120-case scorecard remain separate acceptance gates.
+
+## Verify evidence mode with the bundled research package
+
+Start the local API as described in the [development guide](development.md) with
+the bundled research package selected. In another terminal, use `curl` and
+`jq` to select the reviewed World Cup match by its source number, then check
+the returned provenance and score stages:
+
+```bash
+(
+  set -eu
+  api=http://127.0.0.1:8000/api
+  snapshot=$(curl -fsS --max-time 15 "$api/open-football/snapshot")
+  match=$(printf '%s' "$snapshot" | jq -er '
+    .matches[]
+    | select(.edition_id == "worldcup-2026" and .source_match_number == 104)
+    | .match_id
+  ')
+  fingerprint=$(printf '%s' "$snapshot" | jq -er '.snapshot_fingerprint')
+  jq -n --arg id "$match" '{match_id:$id, mode:"evidence",
+    question:"Show this match’s source evidence."}' |
+    curl -fsS --max-time 15 -H 'Content-Type: application/json' --data-binary @- "$api/open-football/chat" |
+    jq -e --arg fingerprint "$fingerprint" '
+      select(.snapshot_fingerprint == $fingerprint and .mode == "evidence"
+        and .model == null and .metrics.generated_tokens == 0)
+      | .tool_results[] | select(.tool == "research_match") | .rows[0].source_score_stages
+      | select(. == {ft:[0,0], ht:[0,0], et:[1,0]})
+    '
+)
+```
+
+This check uses published retrospective records with an already verified research
+package. It exercises the local, model-free API and writes a trace to the research
+ledger. It provides no measure of generative answer quality or prediction accuracy.
