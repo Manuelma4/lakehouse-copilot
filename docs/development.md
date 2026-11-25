@@ -95,6 +95,36 @@ accepts original synthetic snapshots only. Keep fetched provider data private.
 The static site uses the same observed competition and point-in-time match
 semantics as the API.
 
+### Check saved packages in another reader environment
+
+Use the same Copilot revision and the same package directories for each reader
+environment. With the project's Python environment active, pass two saved Arena
+packages to the validator and record the version and validated identities:
+
+```bash
+python - /path/to/first-snapshot /path/to/second-snapshot <<'PYTHON'
+import sys
+from importlib.metadata import version
+from pathlib import Path
+from arena_copilot.snapshot import snapshot_fingerprint, validate_snapshot
+
+print(f"Python {sys.version.split()[0]}, PyArrow {version('pyarrow')}, Pydantic {version('pydantic')}")
+for directory in sys.argv[1:]:
+    package = Path(directory)
+    manifest = validate_snapshot(package)
+    print(package.name, manifest["dataset_version"], snapshot_fingerprint(manifest))
+PYTHON
+```
+
+A successful read verifies the package against the snapshot contract and does
+not activate it. For a negative control, repeat the check on a disposable copy
+with a payload changed and the manifest left intact. Expect a checksum error
+and retain the original package. To compare writers, compare decoded schemas
+and rows separately. These controls establish acceptance for the specific
+reader versions and artifacts tested.
+
+### OpenFootball export
+
 The independent OpenFootball CC0 research fixture is bundled separately. Its
 default API path is `src/arena_copilot/research_fixture`; `ARENA_OPEN_FOOTBALL`
 can select another validated research package. `scripts/export_openfootball.py`
