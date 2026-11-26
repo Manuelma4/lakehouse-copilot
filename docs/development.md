@@ -81,6 +81,37 @@ arena-copilot --state data/private-import --snapshot "/path/reported/by/ingest" 
 bundled showcase. It does not read the `ACTIVE` file for selection. Restart the
 local API to switch a running instance to a different snapshot.
 
+### Check that an invalid import preserves the activation record
+
+Use the bundled synthetic showcase and a fresh ignored state directory. The
+following checks the recorded copy after a second import fails validation.
+
+```bash
+(
+  set -euo pipefail
+  mkdir -p data
+  scratch=$(mktemp -d data/ingest-check.XXXXXX)
+  state="$scratch/state"
+  source=src/arena_copilot/showcase
+  arena-copilot --state "$state" ingest "$source"
+  cp "$state/ACTIVE" "$scratch/active-before"
+  cp -R "$source" "$scratch/invalid"
+  printf '\n' >> "$scratch/invalid/bronze/events.jsonl"
+  if arena-copilot --state "$state" ingest "$scratch/invalid" > "$scratch/rejected.log" 2>&1; then
+    printf 'Invalid snapshot unexpectedly accepted\n' >&2
+    exit 1
+  fi
+  grep -qi checksum "$scratch/rejected.log"
+  cmp "$scratch/active-before" "$state/ACTIVE"
+  arena-copilot --snapshot "$(cat "$state/ACTIVE")" validate >/dev/null
+)
+```
+
+The changed file belongs to a disposable copy. The last command validates the
+path recorded by the successful ingest. This check leaves the API stopped.
+
+### Export a public web asset
+
 The public web exporter selects the bundled synthetic showcase by default.
 It takes a separate `--snapshot` argument for another eligible synthetic
 package. To review an export alongside the existing web asset, use an ignored
