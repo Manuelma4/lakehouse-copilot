@@ -41,6 +41,24 @@ The default showcase has 600 fictional matches, 16 teams and six competitions.
 The original single-competition fixture is retained separately for historical
 verification. Both use contract-validated, immutable exports.
 
+### Check which datasets the local API serves
+
+With the API running, query the two dataset endpoints from another terminal.
+Vite and Ollama can remain stopped.
+
+```bash
+curl --fail --silent --show-error http://127.0.0.1:8000/api/health
+curl --fail --silent --show-error http://127.0.0.1:8000/api/open-football/health
+```
+
+Both report `snapshot_verified`, `dataset_version`, `snapshot_fingerprint` and
+`as_of` for their own package. When checking an unexpected dataset, compare the
+version and fingerprint with the intended artifact. The canonical endpoint
+reports `ollama_status: "not_checked"`. The OpenFootball endpoint reports
+`predictions_available: false` and returns HTTP 503 if its package is missing.
+These checks cover the Python API's loaded packages. The [static preview](#preview-the-static-web-build)
+has its own exported assets.
+
 ## Generation and retrieval
 
 ```bash
