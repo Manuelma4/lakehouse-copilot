@@ -89,7 +89,9 @@ arena-copilot --state data/private-import ingest data/input/producer-snapshot
 The [contract](../CONTRACT.md) validates paths, checksums, schemas, distributions
 and temporal cutoffs. Ingest validates the source, copies it into the state
 directory and validates the copy before recording it in that state's `ACTIVE`
-file. To serve the imported package, pass the absolute path printed by ingest.
+file. Imports sharing a state directory keep separate validated copies.
+The last successful pointer update records its copy in `ACTIVE`.
+To serve an imported package, pass the absolute path printed by that import.
 
 ```bash
 arena-copilot --state data/private-import --snapshot "/path/reported/by/ingest" serve

@@ -4,6 +4,7 @@ import os
 import shutil
 import uuid
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from dotenv import load_dotenv
 
@@ -11,7 +12,7 @@ from .agent import Copilot
 from .snapshot import default_fixture, validate_snapshot
 
 
-def main():
+def main(argv: list[str] | None = None):
     load_dotenv()
     parser = argparse.ArgumentParser(description="Arena evidence-based sports copilot")
     parser.add_argument("--snapshot", type=Path, default=Path(os.environ.get("ARENA_SNAPSHOT") or default_fixture()))
@@ -26,7 +27,7 @@ def main():
     ingest = sub.add_parser("ingest")
     ingest.add_argument("source", type=Path)
     sub.add_parser("serve")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if args.command == "validate":
         print(json.dumps(validate_snapshot(args.snapshot), indent=2))
     elif args.command == "ingest":
@@ -35,9 +36,10 @@ def main():
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copytree(args.source, destination)
         validate_snapshot(destination)
-        pointer = args.state / "ACTIVE.tmp"
-        pointer.write_text(str(destination.resolve()), encoding="utf-8")
-        pointer.replace(args.state / "ACTIVE")
+        with TemporaryDirectory(dir=args.state, prefix=".active-") as temporary:
+            pointer = Path(temporary) / "pointer"
+            pointer.write_text(str(destination.resolve()), encoding="utf-8")
+            pointer.replace(args.state / "ACTIVE")
         print(f"Validated local copy: {destination.resolve()}\nSet ARENA_SNAPSHOT to this path to serve it.")
     elif args.command == "serve":
         import uvicorn
