@@ -177,8 +177,9 @@ publication clock is obtained after both captures. Every captured/source clock
 must be no later than publication. `validate_live_display(path, now=...)` returns
 the verified manifest and provider payloads without loading private source files.
 
-```powershell
-$env:PYTHONPATH='C:\Works\.arena-worktrees\research-groups\src'
+Run from the repository root with the project Python environment active.
+
+```bash
 python scripts/export_live_display.py --workspace PRIVATE_ROOT --output NEW_BUILD_DIRECTORY
 python scripts/export_live_display.py --workspace PRIVATE_ROOT --output NEW_BUILD_DIRECTORY --previous-package PREVIOUS_DISPLAY_DIRECTORY
 ```
@@ -195,6 +196,38 @@ to 64 KiB, and the artifact to these three files. Unexpected files, directories,
 links, Windows reparse points, unsafe paths, duplicate JSON keys, non-finite
 numbers, malformed/future clocks, cross-provider data, and inconsistent derived
 dates/results/coverage/versions are rejected.
+
+### Verify an empty Current workspace offline
+
+Use a new ignored directory and a fixed clock to check the exporter without a
+collector or provider data.
+
+```bash
+(
+  set -eu
+  mkdir -p data
+  scratch=$(mktemp -d data/display-check.XXXXXX)
+  mkdir "$scratch/empty-source"
+  python scripts/export_live_display.py --workspace "$scratch/empty-source" \
+    --output "$scratch/empty-display" --clock 2026-10-06T12:00:00Z
+  python - "$scratch/empty-display" <<'PYTHON'
+from pathlib import Path
+import sys
+
+from arena_copilot.live_publication import validate_live_display
+
+package = validate_live_display(Path(sys.argv[1]))
+assert package["manifest"]["schema_version"] == "arena-live-display-2.0"
+for provider, payload in package["providers"].items():
+    assert payload["health"]["state"] == "not_connected"
+    assert payload["cards"] == []
+    print(f"{provider}: not_connected, 0 cards")
+PYTHON
+)
+```
+
+This verifies the three-file display package and the unavailable state for both
+providers. The output stays under `data/` as a local check.
 
 ## Verification and deployment scope
 
